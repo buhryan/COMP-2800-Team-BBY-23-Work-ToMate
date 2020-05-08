@@ -45,6 +45,25 @@
 		}
 	}
 
+	const addTaskBlur = () => {
+		if (newTask !== '') {
+			tasks.push({
+				id:tempId,
+				completed: false,
+				title: newTask,
+				editing: false
+			})
+
+			tasks=tasks;
+			tempId++;
+			newTask = '';
+			inputText = '+ new task';
+		}
+		else {
+			replaceText();
+		}
+	}
+
 	const removePlaceholder = () => {
  		inputText = '';
 	}
@@ -110,11 +129,18 @@
 	.container {
 		max-width: 600px;
 		margin: 0 auto;
+		padding: 20px;
 	}
 
 	.logo {
 		display: block;
 		margin: 20px auto;
+	}
+
+	.input-container {
+		position: sticky;
+		position: -webkit-sticky;
+		bottom: 80px;
 	}
 
 	.task-input {
@@ -123,9 +149,10 @@
 		font-size: 24px;
 		margin-bottom: 16px;
 		border: none;
+	
 	}
 
-	.task-checkbox {
+	input[type="checkbox"] {
 		-webkit-transform: scale(2);
 		transform: scale(2);
 		padding: 10px;
@@ -159,6 +186,7 @@
 		border: 1px solid white;
 		margin-left: 12px;
 		margin-bottom: 12px;
+		overflow-wrap: break-word;
 	}
 
 	.task-item-edit,
@@ -180,17 +208,20 @@
 		color: grey;
 	}
 
-	.extra-container {
+	.button-container {
 		display:flex;
 		align-items: center;
 		justify-content: space-between;
-		font-size: 18px;
-		border-top: 1px solid lightgrey;
-		padding-top: 14px;
-		margin-bottom: 14px;
+		font-size: 20px;
+		padding: 14px 0px;
+		margin-bottom: 10px;
+		background: white;
+		position: sticky;
+		position: -webkit-sticky;
+		bottom: 0;
 	}
 
-	.extra-container input {
+	.button-container input {
 		margin-right: 16px;
 	}
 
@@ -198,7 +229,7 @@
 		font-size: 18px;
 		background-color: white;
 		border-radius: 5px;
-		appearance: none;
+		appearance: none;				
 	}
 
 	button:hover {
@@ -214,72 +245,86 @@
 		background: #ee8152;
 		color: white;
 	}
+
+	@media screen and (max-width: 400px) {
+		.logo {
+			width: 250px;
+		}
+
+		button {
+			padding: 12px;
+			font-size: 20px;
+		}
+	}
 </style>
 
 
 <main>
 
-<div class ="container">
+	<div class ="container">
 
-	<img src={'/img/worktomate.png'} alt="worktomate logo" class="logo">
+		<img src={'/img/worktomate.png'} alt="worktomate logo" class="logo">
 
-	{#if !listName.editing}
-			<h1 class="list-name"
-			on:dblclick={() => editListName(listName)}>{listName.name}</h1>
-		{:else}
-			<input class="list-name-edit" bind:value={listName.name} type="text"
-			on:blur={() => doneEditListName(listName)} on:keydown={() => doneEditKeydownListName(listName)}>
-		{/if}
+		{#if !listName.editing}
+				<h1 class="list-name"
+				on:dblclick={() => editListName(listName)}>{listName.name}</h1>
+			{:else}
+				<input class="list-name-edit" bind:value={listName.name} type="text"
+				on:blur={doneEditListName} on:keydown={doneEditKeydownListName}>
+			{/if}
 
-	{#each filteredTasks as task}
-		<div class="task-item">
-			<div class="task-item-left" transition:fly="{{ y: 20, duration: 300 }}">
-				<input class="task-checkbox" type="checkbox" bind:checked={task.completed}>
-				{#if !task.editing}
-					<div class="task-item-label" class:completed={task.completed}
-					on:dblclick={() => editTask(task)}>{task.title}</div>
-				{:else}
-					<input class="task-item-edit" bind:value={task.title} type="text"
-					on:blur={() => doneEdit(task)} on:keydown={() => doneEditKeydown(task)}>
-				{/if}
+		{#each filteredTasks as task}
+			<div class="task-item">
+				<div class="task-item-left" transition:fly="{{ y: 20, duration: 300 }}">
+					<input class="task-checkbox" type="checkbox" bind:checked={task.completed}>
+					{#if !task.editing}
+						<div class="task-item-label" class:completed={task.completed}
+						on:dblclick={() => editTask(task)}>{task.title}</div>
+					{:else}
+						<input class="task-item-edit" bind:value={task.title} type="text"
+						on:blur={() => doneEdit(task)} on:keydown={() => doneEditKeydown(task)}>
+					{/if}
+				</div>
+				<div class="remove-item" on:click={() => deleteTask(task.id)}>
+					&times;
+				</div>
 			</div>
-			<div class="remove-item" on:click={() => deleteTask(task.id)}>
-				&times;
+		{/each}
+
+		<div class="input-container">
+			<input type="text" class="task-input" placeholder={inputText} on:focus={removePlaceholder}
+			 on:blur={addTaskBlur} bind:value={newTask} on:keydown={addTask}>
+		</div>
+
+		<div class="button-container">
+			<div><label><input type="checkbox" on:change={checkAllTasks}>Check All</label></div>
+			<div>{tasksLeft} tasks left</div>
+		</div>
+
+		<div class="button-container">
+			<div>
+				<button
+					on:click="{() => updateFilter('all')}"
+					class:active="{currentFilter === 'all'}"
+				>All</button>
+				<button 
+					on:click="{() => updateFilter('active')}"
+					class:active="{currentFilter === 'active'}"
+				>In Progress</button>
+				<button
+					on:click="{() => updateFilter('completed')}"
+					class:active="{currentFilter === 'completed'}"
+				>Completed</button>
 			</div>
 		</div>
-	{/each}
 
-	<input type="text" class="task-input" placeholder={inputText}
-	on:focus={removePlaceholder} on:blur={replaceText} bind:value={newTask} on:keydown={addTask}>
-
-	<div class="extra-container">
-		<div><label><input type="checkbox" on:change={checkAllTasks}>Check All</label></div>
-		<div>{tasksLeft} tasks left</div>
-	</div>
-
-	<div class="extra-container">
 		<div>
-			<button
-				on:click="{() => updateFilter('all')}"
-			 	class:active="{currentFilter === 'all'}"
-			>All</button>
-			<button 
-				on:click="{() => updateFilter('active')}"
-			 	class:active="{currentFilter === 'active'}"
-			>In Progress</button>
-			<button
-				on:click="{() => updateFilter('completed')}"
-				class:active="{currentFilter === 'completed'}"
-			>Completed</button>
+			<button on:click={clearCompleted}>Clear Completed</button>
 		</div>
+
+		<div>
+			<button on:click={saveList}>Save List</button>
+		</div>
+
 	</div>
-
-	<div>
-		<button on:click={clearCompleted}>Clear Completed</button>
-	</div>
-
-    <div>
-        <button on:click={saveList}>Save List</button>
-    </div>
-
 </main>
