@@ -28,7 +28,14 @@
     color:black;
   }
 </style>
-
+<nav>
+  <a href="/home">Home</a>
+  <a href="/timer">Start a Timer</a>
+  <a href="/task-Lists">Task Lists</a>
+  <a href="/team">Team</a>
+  <a href="/friends">Friends</a>
+  <a href="/about-Us">About us</a>
+</nav>
 <div id="details">
   <a href="/tasks"><button id="back">Back</button></a>
   <h1 id="name">{localStorage.getItem('taskName')}</h1>

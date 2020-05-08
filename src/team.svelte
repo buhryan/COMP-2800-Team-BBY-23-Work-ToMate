@@ -6,4 +6,4 @@
   <a href="/friends">Friends</a>
   <a href="/about-Us">About us</a>
 </nav>
-<h1>Home</h1>
+<h1>Team</h1>
