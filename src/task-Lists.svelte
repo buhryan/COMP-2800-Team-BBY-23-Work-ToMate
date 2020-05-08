@@ -17,6 +17,70 @@
     border: 2px black solid;
     background-color: #ffa032;
   }
+  @media (min-width: 1025px) {
+    .listItem {
+      width: 80%;
+      background-color: #ffc078;
+      margin-right: 10%;
+      margin-left: 10%;
+      margin-bottom: 5%;
+      padding: 0px;
+    }
+    h1 {
+      color: black;
+      text-transform: uppercase;
+      font-size: 4em;
+      font-weight: 25;
+      text-align: center;
+    }
+    #addList {
+      position: relative;
+      width: 30%;
+      height: 25%;
+      left: 15%;
+      font-size: 25px;
+    }
+    span {
+      vertical-align: middle;
+      font-size: 60px;
+      text-align: left;
+    }
+    #back{
+      width:250px;
+      height:100px;
+    }
+  }
+  @media (max-width: 1024px) and (min-width: 401px) {
+    .listItem {
+      width: 80%;
+      background-color: #ffc078;
+      margin-right: 10%;
+      margin-left: 10%;
+      margin-bottom: 5%;
+    }
+    h1 {
+      color: black;
+      text-transform: uppercase;
+      font-size: 3em;
+      font-weight: 25;
+      text-align: center;
+    }
+    #addList {
+      position: relative;
+      width: 30%;
+      height: 25%;
+      left: 15%;
+    }
+    span {
+      vertical-align: middle;
+      font-size: 40px;
+      text-align: left;
+    }
+    #back{
+      width:120px;
+      height:60px;
+    }
+  }
   @media (max-width: 400px) {
     .listItem {
       font-size: 15px;
@@ -40,37 +104,20 @@
       left: 15%;
       margin: 10%;
     }
-  }
-  @media (max-width: 1024px) and (min-width: 400px) {
-    .listItem {
-      width: 80%;
-      background-color: #ffc078;
-      margin-right: 10%;
-      margin-left: 10%;
-      margin-bottom: 5%;
+    span {
+      vertical-align: middle;
+      font-size: 30px;
+      text-align: left;
     }
-    h1 {
-      color: black;
-      text-transform: uppercase;
-      font-size: 3em;
-      font-weight: 25;
-      text-align: center;
+    #back{
+      width:80px;
+      height:45px;
     }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 15%;
-    }
-  }
-  span {
-    vertical-align: middle;
-    font-size: 30px;
-    text-align: left;
   }
 </style>
 
 <div id="list">
+<a href="/home"><button id="back">Back</button></a>
   <h1>Task Lists</h1>
   {#each taskList as list}
     <div id="listItem">

@@ -10,10 +10,10 @@
     .collection("Task-Lists")
     .doc(localStorage.getItem("listName"))
     .collection("Tasks")
-    .doc(localStorage.getItem("taskName"))
     .onSnapshot(snapshot => {
       taskDetails = snapshot.docs;
     });
+    console.log(taskDetails);
 </script>
 
 <style>
@@ -24,17 +24,21 @@
     font-weight: 100;
     text-align: center;
   }
+  h2{
+    color:black;
+  }
 </style>
 
 <div id="details">
-  <h1>{localStorage.getItem('taskName')}</h1>
+  <a href="/tasks"><button id="back">Back</button></a>
+  <h1 id="name">{localStorage.getItem('taskName')}</h1>
   <div id="description">
-    <h1>Description</h1>
+    <h2>Description</h2>
   </div>
   <div id="progress">
-    <h1>Progress</h1>
+    <h2>Progress</h2>
   </div>
   <div id="complete">
-    <h1>Complete / Inprogress / Or not</h1>
+    <h2>Complete / Inprogress / Or not</h2>
   </div>
 </div>

@@ -1,10 +1,12 @@
 <script>
   import { Route } from "tinro";
+  import {active} from 'tinro';
   import TaskLists from "./task-Lists.svelte";
   import Tasks from "./tasks.svelte";
   import TaskDetails from "./task-details.svelte";
   import AddList from "./addList.svelte";
   import Home from "./home.svelte";
+  import AboutUs from "./aboutUs.svelte";
 </script>
 
 <style>
@@ -19,7 +21,7 @@
   <a href="/task-Lists">Task Lists</a>
   <a href="/team">Team</a>
   <a href="/friends">Friends</a>
-  <a href="/list">Add Task</a>
+  <a href="/about-Us">About us</a>
 </nav>
 
 <Route path="/">
@@ -40,4 +42,7 @@
 </Route>
 <Route path="/add-List">
   <AddList />
+</Route>
+<Route path="/about-Us">
+<AboutUs/>
 </Route>
