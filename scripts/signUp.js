@@ -19,7 +19,7 @@ function signup() {
         firebase.auth().onAuthStateChanged(function(user) {
             if(state){
                 console.log(user.uid);
-              }
+              
             if (user) {
               window.location.href = "index.html";
               // User is signed in.
@@ -35,6 +35,7 @@ function signup() {
               // User is signed out.
               // ...
             }
+          }
           });
     }
 }

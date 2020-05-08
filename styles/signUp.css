@@ -12,7 +12,7 @@
             width: 20%;
         }
     
-        #fName {
+        #displayName {
             width: 30%;
             height: 40px;
             display: flex;

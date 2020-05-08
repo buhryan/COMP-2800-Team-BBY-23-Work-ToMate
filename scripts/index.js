@@ -1,7 +1,4 @@
-// $(document).ready(function(){
-//     show();
-// })
- setTimeout(show(), 5000);
+setTimeout(show(), 5000);
 function show(){
     firebase.auth().onAuthStateChanged(function(user) {
             console.log(user.uid);
