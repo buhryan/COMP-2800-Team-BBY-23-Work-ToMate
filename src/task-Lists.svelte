@@ -46,8 +46,8 @@
       text-align: left;
     }
     #back{
-      width:250px;
-      height:100px;
+      width:230px;
+      height:85px;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
