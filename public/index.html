@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width,initial-scale=1'>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<title>Svelte app</title>
+  <title>Svelte app</title>
 
-	<link rel='icon' type='image/png' href='/favicon.png'>
-	<link rel='stylesheet' href='/global.css'>
-	<link rel='stylesheet' href='/build/bundle.css'>
+  <link rel='icon' type='image/png' href='/favicon.png'>
+  <link rel='stylesheet' href='/global.css'>
+  <link rel='stylesheet' href='/build/bundle.css'>
 
-	<script defer src='/build/bundle.js'></script>
+  <script defer src='/build/bundle.js'></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+	 https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCEUpDxYBhdjXRN6oNdOnr-rInIYh96Q8E",
+      authDomain: "worktomate.firebaseapp.com",
+      databaseURL: "https://worktomate.firebaseio.com",
+      projectId: "worktomate",
+      storageBucket: "worktomate.appspot.com",
+      messagingSenderId: "771611111041",
+      appId: "1:771611111041:web:aa8ec2a081bf37ac336780"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
 </head>
 
+
 <body>
-	Something
+  <!-- Previously loaded Firebase SDKs -->
+
+  <!-- Initialize Firebase -->
+  <script src="/__/firebase/init.js"></script>
+  Something
 </body>
+
 </html>
