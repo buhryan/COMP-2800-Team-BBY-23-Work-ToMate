@@ -1,26 +1,4 @@
-<style>
-    h1{
-        text-align:center;
-    }
-  @media (min-width: 1024px) {
-    .column {
-      float: left;
-      width: 15%;
-      margin-right: 5%;
-      margin-left: 5%;
-    }
-    .row::after {
-      content: "";
-      clear: both;
-      display: table;
-    }
-    p{
-        margin-left:20%;
-    }
-  }
-  @media (max-width:400px){
-  }
-</style>
+
 <nav>
   <a href="/home">Home</a>
   <a href="/timer">Start a Timer</a>
@@ -29,24 +7,103 @@
   <a href="/friends">Friends</a>
   <a href="/about-Us">About us</a>
 </nav>
-<h1>Work ToMate</h1>
-<div>
-  <div class="row">
-    <div class="column">
-      <img src="favicon.png" alt="Boming" style="width:100%" />
-      <p>Boming</p>
+<div class="tm-main">
+
+    <div class="tm-welcome-section">
+      <div class="container tm-navbar-container">
+        <div class="row">
+          <div class="col-xl-12">
+            <nav class="navbar navbar-expand-sm">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a href="index.html" class="nav-link tm-nav-link tm-text-white active">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="about.html" class="nav-link tm-nav-link tm-text-white">About</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="container text-center tm-welcome-container">
+        <div class="tm-welcome">
+          <div class="logo">
+            <i class="far fa-clock"></i>
+          <h1 class="text-uppercase mb-3 tm-site-name">Work ToMate</h1>
+          <p class="tm-site-description" >Improves your productivity</p>
+        </div>
+        </div>
+      </div>
+
     </div>
-    <div class="column">
-      <img src="favicon.png" alt="Bryan" style="width:100%" />
-      <p>Bryan</p>
-    </div>
-    <div class="column">
-      <img src="favicon.png" alt="Calvin" style="width:100%" />
-      <p>Calvin</p>
-    </div>
-    <div class="column">
-      <img src="favicon.png" alt="Jessica" style="width:100%" />
-      <p>Jessica</p>
-    </div>
-  </div>
-</div>
+
+    <div class="container">
+
+      
+      
+
+      <div class="row tm-albums-container grid">
+        <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
+          <figure class="effect-sadie">
+            <img src="img/timer.png" alt="Image" class="img-fluid">
+            <figcaption>
+              <h2>Byran Xing</h2>
+              <p>is a CST student at BCIT.</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
+          <figure class="effect-sadie">
+            <img src="img/lists.png" alt="Image" class="img-fluid">
+            <figcaption>
+              <h2>Calvin Loungsay</h2>
+              <p>is a CST student at BCIT.</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
+          <figure class="effect-sadie">
+            <img src="img/teams.png" alt="Image" class="img-fluid">
+            <figcaption>
+              <h2>Jessica Chu</h2>
+              <p>is a CST student at BCIT.</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
+          <figure class="effect-sadie">
+            <img src="img/friends.png" alt="Image" class="img-fluid">
+            <figcaption>
+              <h2>Boming Gong</h2>
+              <p>is a CST student at BCIT.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="tm-tag-line">
+          <h2 class="tm-tag-line-title">Following the quarantine in early 2020, 
+            everyone was required to stay home. Many people, including us, lost their daily routine. 
+            With the goal of staying productive and focused during this time, 
+            our team built Work ToMate as a way to maintain a healthy lifestyle. We hope that you will use our app to stay social and get back on track.</h2>
+          </div>
+        </div>
+      </div>
+
+      
+
+      
+      <footer class="row">
+        <div class="col-xl-12">
+          <p class="text-center p-4">Copyright &copy; <span class="tm-current-year">2018</span> Work ToMate 
+          
+          - Design:  Team 23</p>
+        </div>
+      </footer>
+    </div> <!-- .container -->
+
+  </div> <!-- .main -->
