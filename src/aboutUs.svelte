@@ -1,5 +1,6 @@
 
 
+
   <div class="tm-main">
 
     <div class="tm-welcome-section">
@@ -8,10 +9,10 @@
           <div class="col-xl-12">
             <nav class="navbar navbar-expand-sm">
               <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item active" id="navitem">
                   <a href="/home">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="navitem">
                    <a href="/about-Us">About us</a>
                 </li>
               </ul>
@@ -24,8 +25,8 @@
         <div class="tm-welcome">
           <div class="logo">
             <i class="far fa-clock"></i>
-          <h1 class="text-uppercase mb-3 tm-site-name">Work ToMate</h1>
-          <p class="tm-site-description" >Improves your productivity</p>
+          <h1 class="text-uppercase mb-3 tm-site-name">About Us</h1>
+          <p class="tm-site-description" >Team 23</p>
         </div>
         </div>
       </div>
