@@ -41,7 +41,7 @@
           <figure class="effect-sadie">
             <img src="img/timer.png" alt="Image" class="img-fluid">
             <figcaption>
-              <h2>Byran Xing</h2>
+              <h2>Bryan Xing</h2>
               <p>is a CST student at BCIT.</p>
             </figcaption>
           </figure>
