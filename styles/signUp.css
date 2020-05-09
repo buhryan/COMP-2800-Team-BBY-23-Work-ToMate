@@ -1,0 +1,158 @@
+@media (min-width: 400px){
+    button {
+            background-color: #EE8152;
+            color: #F7EAC5;
+            border-radius: 5px;
+            border: none;
+            display: flex;
+            margin: 0px auto;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 15pt;
+            width: 20%;
+        }
+    
+        #displayName {
+            width: 30%;
+            height: 40px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-top: 50px;
+            font-size: 18pt;
+    
+        }
+        #email {
+            width: 30%;
+            height: 40px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-top: 20px;
+            font-size: 18pt;
+    
+        }
+    
+        #pass {
+            width: 30%;
+            height: 40px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-top: 20px;
+            font-size: 18pt;
+        }
+
+        #pass2 {
+            width: 30%;
+            height: 40px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-top: 20px;
+            font-size: 18pt;
+        }
+    
+        img {
+            width: 120px;
+            height: 120px;
+        }
+    
+        h2 {
+            width: 60%;
+            height: 30px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-left: 250px;
+            font-family: arial;
+            margin-top: 10px;
+            font-size: 30pt;
+        }
+    
+        #loginButton {
+            font-size: 20pt;
+            display: flex;
+            margin: 0px auto;
+        }
+    }
+    @media (min-width: 1024px) {
+        button {
+            background-color: #EE8152;
+            color: #F7EAC5;
+            border-radius: 5px;
+            border: none;
+            display: flex;
+            margin: 0px auto;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 15pt;
+            width: 20%;
+        }
+    
+        #fName {
+            width: 30%;
+            height: 40px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-top: 50px;
+            font-size: 18pt;
+    
+        }
+        #email {
+            width: 30%;
+            height: 40px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-top: 20px;
+            font-size: 18pt;
+    
+        }
+    
+        #pass {
+            width: 30%;
+            height: 40px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-top: 20px;
+            font-size: 18pt;
+        }
+
+        #pass2 {
+            width: 30%;
+            height: 40px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-top: 20px;
+            font-size: 18pt;
+        }
+    
+        img {
+            width: 120px;
+            height: 120px;
+        }
+    
+        h2 {
+            width: 60%;
+            height: 30px;
+            display: flex;
+            position: central;
+            margin: 0px auto;
+            margin-left: 430px;
+            font-family: arial;
+            margin-top: 10px;
+            font-size: 30pt;
+        }
+    
+        #loginButton {
+            font-size: 20pt;
+            display: flex;
+            margin: 0px auto;
+        }
+    }
+    
+    
