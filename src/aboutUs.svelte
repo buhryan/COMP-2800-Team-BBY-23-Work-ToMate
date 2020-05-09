@@ -1,13 +1,6 @@
 
-<nav>
-  <a href="/home">Home</a>
-  <a href="/timer">Start a Timer</a>
-  <a href="/task-Lists">Task Lists</a>
-  <a href="/team">Team</a>
-  <a href="/friends">Friends</a>
-  <a href="/about-Us">About us</a>
-</nav>
-<div class="tm-main">
+
+  <div class="tm-main">
 
     <div class="tm-welcome-section">
       <div class="container tm-navbar-container">
@@ -16,10 +9,10 @@
             <nav class="navbar navbar-expand-sm">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                  <a href="index.html" class="nav-link tm-nav-link tm-text-white active">Home</a>
+                  <a href="/home">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a href="about.html" class="nav-link tm-nav-link tm-text-white">About</a>
+                   <a href="/about-Us">About us</a>
                 </li>
               </ul>
             </nav>
@@ -40,8 +33,6 @@
     </div>
 
     <div class="container">
-
-      
       
 
       <div class="row tm-albums-container grid">
@@ -67,7 +58,7 @@
           <figure class="effect-sadie">
             <img src="img/teams.png" alt="Image" class="img-fluid">
             <figcaption>
-              <h2>Jessica Chu</h2>
+              <h2>Boming Gong</h2>
               <p>is a CST student at BCIT.</p>
             </figcaption>
           </figure>
@@ -76,7 +67,7 @@
           <figure class="effect-sadie">
             <img src="img/friends.png" alt="Image" class="img-fluid">
             <figcaption>
-              <h2>Boming Gong</h2>
+              <h2>Jessica Chu</h2>
               <p>is a CST student at BCIT.</p>
             </figcaption>
           </figure>
@@ -86,10 +77,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="tm-tag-line">
-          <h2 class="tm-tag-line-title">Following the quarantine in early 2020, 
-            everyone was required to stay home. Many people, including us, lost their daily routine. 
-            With the goal of staying productive and focused during this time, 
-            our team built Work ToMate as a way to maintain a healthy lifestyle. We hope that you will use our app to stay social and get back on track.</h2>
+          <h2 class="tm-tag-line-title">Use your time wisely.</h2>
           </div>
         </div>
       </div>
@@ -99,7 +87,7 @@
       
       <footer class="row">
         <div class="col-xl-12">
-          <p class="text-center p-4">Copyright &copy; <span class="tm-current-year">2018</span> Work ToMate 
+          <p class="text-center p-4">Copyright &copy; <span class="tm-current-year">2020</span> Work ToMate 
           
           - Design:  Team 23</p>
         </div>
