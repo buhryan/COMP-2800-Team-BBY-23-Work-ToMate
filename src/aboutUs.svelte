@@ -78,7 +78,11 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="tm-tag-line">
-          <h2 class="tm-tag-line-title">Use your time wisely.</h2>
+          <h2 class="tm-tag-line-title">Following the quarantine in early 2020, 
+            everyone was required to stay home. Many people, including us, lost their daily routine. 
+            With the goal of staying productive and focused during this time, 
+            our team built Work ToMate as a way to maintain a healthy lifestyle. We hope that you will 
+            use our app to stay social and get back on track.</h2>
           </div>
         </div>
       </div>
