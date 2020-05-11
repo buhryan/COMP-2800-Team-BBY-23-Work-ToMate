@@ -15,7 +15,7 @@
 </style>
 
 <h1>Landing Page</h1>
-<a href="/home"><button>Login</button></a>
+<a href="/login"><button>Login</button></a>
 <a href="/signup"><button>Signup</button></a>
 
 <div class= "Square shape">

@@ -32,7 +32,7 @@ function signup() {
                     "name":userName, 
                      "email":user.email,
                     },{ merge: true });
-              //window.location.href = "index.html";
+                //window.location.pathname = "/home";
               // User is signed in.
               
             } else {

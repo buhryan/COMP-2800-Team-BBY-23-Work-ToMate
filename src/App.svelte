@@ -12,11 +12,15 @@
   import Team from "./team.svelte";
   import Friends from "./friends.svelte";
   import Signup from "./signup.svelte";
+  import Login from "./login.svelte";
 </script>
 
 <Route path="/" redirect="/landing" />
 <Route path="/signup">
     <Signup/>
+</Route>
+<Route path="/login">
+  <Login/>
 </Route>
 <Route path="/home">
   <Home />
