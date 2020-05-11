@@ -16,9 +16,8 @@
 
 <h1>Landing Page</h1>
 <a href="/home"><button>Login</button></a>
-<button>
-    SignUp
-</button>
+<a href="/signup"><button>Signup</button></a>
+
 <div class= "Square shape">
     <h3>Core Features</h3>
     

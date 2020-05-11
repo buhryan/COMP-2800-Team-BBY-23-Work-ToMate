@@ -11,9 +11,13 @@
   import Timer from "./timer.svelte";
   import Team from "./team.svelte";
   import Friends from "./friends.svelte";
+  import Signup from "./signup.svelte";
 </script>
 
 <Route path="/" redirect="/landing" />
+<Route path="/signup">
+    <Signup/>
+</Route>
 <Route path="/home">
   <Home />
 </Route>
