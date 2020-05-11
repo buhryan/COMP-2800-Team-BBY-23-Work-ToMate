@@ -13,45 +13,21 @@
     .onSnapshot(snapshot => {
       taskDetails = snapshot.docs;
     });
-  console.log(taskDetails);
+    console.log(taskDetails);
 </script>
 
 <style>
-  #details{
-    margin-right:5%;
-    margin-left:5%;
-    background-color:#FDC030;
-    border:black solid 2px;
+  h1 {
+    color: #ff3e00;
+    text-transform: uppercase;
+    font-size: 4em;
+    font-weight: 100;
+    text-align: center;
   }
-  @media (min-width: 1025px) {
-    h1 {
-      text-align: center;
-      color:orangered;
-    }
-    h2 {
-      text-align: center;
-    }
-  }
-  @media (min-width: 401px) and (max-width: 1024px) {
-    h1 {
-      text-align: center;
-      color:orangered;
-    }
-    h2 {
-      text-align: center;
-    }
-  }
-  @media (max-width: 400px) {
-    h1 {
-      text-align: center;
-      color:orangered;
-    }
-    h2 {
-      text-align: center;
-    }
+  h2{
+    color:black;
   }
 </style>
-
 <nav>
   <a href="/home">Home</a>
   <a href="/timer">Start a Timer</a>
@@ -61,31 +37,15 @@
   <a href="/about-Us">About us</a>
 </nav>
 <div id="details">
-  <a href="/tasks">
-    <button id="back">Back</button>
-  </a>
+  <a href="/tasks"><button id="back">Back</button></a>
   <h1 id="name">{localStorage.getItem('taskName')}</h1>
   <div id="description">
-    <h2>
-      Description
-      <br />
-      <br />
-      <br />
-      <br />
-    </h2>
+    <h2>Description</h2>
   </div>
   <div id="progress">
-    <h2>
-      Progress
-      <br />
-      <br />
-    </h2>
+    <h2>Progress</h2>
   </div>
   <div id="complete">
-    <h2>
-      Completion
-      <br />
-      <br />
-    </h2>
+    <h2>Complete / Inprogress / Or not</h2>
   </div>
 </div>
