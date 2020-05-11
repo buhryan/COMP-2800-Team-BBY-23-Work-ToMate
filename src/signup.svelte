@@ -32,6 +32,7 @@ function signup() {
                     "name":userName, 
                      "email":user.email,
                     },{ merge: true });
+                    document.getElementById("loggedIn").style.display="block";
                 //window.location.pathname = "/home";
               // User is signed in.
               
@@ -124,6 +125,18 @@ function signup() {
             display: flex;
             margin: 0px auto;
         }
+        #loggedIn{
+            display: none;
+            margin: 0px auto;
+            margin-left:10px;
+        }
+
+        #loggedInBtn{
+            font-size: 18pt;
+            display: flex;
+            margin: 0px auto;
+            margin-left:10px;
+        }
     }
     @media (min-width: 1024px) {
         button {
@@ -202,6 +215,18 @@ function signup() {
             display: flex;
             margin: 0px auto;
         }
+        #loggedIn{
+            display: none;
+            margin: 0px auto;
+            margin-left:10px;
+        }
+
+        #loggedInBtn{
+            font-size: 18pt;
+            display: flex;
+            margin: 0px auto;
+            margin-left:10px;
+        }
     }
     
     
@@ -215,5 +240,10 @@ function signup() {
         <button on:click={signup}>
             <div id="loginButton">Signup</div>
         </button>
+        <div id = "loggedIn">
+            <p id="loggedInfo">Signup successful, you are now logged in.</p>
+            <a href="/home"><button id="loggedInBtn">Go To Home</button></a>
+        </div>
+        
 
 

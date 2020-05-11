@@ -16,7 +16,8 @@ function login(){
         if(state){
             console.log(user.uid);
         if (user) {
-        location = "/home";
+            document.getElementById("loggedIn").style.display="block";
+        //location = "/home";
           // User is signed in.
 
           // ...
@@ -86,6 +87,19 @@ function login(){
             display: flex;
             margin: 0px auto;
         }
+
+        #loggedIn{
+            display: none;
+            margin: 0px auto;
+            margin-left:10px;
+        }
+
+        #loggedInBtn{
+            font-size: 18pt;
+            display: flex;
+            margin: 0px auto;
+            margin-left:10px;
+        }
     @media (min-width: 1024px) {
         button {
             background-color: #EE8152;
@@ -144,6 +158,19 @@ function login(){
             display: flex;
             margin: 0px auto;
         }
+
+        #loggedIn{
+            display: none;
+            margin: 0px auto;
+            margin-left:10px;
+        }
+
+        #loggedInBtn{
+            font-size: 18pt;
+            display: flex;
+            margin: 0px auto;
+            margin-left:10px;
+        }
     }
 </style>
 <h2> Login to WorkToMate</h2>
@@ -152,4 +179,8 @@ function login(){
 <button on:click={login}>
     <div id="loginButton">Login</div>
 </button>
+<div id = "loggedIn">
+    <p id="loggedInfo">You are now logged in.</p>
+    <a href="/home"><button id="loggedInBtn">Go To Home</button></a>
+</div>
 
