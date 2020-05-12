@@ -1,24 +1,33 @@
 <script>
   import { db } from "./firebase.js";
   let taskList = [];
-  db.collection("Users")
-    .doc("username")
-    .collection("Task-Lists")
-    .onSnapshot(snapshot => {
-      taskList = snapshot.docs;
-    });
   function storeID() {
+    //Stores a listName variable as the id of the button which should be the name of the task to be used in other sveltes
     localStorage.setItem("listName", this.id);
   }
+  let userid;
+  //Needs this to work with User Login
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      user = firebase.auth().currentUser;
+      if (user != null) {
+        userid = user.uid;
+        //Goes to collection users / unique user id doc / Task-Lists collection and gets all docs in that collection
+        db.collection("users")
+          .doc(userid)
+          .collection("Task-Lists")
+          .onSnapshot(snapshot => {
+            taskList = snapshot.docs;
+          });
+          console.log(taskList);
+      }
+    } else {
+      // No user is signed in.
+    }
+  });
 </script>
-<nav>
-  <a href="/home">Home</a>
-  <a href="/timer">Start a Timer</a>
-  <a href="/task-Lists">Task Lists</a>
-  <a href="/team">Team</a>
-  <a href="/friends">Friends</a>
-  <a href="/about-Us">About us</a>
-</nav>
+
 <style>
   #list {
     border: 2px black solid;
@@ -52,9 +61,9 @@
       font-size: 60px;
       text-align: left;
     }
-    #back{
-      width:230px;
-      height:85px;
+    #back {
+      width: 230px;
+      height: 85px;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -83,9 +92,9 @@
       font-size: 40px;
       text-align: left;
     }
-    #back{
-      width:120px;
-      height:60px;
+    #back {
+      width: 120px;
+      height: 60px;
     }
   }
   @media (max-width: 400px) {
@@ -116,19 +125,31 @@
       font-size: 30px;
       text-align: left;
     }
-    #back{
-      width:80px;
-      height:45px;
+    #back {
+      width: 80px;
+      height: 45px;
     }
   }
 </style>
 
+<nav>
+  <a href="/home">Home</a>
+  <a href="/timer">Start a Timer</a>
+  <a href="/task-Lists">Task Lists</a>
+  <a href="/team">Team</a>
+  <a href="/friends">Friends</a>
+  <a href="/about-Us">About us</a>
+</nav>
+<p id="username" />
 <div id="list">
-<a href="/home"><button id="back">Back</button></a>
+  <a href="/home">
+    <button id="back">Back</button>
+  </a>
   <h1>Task Lists</h1>
   {#each taskList as list}
     <div id="listItem">
       <a href="/tasks">
+        <!-- Id of button is set to be the name of the task -->
         <button on:click={storeID} id={list.data().listName} class="listItem">
           <span>{list.data().listName}</span>
           <br />
