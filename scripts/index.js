@@ -2,7 +2,7 @@ setTimeout(show(), 5000);
 function show(){
     firebase.auth().onAuthStateChanged(function(user) {
             console.log(user.uid);
-        if (user) {
+        if (user) {zz
             db.collection("users").doc(user.uid).set(
                 {
                 "name":user.displayName, 

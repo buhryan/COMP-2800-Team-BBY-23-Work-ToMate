@@ -1,20 +1,32 @@
 <script>
   import { db } from "./firebase.js";
   let tasks = [];
-  db.collection("Users")
-    .doc("username")
-    .collection("Task-Lists")
-    .doc(localStorage.getItem("listName"))
-    .collection("Tasks")
-    .onSnapshot(snapshot => {
-      tasks = snapshot.docs;
-    });
-  console.log(localStorage.getItem("listName"));
+  let userid;
+  // Needs this for User login
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      user = firebase.auth().currentUser;
+      if (user != null) {
+        userid = user.uid;
+        // Goes to collection users / unique user id doc / Task-Lists collection / doc of whatever the previous button id
+        // was / collection Tasks / then taks all the Tasks in there.
+        db.collection("users")
+          .doc(userid)
+          .collection("Task-Lists")
+          .doc(localStorage.getItem("listName"))
+          .collection("Tasks")
+          .onSnapshot(snapshot => {
+            tasks = snapshot.docs;
+          });
+          console.log(tasks);
+      }
+    } else {
+      // No user is signed in.
+    }
+  });
   function storeID() {
     localStorage.setItem("taskName", this.id);
-    localStorage.setItem("progress", this.data().progress);
-    localStorage.setItem("desc", this.data().desc);
-    localStorage.setItem("complete", this.data().complete);
   }
   console;
 </script>
@@ -136,6 +148,7 @@
   {#each tasks as job}
     <div>
       <a href="/task-Details">
+      <!-- id of button is the task name-->
         <button on:click={storeID} id={job.data().task} class="listItem">
           <span>{job.data().task}</span>
           <br />
