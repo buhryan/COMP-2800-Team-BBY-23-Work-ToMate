@@ -23,9 +23,15 @@
 
 <div class="Square shape">
   <h3>Core Features</h3>
+  <ul>Task Lists</ul>
+  <ul>Create Team</ul>
+  <ul>Timer</ul>
+  <ul>Connect Friends</ul>
+  
+
 
 </div>
 <div class="Square shape">
-  <h3>About Us</h3>
+  <h3><a href="/about-Us">About Us</a></h3>
 
 </div>
