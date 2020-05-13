@@ -20,7 +20,7 @@
           .onSnapshot(snapshot => {
             taskList = snapshot.docs;
           });
-          console.log(taskList);
+        console.log(taskList);
       }
     } else {
       // No user is signed in.
@@ -33,7 +33,20 @@
     border: 2px black solid;
     background-color: #ffa032;
   }
+  nav {
+    background-color: rgb(247, 177, 27);
+    border: 2px black solid;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin: 0;
+  }
+
   @media (min-width: 1025px) {
+    #navItem {
+      font-size: 2vw;
+      margin-right: 2%;
+      width: 10%;
+    }
     .listItem {
       width: 80%;
       background-color: #ffc078;
@@ -46,15 +59,26 @@
       color: black;
       text-transform: uppercase;
       font-size: 4em;
-      font-weight: 25;
+      font-weight: 300;
       text-align: center;
     }
     #addList {
       position: relative;
       width: 30%;
       height: 25%;
-      left: 15%;
-      font-size: 25px;
+      left: 0;
+      font-weight: 600;
+      font-size: 45px;
+      margin: 10%;
+    }
+    #deleteList {
+      position: relative;
+      width: 30%;
+      height: 25%;
+      right: 0;
+      font-weight: 600;
+      font-size: 45px;
+      margin: 8%;
     }
     span {
       vertical-align: middle;
@@ -64,9 +88,17 @@
     #back {
       width: 230px;
       height: 85px;
+      font-weight: 600;
+      font-size: 45px;
+      text-align: center;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
+    #navItem {
+      font-size: 3.5vw;
+      margin-right: 1%;
+      width: 10%;
+    }
     .listItem {
       width: 80%;
       background-color: #ffc078;
@@ -77,27 +109,45 @@
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
-      font-weight: 25;
+      font-size: 2.5em;
+      font-weight: 300;
       text-align: center;
     }
     #addList {
       position: relative;
       width: 30%;
       height: 25%;
-      left: 15%;
+      left: 0;
+      margin: 10%;
+      font-weight: 600;
+      font-size: 20px;
+    }
+    #deleteList {
+      position: relative;
+      width: 30%;
+      height: 15%;
+      right: 0;
+      margin: 8%;
+      font-weight: 600;
+      font-size: 20px;
     }
     span {
       vertical-align: middle;
-      font-size: 40px;
+      font-size: 35px;
       text-align: left;
     }
     #back {
-      width: 120px;
-      height: 60px;
+      width: 100px;
+      height: 50px;
+      font-weight: 600;
     }
   }
   @media (max-width: 400px) {
+    #navItem {
+      font-size:3.5vw;
+      margin-right: 1%;
+      width: 10%;
+    }
     .listItem {
       font-size: 15px;
       width: 80%;
@@ -109,16 +159,27 @@
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
-      font-weight: 25;
+      font-size: 2em;
+      font-weight: 400;
       text-align: center;
     }
     #addList {
       position: relative;
-      width: 25%;
-      height: 15%;
-      left: 15%;
-      margin: 10%;
+      width: 100px;
+      height: 50px;
+      left: 0px;
+      margin: 7%;
+      font-weight: 500;
+      font-size: 15px;
+    }
+    #deleteList {
+      position: relative;
+      width: 100px;
+      height: 50px;
+      right: 0px;
+      margin: 7%;
+      font-weight: 500;
+      font-size: 15px;
     }
     span {
       vertical-align: middle;
@@ -126,21 +187,21 @@
       text-align: left;
     }
     #back {
-      width: 80px;
-      height: 45px;
+      width: 90px;
+      height: 40px;
+      font-weight: 600;
     }
   }
 </style>
 
 <nav>
-  <a href="/home">Home</a>
-  <a href="/timer">Start a Timer</a>
-  <a href="/task-Lists">Task Lists</a>
-  <a href="/team">Team</a>
-  <a href="/friends">Friends</a>
-  <a href="/about-Us">About us</a>
+  <a href="/home" id="navItem">Home</a>
+  <a href="/timer" id="navItem">Start a Timer</a>
+  <a href="/task-Lists" id="navItem">Task Lists</a>
+  <a href="/team" id="navItem">Team</a>
+  <a href="/friends" id="navItem">Friends</a>
+  <a href="/about-Us" id="navItem">About us</a>
 </nav>
-<p id="username" />
 <div id="list">
   <a href="/home">
     <button id="back">Back</button>
@@ -159,5 +220,8 @@
   {/each}
   <a href="/add-List">
     <button id="addList">Add List</button>
+  </a>
+  <a href="/task-Lists">
+    <button id="deleteList">Delete List</button>
   </a>
 </div>
