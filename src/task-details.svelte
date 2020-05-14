@@ -140,6 +140,7 @@
     }
   }
 </style>
+
 <nav>
   <a href="/home" id="navItem">Home</a>
   <a href="/timer" id="navItem">Start a Timer</a>

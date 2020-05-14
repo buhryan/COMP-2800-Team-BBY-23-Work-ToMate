@@ -19,6 +19,7 @@
           .collection("Task-Lists")
           .onSnapshot(snapshot => {
             taskList = snapshot.docs;
+            console.log(snapshot.docs);
           });
         console.log(taskList);
       }
@@ -144,7 +145,7 @@
   }
   @media (max-width: 400px) {
     #navItem {
-      font-size:3.5vw;
+      font-size: 3.5vw;
       margin-right: 1%;
       width: 10%;
     }

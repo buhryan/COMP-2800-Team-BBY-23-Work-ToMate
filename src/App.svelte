@@ -17,10 +17,10 @@
 
 <Route path="/" redirect="/landing" />
 <Route path="/signup">
-    <Signup/>
+  <Signup />
 </Route>
 <Route path="/login">
-  <Login/>
+  <Login />
 </Route>
 <Route path="/home">
   <Home />
