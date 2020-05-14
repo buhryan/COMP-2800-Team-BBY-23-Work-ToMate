@@ -127,8 +127,6 @@ function signup() {
         }
         #loggedIn{
             display: none;
-            margin: 0px auto;
-            margin-left:10px;
         }
 
         #loggedInBtn{
@@ -217,8 +215,6 @@ function signup() {
         }
         #loggedIn{
             display: none;
-            margin: 0px auto;
-            margin-left:10px;
         }
 
         #loggedInBtn{
