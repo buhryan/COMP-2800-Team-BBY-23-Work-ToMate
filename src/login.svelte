@@ -20,7 +20,7 @@
                 if (state) {
                     console.log(user.uid);
                     if (user) {
-                        document.getElementById("loggedIn").style.display = "block";
+                        document.getElementById("loggedIn").style.display = "inline";
                         //location = "/home";
                         // User is signed in.
 
@@ -36,7 +36,7 @@
     }
 </script>
 <style>
-    button {
+     button {
         background-color: #EE8152;
         color: #F7EAC5;
         border-radius: 5px;
@@ -53,7 +53,6 @@
         width: 50%;
         height: 40px;
         display: flex;
-        position: central;
         margin: 0px auto;
         margin-top: 20px;
         font-size: 18pt;
@@ -78,13 +77,11 @@
     h2 {
         width: 100%;
         height: 30px;
-        display: flex;
-        position: central;
+        font-size: 30pt;
         margin: 0px auto;
-        margin-left: 50px;
         font-family: arial;
-        margin-top: 10px;
         font-size: 20pt;
+        padding:10px;
     }
 
     #loginButton {
@@ -101,10 +98,17 @@
         font-size: 18pt;
         display: flex;
         margin: 0px auto;
-        margin-left: 10px;
     }
-
-    @media (min-width: 1024px) {
+    main{
+        text-align: center;
+        background-color:#F7EAC5;
+        height:100%;
+        margin: 0px;
+        }
+        #loggedInfo{
+            padding:10px;
+        }
+    /*@media (min-width: 1024px) {
         button {
             background-color: #EE8152;
             color: #F7EAC5;
@@ -170,11 +174,12 @@
         #loggedInBtn {
             font-size: 18pt;
             display: flex;
-            margin: 0px auto;
             margin-left: 10px;
         }
-    }
+        } */
+
 </style>
+<main>
 <h2> Login to WorkToMate</h2>
 <input id="email" placeholder="Email Address" type="text">
 <input id="pass" placeholder="Password" type="password">
@@ -182,6 +187,7 @@
     <div id="loginButton">Login</div>
 </button>
 <div id="loggedIn">
-    <p id="loggedInfo">You are now logged in.</p>
-    <a href="/home"><button id="loggedInBtn">Go To Home</button></a>
+    <h3 id="loggedInfo">You are now logged in.</h3>
+    <a href="/home"><button id="loggedInBtn"><div id="loginButton">Go To Home</div></button></a>
 </div>
+</main>

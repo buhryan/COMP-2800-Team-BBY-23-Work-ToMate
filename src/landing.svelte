@@ -32,11 +32,13 @@
     button {
         background-color: #ee8152;
         color: #f7eac5;
+        border-radius: 7px;
+        border: none;
     }
 
     div {
         height: 400px;
-        width: 300px;
+        width: 100%;
         background: #f7eac5;
     }
 
@@ -53,8 +55,11 @@
         color: #f7eac5;
         width: 10px;
     }
+    main {
+        text-align: center;
+    }
 </style>
-
+<main>
 <h1>Landing Page</h1>
 <span id="loginBtn"><a href="/login"><button>Login</button></a></span>
 <span id="signupBtn"><a href="/signup"><button>Signup</button></a></span>
@@ -70,3 +75,4 @@
     <h3>About Us</h3>
 
 </div>
+</main>

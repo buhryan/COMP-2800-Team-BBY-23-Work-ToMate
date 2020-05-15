@@ -116,35 +116,43 @@
 
   #afterWork{
     display: none;
+    margin:20px;
   }
   #afterBreak{
     display:none;
+    margin:20px;
   }
   #startTime{
     background-color:#ee8152;
     color:#f7EaC5;
     border-radius:7px;
+    margin:20px;
   }
   #cancelTime{
     background-color: #Af7089;
     color:#f7EaC5;
     border-radius:7px;
+    margin:20px;
   }
   #pauseWork{
     background-color: #Ec6d6d;
     color:#f7EaC5;
     border-radius:7px;
+    margin:20px;
   }
   #pauseBreak{
     background-color: #Ec6d6d;
     color:#f7EaC5;
     border-radius:7px;
+    margin:20px;
   }
   h1{
     color: #900c3f;
+    margin:20px;
   }
   #cycle{
     display:none;
+    margin:20px;
   }
   #setBtn{
     background-color:#eeB089;
@@ -153,8 +161,14 @@
   #noRepeat{
     display:none;
   }
+  main{
+    background-color:#f7EaC5;
+    text-align:center;
+    padding: 50px;
+    height:100%;
+  }
 </style>
-<main>
+<main >
   <h1>
     {formatTime(workPeriod)}
   </h1>
