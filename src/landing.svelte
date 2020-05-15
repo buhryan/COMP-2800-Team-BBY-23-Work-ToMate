@@ -22,6 +22,33 @@
         });
 
     }
+
+    function onSignIn(googleUser) {
+      // get user profile information
+      var userName = googleUser.getBasicProfile().getName();
+      var userEmail = googleUser.getBasicProfile().getEmail();
+      console.log(googleUser.getBasicProfile());
+      console.log(userName);
+      console.log(userEmail);
+
+      firebase.auth().onAuthStateChanged(function() {
+                console.log(user.uid);
+
+                db.collection("users").doc(user.uid).set(
+                    {
+                    "name":userName, 
+                     "email":userEmail,
+                    },{ merge: true });
+                    document.getElementById("loggedIn").style.display="block";
+                //window.location.pathname = "/home";
+              // User is signed in.
+              
+            } );
+    }
+      
+  
+
+      
 </script>
 
 <style>
@@ -56,11 +83,27 @@
 </style>
 
 <h1>Landing Page</h1>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+
 <span id="loginBtn"><a href="/login"><button>Login</button></a></span>
 <span id="signupBtn"><a href="/signup"><button>Signup</button></a></span>
 <span id="loggedIn"><a href="/home"><button>Home</button></a></span>
 <span id="logout"><button on:click={logout}>Logout</button></span>
+<!-- 
+    <button on:onclick={googleSignIn()}>Google Sign In</button>
+   <button on:click={signOut()}>Sign Out</button>
+    function googleSignOut(){
+firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+}).catch(function(error) {
+  // An error happened.
+});
+    
+} 
 
+<button on:onclick={googleSignOut()}>Google Sign Out</button>
+ -->
 
 <div class="Square shape">
     <h3>Core Features</h3>

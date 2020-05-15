@@ -4,7 +4,8 @@
 <head>
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
-
+  <meta name="google-signin-client_id" content="484978459765-mc10s1oik64rtmsioipb74gj1vspdusv.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <title>Svelte app</title>
 
   <link rel='icon' type='image/png' href='/favicon.png'>
@@ -44,6 +45,12 @@
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+
+    function signOut() {
+  gapi.auth2.getAuthInstance().signOut().then(function() {
+    console.log('user signed out')
+  })
+}
   </script>
 
 </head>

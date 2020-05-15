@@ -1,5 +1,23 @@
 
+<svelte:head>
+  
+   <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+</svelte:head>
+<script>
+  import { db } from "./firebase.js";
 
+ function logout() {
+        firebase.auth().signOut().then(() => {
+            document.getElementById("loginBtn").style.display = "inline";
+            document.getElementById("signupBtn").style.display = "inline";
+            document.getElementById("loggedIn").style.display = "none";
+            document.getElementById("logout").style.display = "none";
+        });
+
+    }
+
+
+  </script>
   <div class="tm-main">
 
     <div class="tm-welcome-section">
@@ -13,6 +31,9 @@
                 </li>
                 <li class="nav-item" id="navitem">
                    <a href="/about-Us">About us</a>
+                </li>
+                <li class="nav-item" id="navitem">
+                   <a href="/landing" id="logout">Log out</a>
                 </li>
               </ul>
             </nav>
