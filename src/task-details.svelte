@@ -2,11 +2,20 @@
   import { db } from "./firebase.js";
   import { writable } from "svelte/store";
   import { fly } from "svelte/transition";
-
+  const ENTER_KEY = 13;
   let userid;
-  let taskName;
-  let taskDesc;
+  let taskName = {
+    name: "",
+    editing: false
+  };
+  let taskDesc = {
+    name: "",
+    editing: false
+  };
   let taskComplete;
+
+  console.log(localStorage.getItem("listId"));
+  console.log(localStorage.getItem("taskId"));
   //Needs to be added for user login
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -20,12 +29,12 @@
         db.collection("users")
           .doc(userid)
           .collection("Task-Lists")
-          .doc(localStorage.getItem("listName"))
+          .doc(localStorage.getItem("listId"))
           .collection("Tasks")
-          .doc(localStorage.getItem("taskName"))
+          .doc(localStorage.getItem("taskId"))
           .onSnapshot(function(snapshot) {
-            taskName = snapshot.data().task;
-            taskDesc = snapshot.data().desc;
+            taskName.name = snapshot.data().task;
+            taskDesc.name = snapshot.data().desc;
             taskComplete = snapshot.data().complete;
           });
       }
@@ -33,134 +42,133 @@
       // No user is signed in.
     }
   });
+
+  const editName = () => {
+    taskName.editing = true;
+    taskName = taskName;
+  };
+
+  const doneEditTaskName = () => {
+    taskName.editing = false;
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(localStorage.getItem("listId"))
+      .collection("Tasks")
+      .doc(localStorage.getItem("taskId"))
+      .update({
+        task: taskName.name
+      })
+      .then(() => {
+        console.log("Task name successfully updated.");
+      })
+      .catch(() => {
+        console.error("Error updating name: ", error);
+      });
+    taskName = taskName;
+  };
+
+  const doneEditKeydownTaskName = e => {
+    if (e.which === ENTER_KEY) {
+      doneEditTaskName();
+    }
+  };
+
+  const editDesc = () => {
+    taskDesc.editing = true;
+    taskDesc = taskDesc;
+  };
+
+  const doneEditTaskDesc = () => {
+    taskDesc.editing = false;
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(localStorage.getItem("listId"))
+      .collection("Tasks")
+      .doc(localStorage.getItem("taskId"))
+      .update({
+        desc: taskDesc.name
+      })
+      .then(() => {
+        console.log("Task successfully updated.");
+      })
+      .catch(() => {
+        console.error("Error updating task: ", error);
+      });
+    taskDesc = taskDesc;
+  };
+
+  const doneEditKeydownTaskDesc = e => {
+    if (e.which === ENTER_KEY) {
+      doneEditTaskDesc(taskDesc);
+    }
+  };
 </script>
 
 <style>
-  nav {
-    background-color: rgb(247, 177, 27);
-    border: 2px black solid;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    margin: 0;
+  h1 {
+    color: #ff3e00;
+    text-transform: uppercase;
+    font-size: 4em;
+    font-weight: 100;
+    text-align: center;
   }
-  @media (min-width: 1025px) {
-    #navItem {
-      font-size: 2vw;
-      margin-right: 2%;
-      width: 10%;
-    }
-    h1 {
-      color: black;
-      font-size: 4.5em;
-      font-weight: 500;
-      text-align: center;
-    }
-    h2 {
-      color: black;
-      font-size: 3.5em;
-      font-size: 400;
-    }
-    h3 {
-      color: green;
-      font-size: 2.75em;
-    }
-    #details {
-      border: black 2px solid;
-      background-color: orange;
-    }
-    #back {
-      width: 230px;
-      height: 85px;
-      font-weight: 600;
-      font-size: 45px;
-      text-align: center;
-    }
+  h2 {
+    color: black;
   }
-  @media (max-width: 1024px) and (min-width: 401px) {
-    #navItem {
-      font-size: 3.5vw;
-      margin-right: 1%;
-      width: 10%;
-    }
-    h1 {
-      color: black;
-      font-size: 3.5em;
-      font-weight: 500;
-      text-align: center;
-    }
-    h2 {
-      color: black;
-      font-size: 2.5em;
-      font-size: 400;
-    }
-    h3 {
-      color: green;
-      font-size: 1.75em;
-    }
-    #details {
-      border: black 2px solid;
-      background-color: orange;
-    }
-    #back {
-      width: 100px;
-      height: 50px;
-      font-weight: 600;
-    }
+  .task-name-edit {
+    font-size: 4em;
+    font-weight: 100;
+    text-align: center;
   }
-  @media (max-width: 400px) {
-    #navItem {
-      font-size: 3.5vw;
-      margin-right: 1%;
-      width: 10%;
-    }
-    h1 {
-      color: black;
-      font-size: 2.5em;
-      font-weight: 500;
-      text-align: center;
-    }
-    h2 {
-      color: black;
-      font-size: 2em;
-      font-size: 400;
-      text-align: center;
-    }
-    h3 {
-      color: green;
-      font-size: 1.5em;
-    }
-    #details {
-      border: black 2px solid;
-      background-color: orange;
-    }
-    #back {
-      width: 90px;
-      height: 40px;
-      font-weight: 600;
-    }
+  #details {
+    border: black 2px solid;
+    background-color: orange;
   }
 </style>
+
 <nav>
-  <a href="/home" id="navItem">Home</a>
-  <a href="/timer" id="navItem">Start a Timer</a>
-  <a href="/task-Lists" id="navItem">Task Lists</a>
-  <a href="/team" id="navItem">Team</a>
-  <a href="/friends" id="navItem">Friends</a>
-  <a href="/about-Us" id="navItem">About us</a>
+  <a href="/home">Home</a>
+  <a href="/timer">Start a Timer</a>
+  <a href="/task-Lists">Task Lists</a>
+  <a href="/team">Team</a>
+  <a href="/friends">Friends</a>
+  <a href="/about-Us">About us</a>
 </nav>
 <div id="details">
+
   <a href="/tasks">
     <button id="back">Back</button>
   </a>
-  <h1 id="name">{localStorage.getItem('taskName')}</h1>
-  <br />
+
+  {#if !taskName.editing}
+    <h1 id="name" on:dblclick={() => editName(taskName)}>{taskName.name}</h1>
+  {:else}
+    <input
+      class="task-name-edit"
+      bind:value={taskName.name}
+      type="text"
+      on:blur={doneEditTaskName}
+      on:keydown={doneEditKeydownTaskName} />
+  {/if}
+
   <div id="description">
     <h2>Description</h2>
-    <h3>{taskDesc}</h3>
+    {#if !taskDesc.editing}
+      <h3 on:dblclick={() => editDesc(taskDesc)}>{taskDesc.name}</h3>
+    {:else}
+      <input
+        class="task-desc-edit"
+        bind:value={taskDesc.name}
+        type="text"
+        on:blur={doneEditTaskDesc}
+        on:keydown={doneEditKeydownTaskDesc} />
+    {/if}
   </div>
-  <br />
-  <br />
+
   <div id="complete">
-    <h3>{taskComplete}</h3>
+    <h3>Completed: {taskComplete}</h3>
   </div>
+
 </div>

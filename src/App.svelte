@@ -13,6 +13,7 @@
   import Friends from "./friends.svelte";
   import Signup from "./signup.svelte";
   import Login from "./login.svelte";
+  import EasterEgg from "./EasterEgg.svelte";
 </script>
 
 <Route path="/" redirect="/landing" />
@@ -51,4 +52,7 @@
 </Route>
 <Route path="/team">
   <Team />
+</Route>
+<Route path="/EasterEgg">
+  <EasterEgg />
 </Route>
