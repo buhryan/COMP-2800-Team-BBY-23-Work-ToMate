@@ -19,6 +19,7 @@
     listName.editing = true;
     listName = listName;
   };
+
   const doneEditListName = () => {
     listName.editing = false;
     listName = listName;
@@ -355,28 +356,6 @@
 
     <div class="button-container">
       <div>
-<<<<<<< HEAD
-        <button
-          on:click={() => updateFilter('all')}
-          class:active={currentFilter === 'all'}>
-          All
-        </button>
-        <button
-          on:click={() => updateFilter('active')}
-          class:active={currentFilter === 'active'}>
-          In Progress
-        </button>
-        <button
-          on:click={() => updateFilter('completed')}
-          class:active={currentFilter === 'completed'}>
-          Completed
-        </button>
-      </div>
-    </div>
-
-    <div>
-      <button on:click={clearCompleted}>Clear Completed</button>
-=======
         <label>
           <input type="checkbox" on:change={checkAllTasks} />
           Check All
@@ -387,7 +366,6 @@
 
     <div>
       <button on:click={clearChecked}>Clear Checked Tasks</button>
->>>>>>> db_tasks
     </div>
 
     <div>

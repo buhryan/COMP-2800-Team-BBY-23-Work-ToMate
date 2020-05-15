@@ -182,6 +182,13 @@
     border: 2px black solid;
     background-color: #ffa032;
   }
+  nav {
+    background-color: rgb(247, 177, 27);
+    border: 2px black solid;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin: 0;
+  }
   @media (min-width: 1025px) {
     .listItem {
       width: 65%;
@@ -189,6 +196,11 @@
       margin-bottom: 5%;
       background-color: #ffc078;
       padding: 0px;
+    }
+    #navItem {
+      font-size: 2vw;
+      margin-right: 2%;
+      width: 10%;
     }
     .delete {
       float: right;
@@ -229,6 +241,9 @@
     #back {
       width: 230px;
       height: 85px;
+      font-weight: 600;
+      font-size: 45px;
+      text-align: center;
     }
     .task-input {
       position: relative;
@@ -246,6 +261,11 @@
       margin-bottom: 5%;
       background-color: #ffc078;
       padding: 0px;
+    }
+    #navItem {
+      font-size: 3.5vw;
+      margin-right: 1%;
+      width: 10%;
     }
     .delete {
       float: right;
@@ -283,8 +303,10 @@
       text-align: left;
     }
     #back {
-      width: 120px;
-      height: 60px;
+      width: 100px;
+      height: 50px;
+      font-weight: 600;
+      font-size: 20px;
     }
     .task-input {
       position: relative;
@@ -302,6 +324,11 @@
       margin-bottom: 5%;
       background-color: #ffc078;
       padding: 0px;
+    }
+    #navItem {
+      font-size: 3.5vw;
+      margin-right: 1%;
+      width: 10%;
     }
     .delete {
       float: right;
@@ -335,18 +362,14 @@
       margin: 10%;
     }
     #back {
-      width: 80px;
-      height: 45px;
+      width: 90px;
+      height: 40px;
+      font-weight: 600;
     }
     span {
       vertical-align: middle;
       font-size: 30px;
       text-align: left;
-    }
-    #back {
-      width: 90px;
-      height: 40px;
-      font-weight: 600;
     }
     .task-input {
       position: relative;
@@ -360,12 +383,12 @@
 </style>
 
 <nav>
-  <a href="/home">Home</a>
-  <a href="/timer">Start a Timer</a>
-  <a href="/task-Lists">Task Lists</a>
-  <a href="/team">Team</a>
-  <a href="/friends">Friends</a>
-  <a href="/about-Us">About us</a>
+  <a href="/home" id="navItem">Home</a>
+  <a href="/timer" id="navItem">Start a Timer</a>
+  <a href="/task-Lists" id="navItem">Task Lists</a>
+  <a href="/team" id="navItem">Team</a>
+  <a href="/friends" id="navItem">Friends</a>
+  <a href="/about-Us" id="navItem">About us</a>
 </nav>
 <div id="list">
   <a href="/task-Lists">
@@ -374,7 +397,7 @@
 
   {#if !listName.editing}
     <h1 id="name" on:dblclick={() => editName(listName)}>
-      {listName.name} - Tasks
+      {listName.name}
     </h1>
   {:else}
     <input
