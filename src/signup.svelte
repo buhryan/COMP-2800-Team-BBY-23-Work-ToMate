@@ -48,7 +48,7 @@ function signup() {
 </script>
 
 <style>
-  @media (min-width: 200px){
+
     button {
             background-color: #EE8152;
             color: #F7EAC5;
@@ -127,18 +127,23 @@ function signup() {
         }
         #loggedIn{
             display: none;
-            margin: 0px auto;
-            margin-left:10px;
         }
 
         #loggedInBtn{
             font-size: 18pt;
             display: flex;
             margin: 0px auto;
-            margin-left:10px;
         }
-    }
-    @media (min-width: 1024px) {
+        #loggedInfo{
+            padding:10px;
+        }
+        main{
+        text-align: center;
+        background-color:#F7EAC5;
+        height:100%;
+        margin: 0px;
+        }
+    /* @media (min-width: 1024px) {
         button {
             background-color: #EE8152;
             color: #F7EAC5;
@@ -217,8 +222,6 @@ function signup() {
         }
         #loggedIn{
             display: none;
-            margin: 0px auto;
-            margin-left:10px;
         }
 
         #loggedInBtn{
@@ -227,11 +230,14 @@ function signup() {
             margin: 0px auto;
             margin-left:10px;
         }
-    }
+        main{
+            text-align:center;
+        }
+    } */
     
     
   </style>
-
+<main>
       <h2> Signup with WorkToMate</h2>
         <input id="fName" placeholder="Full Name" type="text">
         <input id="email" placeholder="Email Address" type="text">
@@ -241,9 +247,9 @@ function signup() {
             <div id="loginButton">Signup</div>
         </button>
         <div id = "loggedIn">
-            <p id="loggedInfo">Signup successful, you are now logged in.</p>
-            <a href="/home"><button id="loggedInBtn">Go To Home</button></a>
+            <h3 id="loggedInfo">Signup successful, you are now logged in.</h3>
+            <a href="/home"><button id="loggedInBtn"><div id = "loginButton">Go To Home</div></button></a>
         </div>
         
-
+    </main>
 
