@@ -1,10 +1,11 @@
 <script>
   import { db } from "./firebase.js";
+  import { Confirm } from "svelte-confirm";
+
   let taskList = [];
   function storeID() {
     //Stores a listName variable as the id of the button which should be the name of the task to be used in other sveltes
-    localStorage.setItem("listName", this.id);
-    console.log(this.id);
+    localStorage.setItem("listId", this.id);
   }
   let userid;
   //Needs this to work with User Login
@@ -28,6 +29,20 @@
       // No user is signed in.
     }
   });
+
+  const removeList = list => {
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(list)
+      .delete()
+      .then(() => {
+        console.log("List successfully deleted.");
+      })
+      .catch(() => {
+        console.error("Error deleting task: ", error);
+      });
+  };
 </script>
 
 <style>
@@ -35,52 +50,39 @@
     border: 2px black solid;
     background-color: #ffa032;
   }
-  nav {
-    background-color: rgb(247, 177, 27);
-    border: 2px black solid;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    margin: 0;
-  }
-
   @media (min-width: 1025px) {
-    #navItem {
-      font-size: 2vw;
-      margin-right: 2%;
-      width: 10%;
-    }
     .listItem {
-      width: 80%;
-      background-color: #ffc078;
-      margin-right: 10%;
+      width: 65%;
       margin-left: 10%;
       margin-bottom: 5%;
+      background-color: #ffc078;
       padding: 0px;
+      float: left;
+    }
+    .delete {
+      float: right;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 5%;
+      height: 60px;
+      width: 75px;
+      font-size: 20px;
     }
     h1 {
       color: black;
       text-transform: uppercase;
       font-size: 4em;
-      font-weight: 300;
+      font-weight: 25;
       text-align: center;
+      margin-bottom: 2.5%;
     }
     #addList {
       position: relative;
       width: 30%;
       height: 25%;
-      left: 0;
-      font-weight: 600;
-      font-size: 45px;
-      margin: 10%;
-    }
-    #deleteList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      right: 0;
-      font-weight: 600;
-      font-size: 45px;
-      margin: 8%;
+      margin-left: 35%;
+      font-size: 25px;
+      margin-bottom: 5%;
     }
     span {
       vertical-align: middle;
@@ -90,52 +92,44 @@
     #back {
       width: 230px;
       height: 85px;
-      font-weight: 600;
-      font-size: 45px;
-      text-align: center;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
-    #navItem {
-      font-size: 3.5vw;
-      margin-right: 1%;
-      width: 10%;
-    }
     .listItem {
-      width: 80%;
-      background-color: #ffc078;
-      margin-right: 10%;
+      width: 65%;
       margin-left: 10%;
       margin-bottom: 5%;
+      background-color: #ffc078;
+      padding: 0px;
+      float: left;
+    }
+    .delete {
+      float: right;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 5%;
+      height: 40px;
+      width: 60px;
+      font-size: 15px;
     }
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 2.5em;
-      font-weight: 300;
+      font-size: 3em;
+      font-weight: 25;
       text-align: center;
     }
     #addList {
       position: relative;
       width: 30%;
       height: 25%;
-      left: 0;
-      margin: 10%;
-      font-weight: 600;
+      margin-left: 35%;
       font-size: 20px;
-    }
-    #deleteList {
-      position: relative;
-      width: 30%;
-      height: 15%;
-      right: 0;
-      margin: 8%;
-      font-weight: 600;
-      font-size: 20px;
+      margin-bottom: 5%;
     }
     span {
       vertical-align: middle;
-      font-size: 35px;
+      font-size: 40px;
       text-align: left;
     }
     #back {
@@ -152,37 +146,36 @@
       width: 10%;
     }
     .listItem {
-      font-size: 15px;
-      width: 80%;
-      background-color: #ffc078;
-      margin-right: 10%;
+      width: 65%;
       margin-left: 10%;
       margin-bottom: 5%;
+      background-color: #ffc078;
+      padding: 0px;
+      float: left;
+    }
+    .delete {
+      float: right;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 5%;
+      height: 25px;
+      width: 35px;
+      font-size: 12px;
     }
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 2em;
-      font-weight: 400;
+      font-size: 3em;
+      font-weight: 25;
       text-align: center;
     }
     #addList {
       position: relative;
-      width: 100px;
-      height: 50px;
-      left: 0px;
-      margin: 7%;
-      font-weight: 500;
+      width: 30%;
+      height: 25%;
+      margin-left: 35%;
       font-size: 15px;
-    }
-    #deleteList {
-      position: relative;
-      width: 100px;
-      height: 50px;
-      right: 0px;
-      margin: 7%;
-      font-weight: 500;
-      font-size: 15px;
+      margin-bottom: 5%;
     }
     span {
       vertical-align: middle;
@@ -190,21 +183,21 @@
       text-align: left;
     }
     #back {
-      width: 90px;
-      height: 40px;
-      font-weight: 600;
+      width: 80px;
+      height: 45px;
     }
   }
 </style>
 
 <nav>
-  <a href="/home" id="navItem">Home</a>
-  <a href="/timer" id="navItem">Start a Timer</a>
-  <a href="/task-Lists" id="navItem">Task Lists</a>
-  <a href="/team" id="navItem">Team</a>
-  <a href="/friends" id="navItem">Friends</a>
-  <a href="/about-Us" id="navItem">About us</a>
+  <a href="/home">Home</a>
+  <a href="/timer">Start a Timer</a>
+  <a href="/task-Lists">Task Lists</a>
+  <a href="/team">Team</a>
+  <a href="/friends">Friends</a>
+  <a href="/about-Us">About us</a>
 </nav>
+<p id="username" />
 <div id="list">
   <a href="/home">
     <button id="back">Back</button>
@@ -219,12 +212,16 @@
           <br />
         </button>
       </a>
+      <Confirm let:confirm={confirmThis}>
+        <button
+          on:click={() => confirmThis(removeList, list.id)}
+          class="delete">
+          &times
+        </button>
+      </Confirm>
     </div>
   {/each}
   <a href="/add-List">
     <button id="addList">Add List</button>
-  </a>
-  <a href="/task-Lists">
-    <button id="deleteList">Delete List</button>
   </a>
 </div>

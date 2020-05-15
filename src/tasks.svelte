@@ -1,7 +1,17 @@
 <script>
   import { db } from "./firebase.js";
+  import { Confirm } from "svelte-confirm";
+
+  const ENTER_KEY = 13;
   let tasks = [];
   let userid;
+  let listName = {
+    name: "",
+    editing: false
+  };
+  let inputText = "+ New Task";
+  let newTask = "";
+  let tempid = 0;
   // Needs this for User login
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -14,20 +24,157 @@
         db.collection("users")
           .doc(userid)
           .collection("Task-Lists")
-          .doc(localStorage.getItem("listName"))
+          .doc(localStorage.getItem("listId"))
           .collection("Tasks")
           .onSnapshot(snapshot => {
             tasks = snapshot.docs;
           });
         console.log(tasks);
+
+        db.collection("users")
+          .doc(userid)
+          .collection("Task-Lists")
+          .doc(localStorage.getItem("listId"))
+          .get()
+          .then(doc => {
+            if (doc.exists) {
+              listName.name = doc.data().listName;
+              console.log("Document data: ", doc.data());
+            } else {
+              console.log("No such document!");
+            }
+          })
+          .catch(error => {
+            console.error("Error getting document: ", error);
+          });
       }
     } else {
       // No user is signed in.
     }
   });
   function storeID() {
-    localStorage.setItem("taskName", this.id);
+    localStorage.setItem("taskId", this.id);
+    console.log(localStorage.getItem("taskId"));
   }
+  console;
+
+  const editName = () => {
+    listName.editing = true;
+    listName = listName;
+  };
+
+  const doneEditListName = () => {
+    listName.editing = false;
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(localStorage.getItem("listId"))
+      .update({
+        listName: listName.name
+      })
+      .then(() => {
+        console.log("List name successfully updated.");
+      })
+      .catch(() => {
+        console.error("Error updating name: ", error);
+      });
+    listName = listName;
+  };
+
+  const doneEditKeydownListName = e => {
+    if (e.which === ENTER_KEY) {
+      doneEditListName();
+    }
+  };
+
+  const completeTask = task => {
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(localStorage.getItem("listId"))
+      .collection("Tasks")
+      .doc(task)
+      .update({
+        complete: true
+      })
+      .then(() => {
+        console.log("Task successfully updated.");
+      })
+      .catch(() => {
+        console.error("Error updating task: ", error);
+      });
+  };
+
+  const deleteTask = task => {
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(localStorage.getItem("listId"))
+      .collection("Tasks")
+      .doc(task)
+      .delete()
+      .then(() => {
+        console.log("Task successfully deleted.");
+      })
+      .catch(() => {
+        console.error("Error deleting task: ", error);
+      });
+  };
+
+  const addTask = e => {
+    if (e.which === ENTER_KEY) {
+      db.collection("users")
+        .doc(userid)
+        .collection("Task-Lists")
+        .doc(localStorage.getItem("listId"))
+        .collection("Tasks")
+        .add({
+          complete: false,
+          desc: "none",
+          task: newTask
+        })
+        .then(() => {
+          console.log("New task added!");
+          newTask = "";
+        })
+        .catch(() => {
+          console.error("Error adding task: ", error);
+        });
+    }
+  };
+
+  const addTaskBlur = () => {
+    if (newTask !== "") {
+      db.collection("users")
+        .doc(userid)
+        .collection("Task-Lists")
+        .doc(localStorage.getItem("listId"))
+        .collection("Tasks")
+        .add({
+          complete: false,
+          desc: "none",
+          task: newTask
+        })
+        .then(() => {
+          console.log("New task added!");
+          newTask = "";
+          inputText = "+ new task";
+        })
+        .catch(() => {
+          console.error("Error adding task: ", error);
+        });
+    } else {
+      replaceText();
+    }
+  };
+
+  const removePlaceholder = () => {
+    inputText = "";
+  };
+
+  const replaceText = () => {
+    inputText = "+ new task";
+  };
 </script>
 
 <style>
@@ -35,51 +182,44 @@
     border: 2px black solid;
     background-color: #ffa032;
   }
-  nav {
-    background-color: rgb(247, 177, 27);
-    border: 2px black solid;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    margin: 0;
-  }
   @media (min-width: 1025px) {
-    #navItem {
-      font-size: 2vw;
-      margin-right: 2%;
-      width: 10%;
-    }
     .listItem {
-      width: 80%;
-      background-color: #ffc078;
-      margin-right: 10%;
-      margin-left: 10%;
+      width: 65%;
+      margin-left: 3%;
       margin-bottom: 5%;
+      background-color: #ffc078;
       padding: 0px;
     }
-    h1 {
+    .delete {
+      float: right;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 5%;
+      height: 60px;
+      width: 75px;
+      font-size: 20px;
+    }
+    .complete {
+      float: left;
+      width: 50px;
+      height: 50px;
+      margin-left: 4%;
+      margin-top: 2%;
+    }
+    h1,
+    .list-name-edit {
       color: black;
       text-transform: uppercase;
       font-size: 4em;
-      font-weight: 300;
+      font-weight: 25;
       text-align: center;
     }
-    #addTask {
+    #addList {
       position: relative;
       width: 30%;
       height: 25%;
-      left: 0;
-      font-weight: 600;
-      font-size: 45px;
-      margin: 10%;
-    }
-    #deleteTask {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      right: 0;
-      font-weight: 600;
-      font-size: 45px;
-      margin: 8%;
+      left: 15%;
+      font-size: 25px;
     }
     span {
       vertical-align: middle;
@@ -89,99 +229,114 @@
     #back {
       width: 230px;
       height: 85px;
-      font-weight: 600;
-      font-size: 45px;
-      text-align: center;
     }
-  }
-  @media (max-width: 1024px) and (min-width: 401px) {
-    #navItem {
-      font-size: 3.5vw;
-      margin-right: 1%;
-      width: 10%;
-    }
-    .listItem {
-      width: 80%;
-      background-color: #ffc078;
-      margin-right: 10%;
-      margin-left: 10%;
-      margin-bottom: 5%;
-    }
-    h1 {
-      color: black;
-      text-transform: uppercase;
-      font-size: 2.5em;
-      font-weight: 300;
-      text-align: center;
-    }
-    #addTask {
+    .task-input {
       position: relative;
       width: 30%;
       height: 25%;
-      left: 0;
-      margin: 10%;
-      font-weight: 600;
-      font-size: 20px;
+      margin-left: 35%;
+      font-size: 25px;
+      margin-bottom: 5%;
     }
-    #deleteTask {
+  }
+  @media (max-width: 1024px) and (min-width: 401px) {
+    .listItem {
+      width: 65%;
+      margin-left: 3%;
+      margin-bottom: 5%;
+      background-color: #ffc078;
+      padding: 0px;
+    }
+    .delete {
+      float: right;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 5%;
+      height: 40px;
+      width: 50px;
+      font-size: 14px;
+    }
+    .complete {
+      float: left;
+      width: 25px;
+      height: 25px;
+      margin-left: 4%;
+      margin-top: 2%;
+    }
+    h1,
+    .list-name-edit {
+      color: black;
+      text-transform: uppercase;
+      font-size: 3em;
+      font-weight: 25;
+      text-align: center;
+    }
+    #addList {
       position: relative;
       width: 30%;
-      height: 15%;
-      right: 0;
-      margin: 8%;
-      font-weight: 600;
-      font-size: 20px;
+      height: 25%;
+      left: 15%;
     }
     span {
       vertical-align: middle;
-      font-size: 35px;
+      font-size: 40px;
       text-align: left;
     }
     #back {
-      width: 100px;
-      height: 50px;
-      font-weight: 600;
-      font-size: 20px;
+      width: 120px;
+      height: 60px;
+    }
+    .task-input {
+      position: relative;
+      width: 30%;
+      height: 25%;
+      margin-left: 30%;
+      font-size: 17px;
+      margin-bottom: 5%;
     }
   }
   @media (max-width: 400px) {
-    #navItem {
-      font-size: 3.5vw;
-      margin-right: 1%;
-      width: 10%;
-    }
     .listItem {
-      font-size: 15px;
-      width: 80%;
-      background-color: #ffc078;
-      margin-right: 10%;
-      margin-left: 8%;
+      width: 65%;
+      margin-left: 3%;
       margin-bottom: 5%;
+      background-color: #ffc078;
+      padding: 0px;
     }
-    h1 {
+    .delete {
+      float: right;
+      margin-right: 5%;
+      margin-top: 2.5%;
+      margin-bottom: 5%;
+      height: 25px;
+      width: 35px;
+      font-size: 10px;
+    }
+    .complete {
+      float: left;
+      width: 20px;
+      height: 20px;
+      margin-left: 4%;
+      margin-top: 2%;
+    }
+    h1,
+    .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 2em;
-      font-weight: 400;
+      font-size: 3em;
+      font-weight: 25;
       text-align: center;
     }
-    #addTask {
+    #addList {
       position: relative;
-      width: 100px;
-      height: 50px;
-      left: 0px;
-      margin: 7%;
-      font-weight: 600;
-      font-size: 15px;
+      width: 25%;
+      height: 15%;
+      left: 15%;
+      margin: 10%;
     }
-    #deleteTask {
-      position: relative;
-      width: 100px;
-      height: 50px;
-      right: 0px;
-      margin: 7%;
-      font-weight: 600;
-      font-size: 15px;
+    #back {
+      width: 80px;
+      height: 45px;
     }
     span {
       vertical-align: middle;
@@ -193,24 +348,50 @@
       height: 40px;
       font-weight: 600;
     }
+    .task-input {
+      position: relative;
+      width: 30%;
+      height: 25%;
+      margin-left: 35%;
+      font-size: 14px;
+      margin-bottom: 5%;
+    }
   }
 </style>
 
 <nav>
-  <a href="/home" id="navItem">Home</a>
-  <a href="/timer" id="navItem">Start a Timer</a>
-  <a href="/task-Lists" id="navItem">Task Lists</a>
-  <a href="/team" id="navItem">Team</a>
-  <a href="/friends" id="navItem">Friends</a>
-  <a href="/about-Us" id="navItem">About us</a>
+  <a href="/home">Home</a>
+  <a href="/timer">Start a Timer</a>
+  <a href="/task-Lists">Task Lists</a>
+  <a href="/team">Team</a>
+  <a href="/friends">Friends</a>
+  <a href="/about-Us">About us</a>
 </nav>
 <div id="list">
   <a href="/task-Lists">
     <button id="back">Back</button>
   </a>
-  <h1>Tasks</h1>
+
+  {#if !listName.editing}
+    <h1 id="name" on:dblclick={() => editName(listName)}>
+      {listName.name} - Tasks
+    </h1>
+  {:else}
+    <input
+      class="list-name-edit"
+      bind:value={listName.name}
+      type="text"
+      on:blur={doneEditListName}
+      on:keydown={doneEditKeydownListName} />
+  {/if}
+
   {#each tasks as job}
-    <div>
+    <input
+      type="checkbox"
+      on:change={() => completeTask(job.id)}
+      bind:checked={job.complete}
+      class="complete" />
+    <div class="task-container">
       <a href="/task-Details">
         <!-- id of button is the task name-->
         <button on:click={storeID} id={job.id} class="listItem">
@@ -218,14 +399,21 @@
           <br />
         </button>
       </a>
+      <Confirm let:confirm={confirmThis}>
+        <button on:click={() => confirmThis(deleteTask, job.id)} class="delete">
+          &times
+        </button>
+      </Confirm>
     </div>
+    <br />
   {/each}
-  <div>
-    <a href="/tasks">
-      <button id="addTask">Add Task</button>
-    </a>
-    <a href="/tasks">
-      <button id="deleteTask">Delete Task</button>
-    </a>
-  </div>
+  <a href="/tasks">
+    <input
+      class="task-input"
+      placeholder={inputText}
+      on:focus={removePlaceholder}
+      on:blur={addTaskBlur}
+      bind:value={newTask}
+      on:keydown={addTask} />
+  </a>
 </div>

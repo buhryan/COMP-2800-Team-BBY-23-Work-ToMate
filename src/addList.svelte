@@ -1,17 +1,20 @@
 <script>
   import { fly } from "svelte/transition";
+  import { db } from "./firebase.js";
+
   const ENTER_KEY = 13;
-  const ESCAPE_KEY = 27;
   let listName = {
-    // will be pulling from db
     name: "Default List",
     editing: false
   };
   let currentFilter = "all";
   let newTask = "";
   let tempId = 1;
+  let logoCount = 0;
   let tasks = [];
   let inputText = "+ new task";
+  let userid = firebase.auth().currentUser.uid;
+
   const editListName = () => {
     listName.editing = true;
     listName = listName;
@@ -20,6 +23,7 @@
     listName.editing = false;
     listName = listName;
   };
+
   const doneEditKeydownListName = e => {
     if (event.which === ENTER_KEY) {
       doneEditListName(listName);
@@ -30,7 +34,7 @@
     if (e.which === ENTER_KEY) {
       tasks.push({
         id: tempId,
-        completed: false,
+        checked: false,
         title: newTask,
         editing: false
       });
@@ -39,11 +43,12 @@
       newTask = "";
     }
   };
+
   const addTaskBlur = () => {
     if (newTask !== "") {
       tasks.push({
         id: tempId,
-        completed: false,
+        checked: false,
         title: newTask,
         editing: false
       });
@@ -55,12 +60,15 @@
       replaceText();
     }
   };
+
   const removePlaceholder = () => {
     inputText = "";
   };
+
   const replaceText = () => {
     inputText = "+ new task";
   };
+
   const editTask = task => {
     task.editing = true;
     tasks = tasks;
@@ -70,41 +78,91 @@
     task.editing = false;
     tasks = tasks;
   };
+
   const doneEditKeydown = (task, e) => {
     if (event.which === ENTER_KEY) {
       doneEdit(task);
     }
   };
+
   const deleteTask = id => {
     tasks = tasks.filter(task => task.id !== id);
   };
+
   const checkAllTasks = e => {
-    tasks.forEach(task => (task.completed = event.target.checked));
+    tasks.forEach(task => (task.checked = event.target.checked));
     tasks = tasks;
   };
-  const clearCompleted = () => {
-    tasks = tasks.filter(task => !task.completed);
+
+  const clearChecked = () => {
+    tasks = tasks.filter(task => !task.checked);
   };
+
   const updateFilter = filter => {
     currentFilter = filter;
   };
 
   const saveList = () => {
-    //save to firebase
-    /* db.collection("list").add(
-			Tasks: tasks,
-			User: firebase.auth().currentUser,
-			Name: Task List
-        )
-        */
+    let listId;
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .add({
+        listName: listName.name
+      })
+      .then(function(docRef) {
+        listId = docRef.id;
+        console.log("Document written with ID: ", listId);
+      })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+      })
+      .then(() => {
+        tasks.forEach(task => {
+          db.collection("users")
+            .doc(userid)
+            .collection("Task-Lists")
+            .doc(listId)
+            .collection("Tasks")
+            .add({
+              _id: task.id,
+              task: task.title,
+              desc: "none",
+              complete: false
+            })
+            .then(function(docRef) {
+              console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+              console.error("Error adding document: ", error);
+            });
+        });
+      });
   };
-  $: tasksLeft = tasks.filter(task => !task.completed).length;
+
+  const logoClick = () => {
+    logoCount++;
+    if (logoCount === 5) {
+      document.getElementById("logoLink").href = "/EasterEgg";
+      //   document.getElementById("logo").src =
+      //     "https://media.tenor.com/images/5875a102ce91c83e4f857c31e790b180/tenor.gif";
+
+      //   document.getElementById("kirby").play();
+      // }
+      // if (logoCount === 6) {
+      //   document.getElementById("logo").src = "favicon.png";
+      //   document.getElementById("kirby").pause();
+    }
+    console.log(logoCount);
+  };
+
+  $: taskNum = tasks.filter(task => !task.checked).length;
   $: filteredTasks =
     currentFilter === "all"
       ? tasks
-      : currentFilter === "completed"
-      ? tasks.filter(task => task.completed)
-      : tasks.filter(task => !task.completed);
+      : currentFilter === "checked"
+      ? tasks.filter(task => task.checked)
+      : tasks.filter(task => !task.checked);
 </script>
 
 <style>
@@ -172,7 +230,7 @@
   .task-item-edit:focus {
     outline: none;
   }
-  .completed {
+  .checked {
     text-decoration: line-through;
     color: grey;
   }
@@ -204,10 +262,6 @@
   button:focus {
     outline: none;
   }
-  .active {
-    background: #ee8152;
-    color: white;
-  }
   @media screen and (max-width: 400px) {
     .logo {
       width: 250px;
@@ -237,7 +291,14 @@
       <button id="back">Back</button>
     </a>
 
-    <img src={'favicon.png'} alt="worktomate logo" class="logo" />
+    <a id="logoLink">
+      <img
+        src={'favicon.png'}
+        alt="worktomate logo"
+        class="logo"
+        id="logo"
+        on:click={logoClick} />
+    </a>
 
     {#if !listName.editing}
       <h1 class="list-name" on:dblclick={() => editListName(listName)}>
@@ -258,11 +319,11 @@
           <input
             class="task-checkbox"
             type="checkbox"
-            bind:checked={task.completed} />
+            bind:checked={task.checked} />
           {#if !task.editing}
             <div
               class="task-item-label"
-              class:completed={task.completed}
+              class:checked={task.checked}
               on:dblclick={() => editTask(task)}>
               {task.title}
             </div>
@@ -294,16 +355,7 @@
 
     <div class="button-container">
       <div>
-        <label>
-          <input type="checkbox" on:change={checkAllTasks} />
-          Check All
-        </label>
-      </div>
-      <div>{tasksLeft} tasks left</div>
-    </div>
-
-    <div class="button-container">
-      <div>
+<<<<<<< HEAD
         <button
           on:click={() => updateFilter('all')}
           class:active={currentFilter === 'all'}>
@@ -324,6 +376,18 @@
 
     <div>
       <button on:click={clearCompleted}>Clear Completed</button>
+=======
+        <label>
+          <input type="checkbox" on:change={checkAllTasks} />
+          Check All
+        </label>
+      </div>
+      <div>{taskNum} tasks</div>
+    </div>
+
+    <div>
+      <button on:click={clearChecked}>Clear Checked Tasks</button>
+>>>>>>> db_tasks
     </div>
 
     <div>
