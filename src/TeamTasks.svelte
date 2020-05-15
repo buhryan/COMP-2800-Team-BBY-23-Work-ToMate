@@ -1,33 +1,31 @@
 <script>
   import { db } from "./firebase.js";
-  let taskList = [];
-  function storeID() {
-    //Stores a listName variable as the id of the button which should be the name of the task to be used in other sveltes
-    localStorage.setItem("listName", this.id);
-    console.log(this.id);
-  }
+  let tasks = [];
   let userid;
-  //Needs this to work with User Login
+  // Needs this for User login
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
       user = firebase.auth().currentUser;
       if (user != null) {
         userid = user.uid;
-        //Goes to collection users / unique user id doc / Task-Lists collection and gets all docs in that collection
-        db.collection("users")
-          .doc(userid)
-          .collection("Task-Lists")
+        // Goes to collection users / unique user id doc / Task-Lists collection / doc of whatever the previous button id
+        // was / collection Tasks / then taks all the Tasks in there.
+        db.collection("groups")
+          .doc(localStorage.getItem("grpID"))
+          .collection("Tasks")
           .onSnapshot(snapshot => {
-            taskList = snapshot.docs;
-            console.log(snapshot.docs);
+            tasks = snapshot.docs;
           });
-        console.log(taskList);
+        console.log(tasks);
       }
     } else {
       // No user is signed in.
     }
   });
+  function storeID() {
+    localStorage.setItem("teamTaskName", this.id);
+  }
 </script>
 
 <style>
@@ -42,7 +40,6 @@
     padding-bottom: 1%;
     margin: 0;
   }
-
   @media (min-width: 1025px) {
     #navItem {
       font-size: 2vw;
@@ -64,7 +61,7 @@
       font-weight: 300;
       text-align: center;
     }
-    #addList {
+    #addTask {
       position: relative;
       width: 30%;
       height: 25%;
@@ -73,7 +70,7 @@
       font-size: 45px;
       margin: 10%;
     }
-    #deleteList {
+    #deleteTask {
       position: relative;
       width: 30%;
       height: 25%;
@@ -115,7 +112,7 @@
       font-weight: 300;
       text-align: center;
     }
-    #addList {
+    #addTask {
       position: relative;
       width: 30%;
       height: 25%;
@@ -124,7 +121,7 @@
       font-weight: 600;
       font-size: 20px;
     }
-    #deleteList {
+    #deleteTask {
       position: relative;
       width: 30%;
       height: 15%;
@@ -156,7 +153,7 @@
       width: 80%;
       background-color: #ffc078;
       margin-right: 10%;
-      margin-left: 10%;
+      margin-left: 8%;
       margin-bottom: 5%;
     }
     h1 {
@@ -166,22 +163,22 @@
       font-weight: 400;
       text-align: center;
     }
-    #addList {
+    #addTask {
       position: relative;
       width: 100px;
       height: 50px;
       left: 0px;
       margin: 7%;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 15px;
     }
-    #deleteList {
+    #deleteTask {
       position: relative;
       width: 100px;
       height: 50px;
       right: 0px;
       margin: 7%;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 15px;
     }
     span {
@@ -206,25 +203,26 @@
   <a href="/about-Us" id="navItem">About us</a>
 </nav>
 <div id="list">
-  <a href="/home">
+  <a href="/team-info">
     <button id="back">Back</button>
   </a>
-  <h1>Task Lists</h1>
-  {#each taskList as list}
-    <div id="listItem">
-      <a href="/tasks">
-        <!-- Id of button is set to be the name of the task -->
-        <button on:click={storeID} id={list.id} class="listItem">
-          <span>{list.data().listName}</span>
+  <h1>Tasks</h1>
+  {#each tasks as job}
+    <div>
+      <a href="/team-tasks-details">
+        <button on:click={storeID} id={job.id} class="listItem">
+          <span>{job.data().task}</span>
           <br />
         </button>
       </a>
     </div>
   {/each}
-  <a href="/add-List">
-    <button id="addList">Add List</button>
-  </a>
-  <a href="/task-Lists">
-    <button id="deleteList">Delete List</button>
-  </a>
+  <div>
+    <a href="/team-tasks">
+      <button id="addTask">Add Task</button>
+    </a>
+    <a href="/team-tasks">
+      <button id="deleteTask">Delete Task</button>
+    </a>
+  </div>
 </div>

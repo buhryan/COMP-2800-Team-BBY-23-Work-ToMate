@@ -14,15 +14,10 @@
       user = firebase.auth().currentUser;
       if (user != null) {
         userid = user.uid;
-        //Goes to collection users/ userid doc / collection Task-List / gets doc of whatever button id was clicked on task-Lists page
-        // then tasks collection / then doc of whatever the button id was in tasks.svelte / Then grabs all doc details and puts them in
-        // variables.
-        db.collection("users")
-          .doc(userid)
-          .collection("Task-Lists")
-          .doc(localStorage.getItem("listName"))
+        db.collection("groups")
+          .doc(localStorage.getItem("grpID"))
           .collection("Tasks")
-          .doc(localStorage.getItem("taskName"))
+          .doc(localStorage.getItem("teamTaskName"))
           .onSnapshot(function(snapshot) {
             taskName = snapshot.data().task;
             taskDesc = snapshot.data().desc;
@@ -151,10 +146,10 @@
   <a href="/about-Us" id="navItem">About us</a>
 </nav>
 <div id="details">
-  <a href="/tasks">
+  <a href="/team-tasks">
     <button id="back">Back</button>
   </a>
-  <h1 id="name">{localStorage.getItem('taskName')}</h1>
+  <h1 id="name">{taskName}</h1>
   <br />
   <div id="description">
     <h2>Description</h2>

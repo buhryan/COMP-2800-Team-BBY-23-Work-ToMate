@@ -1,7 +1,8 @@
 <script>
   import { db } from "./firebase.js";
-  let name;
+  let memberNames = [];
   let userid;
+  let count = 0;
   // Needs this for User login
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -14,7 +15,8 @@
         db.collection("groups")
           .doc(localStorage.getItem("grpID"))
           .onSnapshot(function(snapshot) {
-            name = snapshot.data().grpName;
+            memberNames = snapshot.data().members;
+            memberNames = memberNames;
           });
       }
     } else {
@@ -38,8 +40,9 @@
     padding-bottom: 1%;
     margin: 0;
   }
-  #invDiv{
-    margin-bottom:5%;
+  h2{
+    color:darkred;
+    margin-left:5%;
   }
   @media (min-width: 1025px) {
     #navItem {
@@ -61,28 +64,9 @@
       font-size: 45px;
       text-align: center;
     }
-    #groupIden {
-      color: white;
-      font-size: 3em;
-      font-weight: 400;
-      text-align: center;
-    }
-    #invite {
-      margin-left: 15%;
+    h2{
       font-size:4.5vw;
-      width:55%;
-    }
-    #buttons {
-      margin-right: 10%;
-      margin-left: 20%;
-      width: 60%;
-      font-size: 50px;
-      margin-bottom: 5%;
-    }
-    #invButton{
-      width:20%;
-      height:10%;
-      font-size:4vw;
+      margin-left:15%;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -93,10 +77,10 @@
     }
     h1 {
       color: black;
+      text-transform: uppercase;
       font-size: 2.5em;
-      font-weight: 400;
+      font-weight: 300;
       text-align: center;
-      margin-bottom: 5%;
     }
     #back {
       width: 100px;
@@ -104,31 +88,9 @@
       font-weight: 600;
       font-size: 20px;
     }
-    #groupIden {
-      color: white;
-      font-size: 1.5em;
-      font-weight: 400;
-      text-align: center;
-    }
-    #invite {
-      margin-left: 10%;
-      width:60%;
+    h2{
       font-size:4vw;
-    }
-    #invDiv {
-      margin-bottom:5%;
-    }
-    #buttons {
-      margin-right: 10%;
-      margin-left: 20%;
-      width: 55%;
-      font-size: 4.5vw;
-      margin-bottom: 5%;
-    }
-    #invButton{
-      width:20%;
-      height:10%;
-      font-size:3vw;
+      margin-left:20%;
     }
   }
   @media (max-width: 400px) {
@@ -139,31 +101,18 @@
     }
     h1 {
       color: black;
+      text-transform: uppercase;
       font-size: 2em;
       font-weight: 400;
       text-align: center;
-      margin-bottom: 5%;
-    }
-    #groupIden {
-      color: white;
-      font-size: 1.5em;
-      font-weight: 400;
-      text-align: center;
-    }
-    #invite {
-      margin-left: 10%;
     }
     #back {
       width: 90px;
       height: 40px;
       font-weight: 600;
     }
-    #buttons {
-      margin-right: 10%;
-      margin-left: 20%;
-      width: 60%;
-      font-size:25px;
-      margin-bottom: 5%;
+    h2{
+      font-size:20px;
     }
   }
 </style>
@@ -177,26 +126,14 @@
   <a href="/about-Us" id="navItem">About us</a>
 </nav>
 <div id="list">
-  <a href="/team">
+  <a href="/team-info">
     <button id="back">Back</button>
   </a>
-  <h1>{name}</h1>
-  <div>
-    <a href="/team-tasks">
-      <button id="buttons">Tasks</button>
-    </a>
-    <br />
-    <a href="/team-members">
-      <button id="buttons">Members</button>
-    </a>
-    <p id="groupIden">Group ID</p>
-    <p id="groupIden">{localStorage.getItem('grpID')}</p>
-    <br />
-    <div id="invDiv">
-      <input type="text" placeholder="Enter User ID" id="invite" />
-      <a href="/team-info">
-        <button id="invButton">Invite</button>
-      </a>
+  <h1>Users</h1>
+  {#each memberNames as name, count}
+    <div>
+      <h2>{memberNames[count]}</h2>
+      <br />
     </div>
-  </div>
+  {/each}
 </div>
