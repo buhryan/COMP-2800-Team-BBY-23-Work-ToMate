@@ -40,6 +40,8 @@
         height: 400px;
         width: 100%;
         background: #f7eac5;
+        text-align: center; 
+        margin: 10px;
     }
 
     #loggedIn {
@@ -61,12 +63,10 @@
 </style>
 <main>
 <h1>Landing Page</h1>
-<a href="/login">
-  <button>Login</button>
-</a>
-<a href="/signup">
-  <button>Signup</button>
-</a>
+<span id="loginBtn"><a href="/login"><button>Login</button></a></span>
+<span id="signupBtn"><a href="/signup"><button>Signup</button></a></span>
+<span id="loggedIn"><a href="/home"><button>Home</button></a></span>
+<span id="logout"><button on:click={logout}>Logout</button></span>
 
 <div class="Square shape">
   <h3>Core Features</h3>
@@ -75,25 +75,10 @@
   <ul>Timer</ul>
   <ul>Connect Friends</ul>
   
-
-
 </div>
 <div class="Square shape">
   <h3><a href="/about-Us">About Us</a></h3>
 
 </div>
-<span id="loginBtn"><a href="/login"><button>Login</button></a></span>
-<span id="signupBtn"><a href="/signup"><button>Signup</button></a></span>
-<span id="loggedIn"><a href="/home"><button>Home</button></a></span>
-<span id="logout"><button on:click={logout}>Logout</button></span>
 
-
-<div class="Square shape">
-    <h3>Core Features</h3>
-
-</div>
-<div class="Square shape">
-    <h3>About Us</h3>
-
-</div>
 </main>
