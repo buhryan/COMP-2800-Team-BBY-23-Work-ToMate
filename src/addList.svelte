@@ -11,6 +11,7 @@
   let currentFilter = "all";
   let newTask = "";
   let tempId = 1;
+  let logoCount = 0;
   let tasks = [];
   let inputText = "+ new task";
   let userid = firebase.auth().currentUser.uid;
@@ -126,7 +127,19 @@
         });
     });
   };
-
+  function logoClick(){
+    
+    logoCount++
+    if(logoCount == 5){
+      document.getElementById('logo').src = "https://media.tenor.com/images/5875a102ce91c83e4f857c31e790b180/tenor.gif"
+      document.getElementById('kirby').play();
+    }
+    if(logoCount == 6){
+      document.getElementById('logo').src = 'favicon.png';
+      document.getElementById('kirby').pause();
+    }
+    console.log(logoCount);
+  }
   $: taskNum = tasks.filter(task => !task.checked).length;
   $: filteredTasks =
     currentFilter === "all"
@@ -259,14 +272,14 @@
 </nav>
 
 <main>
-
+  <audio src={'KirbyDance.mp3'} id="kirby"></audio>
   <div class="container">
 
     <a href="/task-Lists">
       <button id="back">Back</button>
     </a>
 
-    <img src={'favicon.png'} alt="worktomate logo" class="logo" />
+    <img src={'favicon.png'} alt="worktomate logo" class="logo" id="logo" on:click={logoClick}/>
 
     {#if !listName.editing}
       <h1 class="list-name" on:dblclick={() => editListName(listName)}>
@@ -340,6 +353,8 @@
         <button on:click={saveList}>Save List</button>
       </a>
     </div>
-
+  <a href="/tasks">
+      <button id="addTask">Add Task</button>
+    </a>
   </div>
 </main>
