@@ -32,6 +32,13 @@
   }
 
   function startTimer() { 
+    if(repeatTime() == "null"){
+      console.log("in no repeat");
+      document.getElementById("noRepeat").style.display="inline";
+    }else{
+    document.getElementById("noRepeat").style.display="none";
+    document.getElementById("afterWork").style.display="none";
+    document.getElementById("afterBreak").style.display="none";
     currentState = State.inProgress;
     interval = setInterval(() => {
       if (workPeriod === 0) {
@@ -42,6 +49,7 @@
       }
       workPeriod -= 1;
     },1000);
+  }
   }
 
   function workPause(){
@@ -82,6 +90,13 @@
   }
 
   function cancelTimer() {
+    if(document.getElementById("afterBreak").style.display=="inline"){
+      document.getElementById("afterBreak").style.display="none";
+    }
+    if(document.getElementById("afterWork").style.display="inline"){
+      document.getElementById("afterWork").style.display="none";
+    }
+    
     document.getElementById("breakDone").pause();
     document.getElementById("workDone").pause();
     currentState = State.idle;
@@ -98,6 +113,7 @@
 </script>
 
 <style>
+
   #afterWork{
     display: none;
   }
@@ -134,8 +150,11 @@
     background-color:#eeB089;
     border-radius:7px;
   }
+  #noRepeat{
+    display:none;
+  }
 </style>
-<section>
+<main>
   <h1>
     {formatTime(workPeriod)}
   </h1>
@@ -170,9 +189,12 @@
     <div id = "cycle">
       <h2>Cycle Done!</h2>
     </div>
-    <audio id="breakDone" src="https://www.tones7.com/media/4U%20-%20vinci07.mp3"></audio>
-    <audio id="workDone" src="https://files4.mytinyphone.com/file.php?fileringID=3875238&type=ringt&rtype=play"></audio>
+    <div id="noRepeat">
+      <h2>Please select repetition time.</h2>
+    </div>
+    <audio id="workDone" src={'lovingly.mp3'}></audio>
+    <audio id="breakDone" src="https://files4.mytinyphone.com/file.php?fileringID=3875238&type=ringt&rtype=play"></audio>
     <!--button on:click={completePomodoro}>complete</button-->
 
   </footer>
-</section>
+</main>
