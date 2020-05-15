@@ -61,7 +61,6 @@
 </style>
 <main>
 <h1>Landing Page</h1>
-<<<<<<< HEAD
 <a href="/login">
   <button>Login</button>
 </a>
@@ -83,7 +82,6 @@
   <h3><a href="/about-Us">About Us</a></h3>
 
 </div>
-=======
 <span id="loginBtn"><a href="/login"><button>Login</button></a></span>
 <span id="signupBtn"><a href="/signup"><button>Signup</button></a></span>
 <span id="loggedIn"><a href="/home"><button>Home</button></a></span>
@@ -99,4 +97,3 @@
 
 </div>
 </main>
->>>>>>> Jessica_Chu_timer
