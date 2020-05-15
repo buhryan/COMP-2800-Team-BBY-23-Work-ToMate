@@ -28,7 +28,6 @@
   function storeID() {
     localStorage.setItem("taskName", this.id);
   }
-  console;
 </script>
 
 <style>
@@ -193,7 +192,6 @@
       width: 90px;
       height: 40px;
       font-weight: 600;
-      font-size: 15px;
     }
   }
 </style>
@@ -215,7 +213,7 @@
     <div>
       <a href="/task-Details">
         <!-- id of button is the task name-->
-        <button on:click={storeID} id={job.data().task} class="listItem">
+        <button on:click={storeID} id={job.id} class="listItem">
           <span>{job.data().task}</span>
           <br />
         </button>

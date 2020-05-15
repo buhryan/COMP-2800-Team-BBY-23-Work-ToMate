@@ -17,7 +17,7 @@
 <a href="/login">
   <button>Login</button>
 </a>
-<a href="/signup">
+<a href="/home">
   <button>Signup</button>
 </a>
 
