@@ -28,7 +28,6 @@
   function storeID() {
     localStorage.setItem("taskName", this.id);
   }
-  console;
 </script>
 
 <style>

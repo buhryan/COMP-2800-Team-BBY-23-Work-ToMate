@@ -13,6 +13,7 @@
   import Friends from "./friends.svelte";
   import Signup from "./signup.svelte";
   import Login from "./login.svelte";
+  import TeamInfo from "./TeamInfo.svelte";
 </script>
 
 <Route path="/" redirect="/landing" />
@@ -52,3 +53,4 @@
 <Route path="/team">
   <Team />
 </Route>
+<Route path="/team-info"><TeamInfo/></Route>

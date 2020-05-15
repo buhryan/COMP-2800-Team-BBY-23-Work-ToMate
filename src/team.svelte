@@ -1,6 +1,8 @@
 <script>
   import { db } from "./firebase.js";
   let groups = [];
+  let docIDS = [];
+  let count = 0;
   let userid;
   // Needs this for User login
   firebase.auth().onAuthStateChanged(function(user) {
@@ -15,25 +17,29 @@
           .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
               // doc.data() is never undefined for query doc snapshots
-              console.log(doc.id, " => ", doc.data());
               groups.push(doc.data());
               groups = groups;
+              docIDS.push(doc.id);
+              docIDS = docIDS;
             });
-            console.log(groups);
           })
           .catch(function(error) {
             console.log(error);
           });
-        // db.collection("groups").onSnapshot(snapshot => {
-        //   groups = snapshot.docs;
-        // });
       }
     } else {
       // No user is signed in.
     }
   });
-  function showID() {
-    console.log(this.id);
+  function setID() {
+    localStorage.setItem("grpID", this.id);
+  }
+  function joinTeam() {
+    let teamID = document.getElementById("groupID").value;
+    let dbRef = db.collection("groups").doc(teamID);
+    dbRef.update({
+      members: firebase.firestore.FieldValue.arrayUnion("levyOFtloEdo8Gc3tPhBQuKb1ZU2")
+    });
   }
 </script>
 
@@ -56,15 +62,6 @@
       font-size: 4.5em;
       font-weight: 500;
       text-align: center;
-    }
-    h2 {
-      color: black;
-      font-size: 3.5em;
-      font-size: 400;
-    }
-    h3 {
-      color: green;
-      font-size: 2.75em;
     }
     #details {
       border: black 2px solid;
@@ -90,15 +87,6 @@
       font-weight: 500;
       text-align: center;
     }
-    h2 {
-      color: black;
-      font-size: 2.5em;
-      font-size: 400;
-    }
-    h3 {
-      color: green;
-      font-size: 1.75em;
-    }
     #details {
       border: black 2px solid;
       background-color: orange;
@@ -121,16 +109,6 @@
       font-weight: 500;
       text-align: center;
     }
-    h2 {
-      color: black;
-      font-size: 2em;
-      font-size: 400;
-      text-align: center;
-    }
-    h3 {
-      color: green;
-      font-size: 1.5em;
-    }
     #details {
       border: black 2px solid;
       background-color: orange;
@@ -151,31 +129,32 @@
   <a href="/friends" id="navItem">Friends</a>
   <a href="/about-Us" id="navItem">About us</a>
 </nav>
-<div id="">
-  <a href="/home">
-    <button id="back">Back</button>
-  </a>
-  <h1>Groups</h1>
-  {#each groups as grp}
-    <div>
-      <a href="/team">
-        <!-- id of button is the task name-->
-        <button on:click={showID} id={grp.grpName} class="listItem">
-          <span>{grp.grpName}</span>
-          <br />
-        </button>
-      </a>
-    </div>
-  {/each}
+<a href="/home">
+  <button id="back">Back</button>
+</a>
+<h1>Groups</h1>
+{#each groups as grp, count}
   <div>
+    <a href="/team-info">
+      <!-- id of button is the task name-->
+      <button on:click={setID} id={docIDS[count]} class="listItem">
+        <span>{grp.grpName}</span>
+        <br />
+      </button>
+    </a>
+  </div>
+{/each}
+<div>
+  <div>
+    <h4>Your User ID</h4>
     <h4>{userid}</h4>
   </div>
-  <div>
-    <a href="/team">
-      <button id="addTask">Create Group</button>
-    </a>
-    <a href="/team">
-      <button id="deleteTask">Something</button>
-    </a>
-  </div>
+  <a href="/team">
+    <button id="createGroup">Create Group</button>
+  </a>
+  <br />
+  <a href="/team">
+    <button id="joinGroup" on:click={joinTeam}>Join Group</button>
+  </a>
+  <input type="text" placeholder="Enter Group ID" id="groupID" />
 </div>
