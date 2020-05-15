@@ -1,5 +1,7 @@
 <script>
   import { db } from "./firebase.js";
+  import { Confirm } from "svelte-confirm";
+
   let taskList = [];
   function storeID() {
     //Stores a listName variable as the id of the button which should be the name of the task to be used in other sveltes
@@ -20,12 +22,26 @@
           .onSnapshot(snapshot => {
             taskList = snapshot.docs;
           });
-          console.log(taskList);
+        console.log(taskList);
       }
     } else {
       // No user is signed in.
     }
   });
+
+  const removeList = list => {
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(list)
+      .delete()
+      .then(() => {
+        console.log("List successfully deleted.");
+      })
+      .catch(() => {
+        console.error("Error deleting task: ", error);
+      });
+  };
 </script>
 
 <style>
@@ -155,6 +171,13 @@
           <br />
         </button>
       </a>
+      <Confirm let:confirm={confirmThis}>
+        <button
+          on:click={() => confirmThis(removeList, list.data().listName)}
+          class="delete">
+          &times
+        </button>
+      </Confirm>
     </div>
   {/each}
   <a href="/add-List">

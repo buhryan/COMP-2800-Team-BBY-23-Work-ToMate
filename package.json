@@ -21,10 +21,11 @@
     "webpack": "^4.7.0"
   },
   "dependencies": {
-    "firebase": "^7.14.2",
-    "sirv-cli": "^0.4.4",
     "compression": "^1.7.1",
+    "firebase": "^7.14.2",
     "polka": "next",
-    "sirv": "^0.4.0"
+    "sirv": "^0.4.0",
+    "sirv-cli": "^0.4.4",
+    "svelte-confirm": "0.0.0"
   }
 }

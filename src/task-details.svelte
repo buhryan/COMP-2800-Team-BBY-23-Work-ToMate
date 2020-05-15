@@ -2,13 +2,17 @@
   import { db } from "./firebase.js";
   import { writable } from "svelte/store";
   import { fly } from "svelte/transition";
-
-  const progress = writable(0);
+  const ENTER_KEY = 13;
   let userid;
-  let taskName;
-  let taskDesc;
+  let taskName = {
+    name: "",
+    editing: false
+  };
+  let taskDesc = {
+    name: "",
+    editing: false
+  };
   let taskComplete;
-  let taskProgress;
   //Needs to be added for user login
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -26,10 +30,8 @@
           .collection("Tasks")
           .doc(localStorage.getItem("taskName"))
           .onSnapshot(function(snapshot) {
-            taskName = snapshot.data().task;
-            taskDesc = snapshot.data().desc;
-            taskProgress = snapshot.data().progress;
-            progress.set(taskProgress / 100);
+            taskName.name = snapshot.data().task;
+            taskDesc.name = snapshot.data().desc;
             taskComplete = snapshot.data().complete;
           });
       }
@@ -37,6 +39,70 @@
       // No user is signed in.
     }
   });
+
+  const editName = () => {
+    taskName.editing = true;
+    taskName = taskName;
+  };
+
+  const doneEditTaskName = () => {
+    taskName.editing = false;
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(localStorage.getItem("listName"))
+      .collection("Tasks")
+      .doc(taskName.name)
+      .set({
+        task: taskName.name,
+        desc: taskDesc.name,
+        complete: false
+      })
+      .then(() => {
+        console.log("Task name successfully updated.");
+      })
+      .catch(() => {
+        console.error("Error updating name: ", error);
+      });
+    taskName = taskName;
+  };
+
+  const doneEditKeydownTaskName = e => {
+    if (e.which === ENTER_KEY) {
+      doneEditTaskName(taskName);
+    }
+  };
+
+  const editDesc = () => {
+    taskDesc.editing = true;
+    taskDesc = taskDesc;
+  };
+
+  const doneEditTaskDesc = () => {
+    taskDesc.editing = false;
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(localStorage.getItem("listName"))
+      .collection("Tasks")
+      .doc(localStorage.getItem("taskName"))
+      .update({
+        desc: taskDesc.name
+      })
+      .then(() => {
+        console.log("Task successfully updated.");
+      })
+      .catch(() => {
+        console.error("Error updating task: ", error);
+      });
+    taskDesc = taskDesc;
+  };
+
+  const doneEditKeydownTaskDesc = e => {
+    if (e.which === ENTER_KEY) {
+      doneEditTaskDesc(taskDesc);
+    }
+  };
 </script>
 
 <style>
@@ -50,13 +116,14 @@
   h2 {
     color: black;
   }
+  .task-name-edit {
+    font-size: 4em;
+    font-weight: 100;
+    text-align: center;
+  }
   #details {
     border: black 2px solid;
-    background-color:orange;
-  }
-  progress {
-    display: block;
-    width: 100%;
+    background-color: orange;
   }
 </style>
 
@@ -69,19 +136,38 @@
   <a href="/about-Us">About us</a>
 </nav>
 <div id="details">
+
   <a href="/tasks">
     <button id="back">Back</button>
   </a>
-  <h1 id="name">{localStorage.getItem('taskName')}</h1>
+
+  {#if !taskName.editing}
+    <h1 id="name" on:dblclick={() => editName(taskName)}>{taskName.name}</h1>
+  {:else}
+    <input
+      class="task-name-edit"
+      bind:value={taskName.name}
+      type="text"
+      on:blur={doneEditTaskName}
+      on:keydown={doneEditKeydownTaskName} />
+  {/if}
+
   <div id="description">
     <h2>Description</h2>
-    <h3>{taskDesc}</h3>
+    {#if !taskDesc.editing}
+      <h3 on:dblclick={() => editDesc(taskDesc)}>{taskDesc.name}</h3>
+    {:else}
+      <input
+        class="task-desc-edit"
+        bind:value={taskDesc.name}
+        type="text"
+        on:blur={doneEditTaskDesc}
+        on:keydown={doneEditKeydownTaskDesc} />
+    {/if}
   </div>
-  <div id="progress">
-    <h2>Progress</h2>
-    <progress value={$progress} />
-  </div>
+
   <div id="complete">
-  <h3>{taskComplete}</h3>
+    <h3>{taskComplete}</h3>
   </div>
+
 </div>

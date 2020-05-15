@@ -1,5 +1,7 @@
 <script>
   import { db } from "./firebase.js";
+  import { Confirm } from "svelte-confirm";
+
   let tasks = [];
   let userid;
   // Needs this for User login
@@ -29,6 +31,40 @@
     localStorage.setItem("taskName", this.id);
   }
   console;
+
+  const completeTask = (task) => {
+    db.collection("users")
+    .doc(userid)
+    .collection("Task-Lists")
+    .doc(localStorage.getItem("listName"))
+    .collection("Tasks")
+    .doc(task)
+    .update({
+      complete: true
+    })
+    .then(() => {
+      console.log("Task successfully updated.")
+    })
+    .catch(() => {
+      console.error("Error updating task: ", error)
+    })
+  }
+
+  const deleteTask = (task) => {
+    db.collection("users")
+    .doc(userid)
+    .collection("Task-Lists")
+    .doc(localStorage.getItem("listName"))
+    .collection("Tasks")
+    .doc(task)
+    .delete()
+    .then(() => {
+      console.log("Task successfully updated.")
+    })
+    .catch(() => {
+      console.error("Error updating task: ", error)
+    })
+  }
 </script>
 
 <style>
@@ -146,7 +182,7 @@
 <a href="/task-Lists"><button id="back">Back</button></a>
   <h1>Tasks</h1>
   {#each tasks as job}
-    <div>
+    <div class="task-container">
       <a href="/task-Details">
       <!-- id of button is the task name-->
         <button on:click={storeID} id={job.data().task} class="listItem">
@@ -154,6 +190,13 @@
           <br />
         </button>
       </a>
+      <input
+        type="checkbox" 
+        on:change={() => completeTask(job.data().task)}
+        class="complete">
+      <Confirm let:confirm={confirmThis}>
+        <button on:click={() => confirmThis(deleteTask,job.data().task)} class="delete">&times</button>
+      </Confirm>
     </div>
   {/each}
 </div>
