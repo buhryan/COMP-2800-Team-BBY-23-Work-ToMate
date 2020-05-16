@@ -11,9 +11,22 @@
   import Timer from "./timer.svelte";
   import Team from "./team.svelte";
   import Friends from "./friends.svelte";
+  import Signup from "./signup.svelte";
+  import Login from "./login.svelte";
+  import TeamInfo from "./TeamInfo.svelte";
+  import TeamMembers from "./TeamMembers.svelte";
+  import TeamTasks from "./TeamTasks.svelte";
+  import TeamTaskDetails from "./TeamTaskDetails.svelte";
+  import EasterEgg from "./EasterEgg.svelte";
 </script>
 
 <Route path="/" redirect="/landing" />
+<Route path="/signup">
+  <Signup />
+</Route>
+<Route path="/login">
+  <Login />
+</Route>
 <Route path="/home">
   <Home />
 </Route>
@@ -43,4 +56,19 @@
 </Route>
 <Route path="/team">
   <Team />
+</Route>
+<Route path="/team-info">
+  <TeamInfo />
+</Route>
+<Route path="/team-members">
+  <TeamMembers />
+</Route>
+<Route path="/team-tasks">
+  <TeamTasks />
+</Route>
+<Route path="/team-tasks-details">
+  <TeamTaskDetails />
+</Route>
+<Route path="/EasterEgg">
+  <EasterEgg />
 </Route>

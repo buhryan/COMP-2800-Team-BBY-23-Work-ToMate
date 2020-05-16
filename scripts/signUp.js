@@ -19,9 +19,14 @@ function signup() {
         firebase.auth().onAuthStateChanged(function(user) {
             if(state){
                 console.log(user.uid);
-              
-            if (user) {
-              window.location.href = "index.html";
+
+              if (user) {
+                db.collection("users").doc(user.uid).set(
+                    {
+                    "name":userName, 
+                     "email":user.email,
+                    },{ merge: true });
+              //window.location.href = "index.html";
               // User is signed in.
               var displayName = user.displayName;
               var email = user.email;
