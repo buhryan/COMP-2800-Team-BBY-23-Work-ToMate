@@ -1,3 +1,7 @@
+<svelte:head>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</svelte:head>
+
 <script>
     import {
         db
@@ -8,6 +12,7 @@
             document.getElementById("loggedIn").style.display = "inline";
             document.getElementById("logout").style.display = "inline";
             document.getElementById("loginBtn").style.display = "none";
+            document.getElementById("ggBtn").style.display = "inline";
             document.getElementById("signupBtn").style.display = "none";
 
         }
@@ -23,30 +28,23 @@
 
     }
 
-    function onSignIn(googleUser) {
-      // get user profile information
-      var userName = googleUser.getBasicProfile().getName();
-      var userEmail = googleUser.getBasicProfile().getEmail();
-      console.log(googleUser.getBasicProfile());
-      console.log(userName);
-      console.log(userEmail);
+   var userEmail
+   var userPass
+   var userName
+   window.onSignIn = (googleUser) => {
+     const profile = googleUser.getBasicProfile();
+     console.log('ID: ' + profile.getId());
+     console.log('Name: ' + profile.getName());
+     console.log('Image URL: ' + profile.getImageUrl());
+     console.log('Email: ' + profile.getEmail());
+      userEmail = profile.getEmail();
+      userPass = profile.getName();
+      userName = profile.getName();
 
-      firebase.auth().onAuthStateChanged(function() {
-                console.log(user.uid);
-
-                db.collection("users").doc(user.uid).set(
-                    {
-                    "name":userName, 
-                     "email":userEmail,
-                    },{ merge: true });
-                    document.getElementById("loggedIn").style.display="block";
-                //window.location.pathname = "/home";
-              // User is signed in.
-              
-            } );
-    }
-      
-  
+    
+   }
+    
+   
 
       
 </script>
@@ -83,10 +81,9 @@
 </style>
 
 <h1>Landing Page</h1>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-
+<div class="g-signin2" data-longtitle="true" data-onsuccess="onSignIn" />
 <span id="loginBtn"><a href="/login"><button>Login</button></a></span>
+<span id="loginBtn"><a href="/googleSignIn"><button>Google Login</button></a></span>
 <span id="signupBtn"><a href="/signup"><button>Signup</button></a></span>
 <span id="loggedIn"><a href="/home"><button>Home</button></a></span>
 <span id="logout"><button on:click={logout}>Logout</button></span>
@@ -103,6 +100,31 @@ firebase.auth().signOut().then(function() {
 } 
 
 <button on:onclick={googleSignOut()}>Google Sign Out</button>
+
+
+firebase.auth().createUserWithEmailAndPassword(userEmail, userPass).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            window.alert("Error : " + errorMessage);
+        });
+
+        firebase.auth().onAuthStateChanged(function(user) {
+                console.log(user.uid);
+
+              if (user) {
+                db.collection("users").doc(user.uid).set(
+                    {
+                    "name":userName, 
+                     "email":userEmail,
+                    });
+            } else {
+              // User is signed out.
+              // ...
+            }
+        }
+   
+  };
  -->
 
 <div class="Square shape">
