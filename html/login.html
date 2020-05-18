@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="../styles/login.css">
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
 
@@ -28,15 +28,19 @@
     </script>
 </head>
 
-<body>
-    <img src="image/logo.png">
-    <h2> Login to WorkToMate</h2>
-    <input id="email" placeholder="Email Address" type="text">
-    <input id="pass" placeholder="Password" type="password">
-    <button onclick="login()">
-        <div id="loginButton">Login</div>
+<main>
+    <h2>Login to WorkToMate</h2>
+    <input id="email" placeholder="Email Address" type="text" />
+    <input id="pass" placeholder="Password" type="password" />
+    <button on:click={login}>
+      <div id="loginButton">Login</div>
     </button>
-    <script src="scripts/login.js"></script>
-</body>
+    <div id="loggedIn">
+      <p id="loggedInfo">You are now logged in.</p>
+      <a href="/home">
+        <button id="loggedInBtn">Go To Home</button>
+      </a>
+    </div>
+</main>
 
 </html>

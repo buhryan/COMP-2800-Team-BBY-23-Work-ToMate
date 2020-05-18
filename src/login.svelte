@@ -34,146 +34,80 @@
 </script>
 
 <style>
-  button {
-    background-color: #ee8152;
-    color: #f7eac5;
-    border-radius: 5px;
-    border: none;
-    display: flex;
-    margin: 0px auto;
-    padding: 10px;
-    margin-top: 20px;
-    font-size: 15pt;
-    width: 50%;
-  }
-
-  #email {
-    width: 50%;
-    height: 40px;
-    display: flex;
-    position: central;
-    margin: 0px auto;
-    margin-top: 20px;
-    font-size: 18pt;
-  }
-
-  #pass {
-    width: 50%;
-    height: 40px;
-    display: flex;
-    position: central;
-    margin: 0px auto;
-    margin-top: 20px;
-    font-size: 18pt;
-  }
-
-  img {
-    width: 120px;
-    height: 120px;
-  }
-
-  h2 {
-    width: 100%;
-    height: 30px;
-    display: flex;
-    position: central;
-    margin: 0px auto;
-    margin-left: 50px;
-    font-family: arial;
-    margin-top: 10px;
-    font-size: 20pt;
-  }
-
-  #loginButton {
-    font-size: 20pt;
-    display: flex;
-    margin: 0px auto;
-  }
-
-  #loggedIn {
-    display: none;
-    margin: 0px auto;
-    margin-left: 10px;
-  }
-
-  #loggedInBtn {
-    font-size: 18pt;
-    display: flex;
-    margin: 0px auto;
-    margin-left: 10px;
-  }
-  @media (min-width: 1024px) {
-    button {
-      background-color: #ee8152;
-      color: #f7eac5;
-      border-radius: 5px;
-      border: none;
-      display: flex;
-      margin: 0px auto;
-      padding: 10px;
-      margin-top: 20px;
-      font-size: 15pt;
-      width: 20%;
-    }
-
-    #email {
-      width: 30%;
-      height: 40px;
-      display: flex;
-      position: central;
-      margin: 0px auto;
-      margin-top: 20px;
-      font-size: 18pt;
-    }
-
-    #pass {
-      width: 30%;
-      height: 40px;
-      display: flex;
-      position: central;
-      margin: 0px auto;
-      margin-top: 20px;
-      font-size: 18pt;
-    }
-
-    img {
-      width: 120px;
-      height: 120px;
-    }
-
-    h2 {
-      width: 60%;
-      height: 30px;
-      display: flex;
-      position: central;
-      margin: 0px auto;
-      margin-left: 430px;
-      font-family: arial;
-      margin-top: 10px;
-      font-size: 30pt;
-    }
-
-    #loginButton {
-      font-size: 20pt;
-      display: flex;
-      margin: 0px auto;
-    }
-
-    #loggedIn {
-      display: none;
-      margin: 0px auto;
-      margin-left: 10px;
-    }
-
-    #loggedInBtn {
-      font-size: 18pt;
-      display: flex;
-      margin: 0px auto;
-      margin-left: 10px;
-    }
-  }
+      main{
+            text-align: center;
+            background-color:#F7EAC5;
+            height:100%;
+            margin: 0px;
+            }
+            button {
+                background-color: #EE8152;
+                color: #F7EAC5;
+                border-radius: 7px;
+                border: none;
+                padding: 10px;
+                margin-top: 20px;
+                font-size: 15pt;
+                width: 50%;
+            }
+            #loginButton {
+                font-size: 20pt;
+               
+            }
+            h2 {
+                width: 100%;
+                height: 30px;
+                font-family: arial;
+                padding-top: 10px;
+                font-size: 20pt;
+            }
+            #fName {
+                width: 50%;
+                height: 40px;
+                display: flex;
+                margin: 0px auto;
+                margin-top: 50px;
+                font-size: 18pt;
+            }
+            #email {
+                width: 50%;
+                height: 40px;
+                display: flex;
+                margin: 0px auto;
+                margin-top: 20px;
+                font-size: 18pt;
+        
+            }
+        
+            #pass {
+                width: 50%;
+                height: 40px;
+                display: flex;
+                margin: 0px auto;
+                margin-top: 20px;
+                font-size: 18pt;
+            }
+            #pass2 {
+                width: 50%;
+                height: 40px;
+                display: flex;
+                margin: 0px auto;
+                margin-top: 20px;
+                font-size: 15pt;
+            }
+    
+            #loggedIn{
+                margin-top:40px;
+                padding: -2px;
+                display:none;
+            }
+            #loggedInfo {
+                font-size: 15pt;
+                font-family: arial;
+                color:#900c3f;
+            }
 </style>
-
+<main>
 <h2>Login to WorkToMate</h2>
 <input id="email" placeholder="Email Address" type="text" />
 <input id="pass" placeholder="Password" type="password" />
@@ -186,3 +120,4 @@
     <button id="loggedInBtn">Go To Home</button>
   </a>
 </div>
+</main> 

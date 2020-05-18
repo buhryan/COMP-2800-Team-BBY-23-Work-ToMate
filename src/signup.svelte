@@ -52,34 +52,45 @@
 </script>
 
 <style>
-   button {
+   main{
+        text-align: center;
+        background-color:#F7EAC5;
+        height:100%;
+        margin: 0px;
+        }
+        button {
             background-color: #EE8152;
             color: #F7EAC5;
-            border-radius: 5px;
+            border-radius: 7px;
             border: none;
-            display: flex;
-            margin: 0px auto;
             padding: 10px;
             margin-top: 20px;
             font-size: 15pt;
             width: 50%;
         }
-    
+        #loginButton {
+            font-size: 20pt;
+           
+        }
+        h2 {
+            width: 100%;
+            height: 30px;
+            font-family: arial;
+            padding-top: 10px;
+            font-size: 20pt;
+        }
         #fName {
             width: 50%;
             height: 40px;
             display: flex;
-            position: central;
             margin: 0px auto;
             margin-top: 50px;
             font-size: 18pt;
-    
         }
         #email {
             width: 50%;
             height: 40px;
             display: flex;
-            position: central;
             margin: 0px auto;
             margin-top: 20px;
             font-size: 18pt;
@@ -90,7 +101,6 @@
             width: 50%;
             height: 40px;
             display: flex;
-            position: central;
             margin: 0px auto;
             margin-top: 20px;
             font-size: 18pt;
@@ -99,50 +109,20 @@
             width: 50%;
             height: 40px;
             display: flex;
-            position: central;
             margin: 0px auto;
             margin-top: 20px;
             font-size: 15pt;
         }
-    
-        img {
-            width: 120px;
-            height: 120px;
-        }
-    
-        h2 {
-            width: 100%;
-            height: 30px;
-            display: flex;
-            position: central;
-            margin: 0px auto;
-            margin-left:50px;
-            font-family: arial;
-            margin-top: 10px;
-            font-size: 20pt;
-        }
-    
-        #loginButton {
-            font-size: 20pt;
-            display: flex;
-            margin: 0px auto;
-        }
+
         #loggedIn{
-            display: none;
+            margin-top:40px;
+            padding: -2px;
+            display:none;
         }
-        #loggedInBtn{
-            font-size: 18pt;
-            display: flex;
-            margin: 0px auto;
-        }
-        #loggedInfo{
-            padding:10px;
-        }
-        main{
-        text-align: center;
-        background-color:#F7EAC5;
-        height:100%;
-        margin: 0px;
+        #loggedInfo {
+            font-size: 15pt;
+            font-family: arial;
+            color:#900c3f;
         }
 </style>
 
@@ -152,17 +132,18 @@
 
   </script>
 </svelte:head>
-<h2>Signup with WorkToMate</h2>
-<input id="fName" placeholder="Full Name" type="text" />
-<input id="email" placeholder="Email Address" type="text" />
-<input id="pass" placeholder="Password" type="password" />
-<input id="pass2" placeholder="Confirm Password" type="password" />
-<button on:click={signup}>
-  <div id="loginButton">Signup</div>
-</button>
-<div id="loggedIn">
-  <p id="loggedInfo">Signup successful, you are now logged in.</p>
-  <a href="/home">
-    <button id="loggedInBtn">Go To Home</button>
-  </a>
-</div>
+<main><h2>Signup with WorkToMate</h2>
+  <input id="fName" placeholder="Full Name" type="text" />
+  <input id="email" placeholder="Email Address" type="text" />
+  <input id="pass" placeholder="Password" type="password" />
+  <input id="pass2" placeholder="Confirm Password" type="password" />
+  <button on:click={signup}>
+    <div id="loginButton">Signup</div>
+  </button>
+  <div id="loggedIn">
+    <p id="loggedInfo">Signup successful, you are now logged in.</p>
+    <a href="/home">
+      <button id="loggedInBtn">Go To Home</button>
+    </a>
+  </div></main>
+
