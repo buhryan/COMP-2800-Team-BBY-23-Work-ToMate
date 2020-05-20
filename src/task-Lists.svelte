@@ -100,8 +100,8 @@
       text-align: left;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
@@ -129,14 +129,14 @@
       margin-right: 10%;
       margin-top: 2%;
       margin-bottom: 5%;
-      height: 40px;
-      width: 60px;
-      font-size: 15px;
+      height: 8%;
+      width: 10%;
+      font-size: 4vw;
     }
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
+      font-size: 11vw;
       font-weight: 25;
       text-align: center;
     }
@@ -144,7 +144,7 @@
       position: relative;
       width: 30%;
       height: 25%;
-      font-size: 20px;
+      font-size: 5vw;
       margin-bottom: 5%;
     }
     #aElement{
@@ -152,19 +152,19 @@
     }
     span {
       vertical-align: middle;
-      font-size: 40px;
+      font-size: 8vw;
       text-align: left;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
   }
   @media (max-width: 400px) {
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
@@ -181,14 +181,14 @@
       margin-right: 10%;
       margin-top: 2%;
       margin-bottom: 5%;
-      height: 25px;
-      width: 35px;
-      font-size: 12px;
+      height: 8%;
+      width: 10%;
+      font-size: 3vw;
     }
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
+      font-size: 10vw;
       font-weight: 25;
       text-align: center;
     }
@@ -196,7 +196,7 @@
       position: relative;
       width: 30%;
       height: 25%;
-      font-size: 15px;
+      font-size: 4vw;
       margin-bottom: 5%;
     }
     #aElement{
@@ -204,13 +204,14 @@
     }
     span {
       vertical-align: middle;
-      font-size: 30px;
+      font-size: 5vw;
       text-align: left;
     }
     #back {
-      width: 90px;
-      height: 40px;
-      font-weight: 600;
+      width: 20%;
+      height: 10%;
+      font-size:5vw;
+      font-weight:600;
     }
   }
 </style>

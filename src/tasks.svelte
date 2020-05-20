@@ -222,7 +222,7 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 4em;
+      font-size: 8vw;
       font-weight: 25;
       text-align: center;
     }
@@ -249,7 +249,7 @@
       position: relative;
       width: 30%;
       height: 25%;
-      font-size: 25px;
+      font-size: 5vw;
       margin-bottom: 5%;
     }
     #aElement{
@@ -274,8 +274,8 @@
       margin-right: 10%;
       margin-top: 2%;
       margin-bottom: 5%;
-      height: 40px;
-      width: 50px;
+      height: 8%;
+      width: 10%;
       font-size: 14px;
     }
     .complete {
@@ -289,7 +289,7 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
+      font-size: 7vw;
       font-weight: 25;
       text-align: center;
     }
@@ -301,7 +301,7 @@
     }
     span {
       vertical-align: middle;
-      font-size: 40px;
+      font-size: 7vw;
       text-align: left;
     }
     #back {
@@ -314,7 +314,7 @@
       position: relative;
       width: 30%;
       height: 25%;
-      font-size: 17px;
+      font-size: 4vw;
       margin-bottom: 5%;
     }
     #aElement{
@@ -330,7 +330,7 @@
       padding: 0px;
     }
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
@@ -339,8 +339,8 @@
       margin-right: 5%;
       margin-top: 2.5%;
       margin-bottom: 5%;
-      height: 25px;
-      width: 35px;
+      height: 8%;
+      width: 10%;
       font-size: 10px;
     }
     .complete {
@@ -354,32 +354,33 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
+      font-size: 8vw;
       font-weight: 25;
       text-align: center;
     }
     #addList {
       position: relative;
-      width: 25%;
-      height: 15%;
-      left: 15%;
-      margin: 10%;
+      width: 30%;
+      height: 25%;
+      font-size: 4vw;
+      margin-bottom: 5%;
     }
     #back {
-      width: 90px;
-      height: 40px;
-      font-weight: 600;
+      width: 20%;
+      height: 10%;
+      font-size:5vw;
+      font-weight:600;
     }
     span {
       vertical-align: middle;
-      font-size: 30px;
+      font-size: 7vw;
       text-align: left;
     }
     .task-input {
       position: relative;
       width: 30%;
       height: 25%;
-      font-size: 14px;
+      font-size: 3vw;
       margin-bottom: 5%;
     }
     #aElement{
