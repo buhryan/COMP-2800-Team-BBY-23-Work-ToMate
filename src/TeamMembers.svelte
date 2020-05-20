@@ -1,5 +1,6 @@
 <script>
   import { db } from "./firebase.js";
+  let memberIDs = [];
   let memberNames = [];
   let userid;
   let count = 0;
@@ -10,13 +11,19 @@
       user = firebase.auth().currentUser;
       if (user != null) {
         userid = user.uid;
-        // Goes to collection users / unique user id doc / Task-Lists collection / doc of whatever the previous button id
-        // was / collection Tasks / then taks all the Tasks in there.
         db.collection("groups")
           .doc(localStorage.getItem("grpID"))
           .onSnapshot(function(snapshot) {
-            memberNames = snapshot.data().members;
-            memberNames = memberNames;
+            memberIDs = snapshot.data().members;
+            memberIDs = memberIDs;
+            for (let count = 0; count < memberIDs.length; count++) {
+              db.collection("users")
+                .doc(memberIDs[count])
+                .onSnapshot(function(snapshot) {
+                  memberNames.push(snapshot.data().name);
+                  memberNames = memberNames;
+                });
+            }
           });
       }
     } else {
@@ -40,9 +47,9 @@
     padding-bottom: 1%;
     margin: 0;
   }
-  h2{
-    color:darkred;
-    margin-left:5%;
+  h2 {
+    color: darkred;
+    text-align:center;
   }
   @media (min-width: 1025px) {
     #navItem {
@@ -64,9 +71,8 @@
       font-size: 45px;
       text-align: center;
     }
-    h2{
-      font-size:4.5vw;
-      margin-left:15%;
+    h2 {
+      font-size: 4.5vw;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -88,9 +94,8 @@
       font-weight: 600;
       font-size: 20px;
     }
-    h2{
-      font-size:4vw;
-      margin-left:20%;
+    h2 {
+      font-size: 4vw;
     }
   }
   @media (max-width: 400px) {
@@ -111,8 +116,8 @@
       height: 40px;
       font-weight: 600;
     }
-    h2{
-      font-size:20px;
+    h2 {
+      font-size: 20px;
     }
   }
 </style>

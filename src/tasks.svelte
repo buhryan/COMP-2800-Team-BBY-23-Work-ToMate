@@ -249,9 +249,11 @@
       position: relative;
       width: 30%;
       height: 25%;
-      margin-left: 35%;
       font-size: 25px;
       margin-bottom: 5%;
+    }
+    #aElement{
+      margin-left:35%;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -312,9 +314,11 @@
       position: relative;
       width: 30%;
       height: 25%;
-      margin-left: 30%;
       font-size: 17px;
       margin-bottom: 5%;
+    }
+    #aElement{
+      margin-left:30%;
     }
   }
   @media (max-width: 400px) {
@@ -375,9 +379,11 @@
       position: relative;
       width: 30%;
       height: 25%;
-      margin-left: 35%;
       font-size: 14px;
       margin-bottom: 5%;
+    }
+    #aElement{
+      margin-left:35%;
     }
   }
 </style>
@@ -430,7 +436,7 @@
     </div>
     <br />
   {/each}
-  <a href="/tasks">
+  <a href="/tasks" id="aElement">
     <input
       class="task-input"
       placeholder={inputText}

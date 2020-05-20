@@ -59,8 +59,8 @@
   @media (min-width: 1025px) {
     .listItem {
       width: 65%;
-      margin-left:10%;
-      margin-bottom:5%;
+      margin-left: 10%;
+      margin-bottom: 5%;
       background-color: #ffc078;
       padding: 0px;
       float: left;
@@ -71,13 +71,13 @@
       width: 10%;
     }
     .delete {
-      float:right;
-      margin-right:10%;
-      margin-top:2%;
-      margin-bottom:5%;
+      float: right;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 5%;
       height: 60px;
-      width:75px;
-      font-size:20px;
+      width: 75px;
+      font-size: 20px;
     }
     h1 {
       color: black;
@@ -85,15 +85,14 @@
       font-size: 4em;
       font-weight: 25;
       text-align: center;
-      margin-bottom:2.5%;
+      margin-bottom: 2.5%;
     }
     #addList {
       position: relative;
       width: 30%;
       height: 25%;
-      margin-left: 35%;
       font-size: 25px;
-      margin-bottom:5%;
+      margin-bottom: 5%;
     }
     span {
       vertical-align: middle;
@@ -107,12 +106,15 @@
       font-size: 45px;
       text-align: center;
     }
+    #aElement{
+      margin-left:35%;
+    }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
     .listItem {
       width: 65%;
-      margin-left:10%;
-      margin-bottom:5%;
+      margin-left: 10%;
+      margin-bottom: 5%;
       background-color: #ffc078;
       padding: 0px;
       float: left;
@@ -123,13 +125,13 @@
       width: 10%;
     }
     .delete {
-      float:right;
-      margin-right:10%;
-      margin-top:2%;
-      margin-bottom:5%;
+      float: right;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 5%;
       height: 40px;
-      width:60px;
-      font-size:15px;
+      width: 60px;
+      font-size: 15px;
     }
     h1 {
       color: black;
@@ -142,9 +144,11 @@
       position: relative;
       width: 30%;
       height: 25%;
-      margin-left: 35%;
       font-size: 20px;
-      margin-bottom:5%;
+      margin-bottom: 5%;
+    }
+    #aElement{
+      margin-left:35%;
     }
     span {
       vertical-align: middle;
@@ -166,20 +170,20 @@
     }
     .listItem {
       width: 65%;
-      margin-left:10%;
-      margin-bottom:5%;
+      margin-left: 10%;
+      margin-bottom: 5%;
       background-color: #ffc078;
       padding: 0px;
       float: left;
     }
     .delete {
-      float:right;
-      margin-right:10%;
-      margin-top:2%;
-      margin-bottom:5%;
+      float: right;
+      margin-right: 10%;
+      margin-top: 2%;
+      margin-bottom: 5%;
       height: 25px;
-      width:35px;
-      font-size:12px;
+      width: 35px;
+      font-size: 12px;
     }
     h1 {
       color: black;
@@ -192,9 +196,11 @@
       position: relative;
       width: 30%;
       height: 25%;
-      margin-left: 35%;
       font-size: 15px;
-      margin-bottom:5%;
+      margin-bottom: 5%;
+    }
+    #aElement{
+      margin-left:35%;
     }
     span {
       vertical-align: middle;
@@ -240,7 +246,9 @@
       </Confirm>
     </div>
   {/each}
-  <a href="/add-List">
-    <button id="addList">Add List</button>
-  </a>
+  <div>
+    <a href="/add-List" id="aElement">
+      <input type="button" value="Add List" id="addList">
+    </a>
+  </div>
 </div>
