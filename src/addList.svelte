@@ -3,6 +3,8 @@
   import { db } from "./firebase.js";
 
   const ENTER_KEY = 13;
+  const MAX_CLICKS = 5;
+  
   let listName = {
     name: "Default List",
     editing: false
@@ -143,16 +145,8 @@
 
   const logoClick = () => {
     logoCount++;
-    if (logoCount === 5) {
+    if (logoCount === MAX_CLICKS) {
       document.getElementById("logoLink").href = "/EasterEgg";
-      //   document.getElementById("logo").src =
-      //     "https://media.tenor.com/images/5875a102ce91c83e4f857c31e790b180/tenor.gif";
-
-      //   document.getElementById("kirby").play();
-      // }
-      // if (logoCount === 6) {
-      //   document.getElementById("logo").src = "favicon.png";
-      //   document.getElementById("kirby").pause();
     }
     console.log(logoCount);
   };
