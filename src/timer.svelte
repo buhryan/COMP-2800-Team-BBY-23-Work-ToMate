@@ -1,25 +1,51 @@
 <script>
-  const minutesToSeconds = minutes => minutes * 60;
-  const secondsToMinutes = seconds => Math.floor(seconds / 60);
-  const padWithZeroes = number => number.toString().padStart(2, "0");
-  const State = { idle: "idle", inProgress: "in progress", resting: "resting" };
-  const workMin = minutesToSeconds(0.05);
-  const LONG_BREAK_S = minutesToSeconds(20);
-  const SHORT_BREAK_S = minutesToSeconds(0.1);
-  let currentState = State.idle;
-  let workPeriod = workMin;
-  let completed = 0;
-  let interval;
-  function repeatTime() {
-    return document.getElementById("repeat").value;
+  //source: https://www.barbarianmeetscoding.com/blog/2020/01/04/discovering-svelte-creating-a-pomodoro-timer
+  //learn svelte: create a pomodoro timer
+  var workTimer;
+  var breakTimer;
+  let doneSet = {
+    timeInput: false
+  };
+  var repeatTime;
+  var workPeriod;
+  const minutesToSeconds = (minutes) => minutes * 60;
+  const secondsToMinutes = (seconds) => Math.floor(seconds / 60);
+  const padWithZeroes = (number) => number.toString().padStart(2, '0');
+  const State = {
+      idle: 'idle',
+      inProgress: 'in progress',
+      resting: 'resting'
+    };
+    let currentState = State.idle;
+    let interval;
+    let completed = 0;
+    var SHORT_BREAK_S;
+    let workMin;
+
+  function setTimer() {
+    workTimer = document.getElementById("workInput").value;
+    breakTimer = document.getElementById("breakInput").value;
+    repeatTime = document.getElementById("repeat").value;
+    workMin = minutesToSeconds(workTimer);
+    SHORT_BREAK_S = minutesToSeconds(breakTimer);
+    console.log(workMin);
+
+    workPeriod = workMin;
+    console.log(workPeriod);
+
+  
+    doneSet.timeInput = !doneSet.timeInput;
   }
+
   function formatTime(timeInSeconds) {
     const minutes = secondsToMinutes(timeInSeconds);
     const remainingSeconds = timeInSeconds % 60;
     return `${padWithZeroes(minutes)}:${padWithZeroes(remainingSeconds)}`;
   }
+
   function startTimer() {
-    if (repeatTime() == "null") {
+    currentState !== State.idle;
+    if (repeatTime == "null") {
       console.log("in no repeat");
       document.getElementById("noRepeat").style.display = "inline";
     } else {
@@ -50,10 +76,11 @@
     console.log(completed);
     idle();
   }
+
   function completeTimer() {
     clearInterval(interval);
     completed++;
-    if (completed == repeatTime()) {
+    if (completed == repeatTime) {
       document.getElementById("cycle").style.display = "inline";
       document.getElementById("allDone").style.display = "none";
       completed = 0;
@@ -76,7 +103,7 @@
     if (document.getElementById("afterBreak").style.display == "inline") {
       document.getElementById("afterBreak").style.display = "none";
     }
-    if ((document.getElementById("afterWork").style.display = "inline")) {
+    if (document.getElementById("afterWork").style.display = "inline") {
       document.getElementById("afterWork").style.display = "none";
     }
 
@@ -95,45 +122,47 @@
 </script>
 
 <style>
+  button {
+    border: none;
+  }
   #afterWork {
     display: none;
     margin: 20px;
   }
-  nav {
-    background-color: rgb(247, 177, 27);
-    border: 2px black solid;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    margin: 0;
-  }
+
   #afterBreak {
     display: none;
     margin: 20px;
   }
+
   #startTime {
     background-color: #ee8152;
-    color: #f7eac5;
+    color: #f7EaC5;
     border-radius: 7px;
     margin: 20px;
   }
+
   #cancelTime {
-    background-color: #af7089;
-    color: #f7eac5;
+    background-color: #Af7089;
+    color: #f7EaC5;
     border-radius: 7px;
     margin: 20px;
   }
+
   #pauseWork {
-    background-color: #ec6d6d;
-    color: #f7eac5;
+    background-color: #Ec6d6d;
+    color: #f7EaC5;
     border-radius: 7px;
     margin: 20px;
   }
+
   #pauseBreak {
-    background-color: #ec6d6d;
-    color: #f7eac5;
+    background-color: #Ec6d6d;
+    color: #f7EaC5;
     border-radius: 7px;
     margin: 20px;
   }
+
   h1 {
     color: #900c3f;
     margin: 20px;
@@ -142,56 +171,44 @@
     display: none;
     margin: 20px;
   }
+
   #setBtn {
-    background-color: #eeb089;
+    background-color: #eeB089;
     border-radius: 7px;
+    margin: 10px;
+    width: 20%;
   }
+
   #noRepeat {
     display: none;
   }
+
   main {
-    background-color: #f7eac5;
+    background-color: #f7EaC5;
     text-align: center;
     padding: 50px;
     height: 100%;
   }
-  @media (min-width: 1025px) {
-    #navItem {
-      font-size: 2vw;
-      margin-right: 2%;
-      width: 10%;
-    }
+  
+  input{
+    width:20%;
   }
-  @media (max-width: 1024px) and (min-width: 401px) {
-    #navItem {
-      font-size: 3.5vw;
-      margin-right: 1%;
-      width: 10%;
-    }
-  }
-  @media (max-width: 400px) {
-    #navItem {
-      font-size: 3.5vw;
-      margin-right: 1%;
-      width: 10%;
-    }
+  p{
+    font-family: arial;
   }
 </style>
-
-<nav>
-  <a href="/home" id="navItem">Home</a>
-  <a href="/timer" id="navItem">Start a Timer</a>
-  <a href="/task-Lists" id="navItem">Task Lists</a>
-  <a href="/team" id="navItem">Team</a>
-  <a href="/friends" id="navItem">Friends</a>
-  <a href="/about-Us" id="navItem">About us</a>
-</nav>
-
 <main>
-  <h1>{formatTime(workPeriod)}</h1>
 
+
+  <p> Work Time:
+    <input id="workInput" type="number" pattern="[0-9]{2}"> Minutes</p>
+  <p>
+    Break Time:
+    <input id="breakInput" type="number" pattern="[0-9{2}"> Minutes
+  </p>
+  <!-- <button on:click={setTimer}>Submit</button> -->
   <select id="repeat">
-    <option value="null">Times to repeat the timer</option>
+    <option value="null">Timer repeatition</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -203,18 +220,16 @@
     <option value="9">9</option>
     <option value="10">10</option>
   </select>
-  <button id="setBtn" on:click={repeatTime}>Set</button>
+<br>
+  <button id="setBtn" on:click={setTimer}>Set</button>
+  {#if doneSet.timeInput}
   <footer>
-    <div id="allDone">
-      <button
-        id="startTime"
-        on:click={startTimer}
-        disabled={currentState !== State.idle}>
-        Start
-      </button>
-      <button id="cancelTime" on:click={cancelTimer}>Cancel</button>
+    <div id = "allDone">
+      <button id="startTime" on:click={startTimer} >Start</button>
+      <button id="cancelTime" on:click={cancelTimer} >Cancel</button>
     </div>
-    <div id="afterWork">
+    <h1 >{formatTime(workPeriod)}</h1>
+    <div id = "afterWork">
       <h2>Work Period Done.</h2>
       <button id="pauseWork" on:click={workPause}>
         Pause Sound and Take a Break
@@ -232,11 +247,10 @@
     <div id="noRepeat">
       <h2>Please select repetition time.</h2>
     </div>
-    <audio id="workDone" src={'lovingly.mp3'} />
-    <audio
-      id="breakDone"
-      src="https://files4.mytinyphone.com/file.php?fileringID=3875238&type=ringt&rtype=play" />
-    <!--button on:click={completePomodoro}>complete</button-->
-
+    <!--src: https://notificationsounds.com/notification-sounds-->
+    <audio id="workDone" src={'lovingly.mp3'}></audio>
+    <audio id="breakDone" src="https://files4.mytinyphone.com/file.php?fileringID=3875238&type=ringt&rtype=play"></audio>
+   
   </footer>
+  {/if}
 </main>
