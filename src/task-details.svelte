@@ -14,8 +14,6 @@
   };
   let taskComplete;
 
-  console.log(localStorage.getItem("listId"));
-  console.log(localStorage.getItem("taskId"));
   //Needs to be added for user login
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -113,39 +111,39 @@
     padding-bottom: 1%;
     margin: 0;
   }
-  .task-name-edit {
-      font-size: 4em;
-      font-weight: 100;
-      text-align: center;
-    }
   @media (min-width: 1025px) {
     #navItem {
       font-size: 2vw;
       margin-right: 2%;
       width: 10%;
     }
-    h1 {
+    h1,
+    .task-name-edit {
       color: black;
-      font-size: 4.5em;
-      font-weight: 500;
+      width:100%;
+      font-size: 6vw;
       text-align: center;
     }
     h2 {
       color: black;
-      font-size: 3.5em;
+      font-size: 5vw;
       font-size: 400;
     }
-    h3 {
+    #dbField {
       color: green;
-      font-size: 2.75em;
+      font-size: 4.5vw;
+    }
+    span {
+      color: green;
+      font-size: 4vw;
     }
     #details {
       border: black 2px solid;
       background-color: orange;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
@@ -157,61 +155,70 @@
       margin-right: 1%;
       width: 10%;
     }
-    h1 {
+    h1,
+    .task-name-edit {
       color: black;
-      font-size: 3.5em;
-      font-weight: 500;
+      width:100%;
+      font-size: 6vw;
       text-align: center;
+    }
+    #dbField {
+      color: green;
+      font-size: 4.5vw;
     }
     h2 {
       color: black;
-      font-size: 2.5em;
+      font-size: 5vw;
       font-size: 400;
     }
-    h3 {
+    span {
       color: green;
-      font-size: 1.75em;
+      font-size: 4vw;
     }
     #details {
       border: black 2px solid;
       background-color: orange;
     }
+    
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
   }
   @media (max-width: 400px) {
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
-    h1 {
+    h1,
+    .task-name-edit {
       color: black;
-      font-size: 2.5em;
-      font-weight: 500;
+      width:100%;
+      font-size: 6vw;
       text-align: center;
     }
     h2 {
       color: black;
-      font-size: 2em;
+      font-size: 5vw;
       font-size: 400;
     }
-    h3 {
+    #dbField {
       color: green;
-      font-size: 1.5em;
+      font-size: 4.5vw;
     }
+    
     #details {
       border: black 2px solid;
       background-color: orange;
     }
     #back {
-      width: 90px;
-      height: 40px;
-      font-weight: 600;
+      width: 20%;
+      height: 10%;
+      font-size:5vw;
+      font-weight:600;
     }
   }
 </style>
@@ -245,7 +252,7 @@
   <div id="description">
     <h2>Description</h2>
     {#if !taskDesc.editing}
-      <h3 on:dblclick={() => editDesc(taskDesc)}>{taskDesc.name}</h3>
+      <h3 id="dbField" on:dblclick={() => editDesc(taskDesc)}>{taskDesc.name}</h3>
     {:else}
       <input
         class="task-desc-edit"
@@ -257,7 +264,7 @@
   </div>
 
   <div id="complete">
-    <h3>Completed: {taskComplete}</h3>
+    <h2>Completed: <span id="dbField">{taskComplete}</span></h2>
   </div>
 
 </div>

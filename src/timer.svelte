@@ -1,12 +1,3 @@
-<nav>
-  <a href="/home">Home</a>
-  <a href="/timer">Start a Timer</a>
-  <a href="/task-Lists">Task Lists</a>
-  <a href="/team">Team</a>
-  <a href="/friends">Friends</a>
-  <a href="/about-Us">About us</a>
-</nav>
-
 <script>
   //source: https://www.barbarianmeetscoding.com/blog/2020/01/04/discovering-svelte-creating-a-pomodoro-timer
   //learn svelte: create a pomodoro timer
@@ -73,13 +64,11 @@
       }, 1000);
     }
   }
-
   function workPause() {
     document.getElementById("workDone").pause();
     document.getElementById("afterWork").style.display = "none";
     completeTimer();
   }
-
   function breakPause() {
     console.log("hi");
     document.getElementById("breakDone").pause();
@@ -99,7 +88,6 @@
       rest(SHORT_BREAK_S);
     }
   }
-
   function rest(time) {
     currentState = State.resting;
     workPeriod = time;
@@ -111,7 +99,6 @@
       workPeriod -= 1;
     }, 1000);
   }
-
   function cancelTimer() {
     if (document.getElementById("afterBreak").style.display == "inline") {
       document.getElementById("afterBreak").style.display = "none";
@@ -126,7 +113,6 @@
     clearInterval(interval);
     workPeriod = workMin;
   }
-
   function idle() {
     currentState = State.idle;
     clearInterval(interval);
@@ -181,7 +167,6 @@
     color: #900c3f;
     margin: 20px;
   }
-
   #cycle {
     display: none;
     margin: 20px;
@@ -246,13 +231,17 @@
     <h1 >{formatTime(workPeriod)}</h1>
     <div id = "afterWork">
       <h2>Work Period Done.</h2>
-    <button id="pauseWork" on:click={workPause}>Pause Sound and Take a Break</button>
+      <button id="pauseWork" on:click={workPause}>
+        Pause Sound and Take a Break
+      </button>
     </div>
-    <div id = "afterBreak">
+    <div id="afterBreak">
       <h2>Break time is over, time to get back to work.</h2>
-      <button id = "pauseBreak" on:click={breakPause}>Pause Sound and Start Working</button>
+      <button id="pauseBreak" on:click={breakPause}>
+        Pause Sound and Start Working
+      </button>
     </div>
-    <div id = "cycle">
+    <div id="cycle">
       <h2>Cycle Done!</h2>
     </div>
     <div id="noRepeat">

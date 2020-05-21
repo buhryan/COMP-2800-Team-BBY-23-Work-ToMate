@@ -8,9 +8,6 @@
           <div class="col-xl-12">
             <nav class="navbar navbar-expand-sm">
               <ul class="navbar-nav ml-auto">
-                <li class="nav-item active" id="navitem">
-                  <a href="/home">Home</a>
-                </li>
                 <li class="nav-item" id="navitem">
                    <a href="/about-Us">About us</a>
                 </li>
@@ -39,7 +36,7 @@
         <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
           <a href="/timer">
           <figure class="effect-sadie">
-            <img src="img/timer.png" alt="Image" class="img-fluid">
+            <img src="img/timer.png" alt="A clock" class="img-fluid">
             <figcaption>
               <h2>Start a Timer</h2>
               <p>Organize work periods and break times to increase productivity.</p>
@@ -50,10 +47,10 @@
         <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
           <a href="/task-Lists">
           <figure class="effect-sadie">
-            <img src="img/lists.png" alt="Image" class="img-fluid">
+            <img src="img/lists.png" alt="A clipboard with tasks along with a pen" class="img-fluid">
             <figcaption>
               <h2>Task Lists</h2>
-              <p>Maecenas iaculis et turpis et iaculis. Aenean at volutpat diam.</p>
+              <p>Create or view your task lists!</p>
             </figcaption>
           </figure>
           </a>
@@ -61,10 +58,10 @@
         <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
         <a href="/team">
           <figure class="effect-sadie">
-            <img src="img/teams.png" alt="Image" class="img-fluid">
+            <img src="img/teams.png" alt="Group of people" class="img-fluid">
             <figcaption>
               <h2>Team</h2>
-              <p>Vivamus eget elit purus. Nullam consectetur porttitor elementum.</p>
+              <p>Join a team of people and share a task list!</p>
             </figcaption>
           </figure>
           </a>
@@ -72,10 +69,10 @@
         <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
           <a href="/friends">
           <figure class="effect-sadie">
-            <img src="img/friends.png" alt="Image" class="img-fluid">
+            <img src="img/friends.png" alt="Two guys with arms around their shoulders" class="img-fluid">
             <figcaption>
               <h2> Connect with a Friend</h2>
-              <p>Praesent nec feugiat dolor, elementum mollis purus. Etiam faucibus.</p>
+              <p>Connect with people that you've friended!</p>
             </figcaption>
           </figure>
           </a>

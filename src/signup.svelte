@@ -141,6 +141,7 @@
 
   </script>
 </svelte:head>
+<<<<<<< HEAD
 <main>
   <h2>Signup with WorkToMate</h2>
   <input id="fName" placeholder="Full Name" type="text" />
@@ -157,3 +158,19 @@
     </a>
   </div>
 </main>
+=======
+<h2>Signup with WorkToMate</h2>
+<input id="fName" placeholder="Full Name" type="text" />
+<input id="email" placeholder="Email Address" type="text" />
+<input id="pass" placeholder="Password" type="password" />
+<input id="pass2" placeholder="Confirm Password" type="password" />
+<button on:click={signup}>
+  <div id="loginButton">Signup</div>
+</button>
+<div id="loggedIn">
+  <p id="loggedInfo">Signup successful, you are now logged in.</p>
+  <a href="/home">
+    <button id="loggedInBtn">Go To Home</button>
+  </a>
+</div>
+>>>>>>> 524f0ce080e49c5a1a42199062a52957e7dcdbe7

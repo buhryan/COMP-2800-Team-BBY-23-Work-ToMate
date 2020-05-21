@@ -2,11 +2,18 @@
   import { db } from "./firebase.js";
   import { writable } from "svelte/store";
   import { fly } from "svelte/transition";
-
+  const ENTER_KEY = 13;
   let userid;
-  let taskName;
-  let taskDesc;
+  let taskName = {
+    name: "",
+    editing: false
+  };
+  let taskDesc = {
+    name: "",
+    editing: false
+  };
   let taskComplete;
+
   //Needs to be added for user login
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -19,8 +26,8 @@
           .collection("Tasks")
           .doc(localStorage.getItem("teamTaskName"))
           .onSnapshot(function(snapshot) {
-            taskName = snapshot.data().task;
-            taskDesc = snapshot.data().desc;
+            taskName.name = snapshot.data().task;
+            taskDesc.name = snapshot.data().desc;
             taskComplete = snapshot.data().complete;
           });
       }
@@ -28,6 +35,66 @@
       // No user is signed in.
     }
   });
+
+  const editName = () => {
+    taskName.editing = true;
+    taskName = taskName;
+  };
+
+  const doneEditTaskName = () => {
+    taskName.editing = false;
+    db.collection("groups")
+      .doc(localStorage.getItem("grpID"))
+      .collection("Tasks")
+      .doc(localStorage.getItem("teamTaskName"))
+      .update({
+        task: taskName.name
+      })
+      .then(() => {
+        console.log("Task name successfully updated.");
+      })
+      .catch(() => {
+        console.error("Error updating name: ", error);
+      });
+    taskName = taskName;
+  };
+
+  const doneEditKeydownTaskName = e => {
+    if (e.which === ENTER_KEY) {
+      doneEditTaskName();
+    }
+  };
+
+  const editDesc = () => {
+    taskDesc.editing = true;
+    taskDesc = taskDesc;
+  };
+
+  const doneEditTaskDesc = () => {
+    taskDesc.editing = false;
+    db.collection("users")
+      .doc(userid)
+      .collection("Task-Lists")
+      .doc(localStorage.getItem("listId"))
+      .collection("Tasks")
+      .doc(localStorage.getItem("taskId"))
+      .update({
+        desc: taskDesc.name
+      })
+      .then(() => {
+        console.log("Task successfully updated.");
+      })
+      .catch(() => {
+        console.error("Error updating task: ", error);
+      });
+    taskDesc = taskDesc;
+  };
+
+  const doneEditKeydownTaskDesc = e => {
+    if (e.which === ENTER_KEY) {
+      doneEditTaskDesc(taskDesc);
+    }
+  };
 </script>
 
 <style>
@@ -44,10 +111,12 @@
       margin-right: 2%;
       width: 10%;
     }
-    h1 {
+    h1,
+    .task-name-edit {
       color: black;
-      font-size: 4.5em;
-      font-weight: 500;
+      width: 100%;
+      font-size: 6vw;
+      font-weight: 25;
       text-align: center;
     }
     h2 {
@@ -64,8 +133,8 @@
       background-color: orange;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
@@ -77,10 +146,12 @@
       margin-right: 1%;
       width: 10%;
     }
-    h1 {
+    h1,
+    .task-name-edit {
       color: black;
-      font-size: 3.5em;
-      font-weight: 500;
+      width: 100%;
+      font-size: 7vw;
+      font-weight: 25;
       text-align: center;
     }
     h2 {
@@ -97,8 +168,8 @@
       background-color: orange;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
@@ -109,17 +180,18 @@
       margin-right: 1%;
       width: 10%;
     }
-    h1 {
+    h1,
+    .task-name-edit {
       color: black;
-      font-size: 2.5em;
-      font-weight: 500;
+      width: 100%;
+      font-size: 6vw;
+      font-weight: 25;
       text-align: center;
     }
     h2 {
       color: black;
       font-size: 2em;
       font-size: 400;
-      text-align: center;
     }
     h3 {
       color: green;
@@ -130,8 +202,9 @@
       background-color: orange;
     }
     #back {
-      width: 90px;
-      height: 40px;
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
     }
   }
@@ -146,18 +219,38 @@
   <a href="/about-Us" id="navItem">About us</a>
 </nav>
 <div id="details">
+
   <a href="/team-tasks">
     <button id="back">Back</button>
   </a>
-  <h1 id="name">{taskName}</h1>
-  <br />
+
+  {#if !taskName.editing}
+    <h1 id="name" on:dblclick={() => editName(taskName)}>{taskName.name}</h1>
+  {:else}
+    <input
+      class="task-name-edit"
+      bind:value={taskName.name}
+      type="text"
+      on:blur={doneEditTaskName}
+      on:keydown={doneEditKeydownTaskName} />
+  {/if}
+
   <div id="description">
     <h2>Description</h2>
-    <h3>{taskDesc}</h3>
+    {#if !taskDesc.editing}
+      <h3 on:dblclick={() => editDesc(taskDesc)}>{taskDesc.name}</h3>
+    {:else}
+      <input
+        class="task-desc-edit"
+        bind:value={taskDesc.name}
+        type="text"
+        on:blur={doneEditTaskDesc}
+        on:keydown={doneEditKeydownTaskDesc} />
+    {/if}
   </div>
-  <br />
-  <br />
+
   <div id="complete">
-    <h3>{taskComplete}</h3>
+    <h3>Completed: {taskComplete}</h3>
   </div>
+
 </div>

@@ -29,7 +29,6 @@
           .onSnapshot(snapshot => {
             tasks = snapshot.docs;
           });
-        console.log(tasks);
 
         db.collection("users")
           .doc(userid)
@@ -56,7 +55,6 @@
     localStorage.setItem("taskId", this.id);
     console.log(localStorage.getItem("taskId"));
   }
-  console;
 
   const editName = () => {
     listName.editing = true;
@@ -222,16 +220,9 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 4em;
-      font-weight: 25;
+      width: 100%;
+      font-size: 6vw;
       text-align: center;
-    }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 15%;
-      font-size: 25px;
     }
     span {
       vertical-align: middle;
@@ -239,19 +230,21 @@
       text-align: left;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
     }
     .task-input {
       position: relative;
-      width: 30%;
-      height: 25%;
-      margin-left: 35%;
-      font-size: 25px;
+      width: 40%;
+      height: 20%;
+      font-size: 3vw;
       margin-bottom: 5%;
+    }
+    #aElement {
+      margin-left: 30%;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -272,8 +265,8 @@
       margin-right: 10%;
       margin-top: 2%;
       margin-bottom: 5%;
-      height: 40px;
-      width: 50px;
+      height: 8%;
+      width: 10%;
       font-size: 14px;
     }
     .complete {
@@ -287,34 +280,30 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
-      font-weight: 25;
+      width: 100%;
+      font-size: 7vw;
       text-align: center;
-    }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 15%;
     }
     span {
       vertical-align: middle;
-      font-size: 40px;
+      font-size: 8vw;
       text-align: left;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
     .task-input {
       position: relative;
-      width: 30%;
+      width: 40%;
       height: 25%;
-      margin-left: 30%;
-      font-size: 17px;
+      font-size: 3vw;
       margin-bottom: 5%;
+    }
+    #aElement {
+      margin-left: 30%;
     }
   }
   @media (max-width: 400px) {
@@ -326,7 +315,7 @@
       padding: 0px;
     }
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
@@ -335,8 +324,8 @@
       margin-right: 5%;
       margin-top: 2.5%;
       margin-bottom: 5%;
-      height: 25px;
-      width: 35px;
+      height: 8%;
+      width: 10%;
       font-size: 10px;
     }
     .complete {
@@ -350,34 +339,30 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
-      font-weight: 25;
+      width: 100%;
+      font-size: 6vw;
       text-align: center;
     }
-    #addList {
-      position: relative;
-      width: 25%;
-      height: 15%;
-      left: 15%;
-      margin: 10%;
-    }
     #back {
-      width: 90px;
-      height: 40px;
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
     }
     span {
       vertical-align: middle;
-      font-size: 30px;
+      font-size: 5vw;
       text-align: left;
     }
     .task-input {
       position: relative;
       width: 30%;
       height: 25%;
-      margin-left: 35%;
-      font-size: 14px;
+      font-size: 3vw;
       margin-bottom: 5%;
+    }
+    #aElement {
+      margin-left: 35%;
     }
   }
 </style>
@@ -396,9 +381,7 @@
   </a>
 
   {#if !listName.editing}
-    <h1 id="name" on:dblclick={() => editName(listName)}>
-      {listName.name}
-    </h1>
+    <h1 id="name" on:dblclick={() => editName(listName)}>{listName.name}</h1>
   {:else}
     <input
       class="list-name-edit"
@@ -430,7 +413,7 @@
     </div>
     <br />
   {/each}
-  <a href="/tasks">
+  <a href="/tasks" id="aElement">
     <input
       class="task-input"
       placeholder={inputText}

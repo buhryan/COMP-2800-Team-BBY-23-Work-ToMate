@@ -12,7 +12,7 @@
   let tempId = 1;
   let logoCount = 0;
   let tasks = [];
-  let inputText = "+ new task";
+  let inputText = "+ New Task";
   let userid = firebase.auth().currentUser.uid;
 
   const editListName = () => {
@@ -126,7 +126,6 @@
             .doc(listId)
             .collection("Tasks")
             .add({
-              _id: task.id,
               task: task.title,
               desc: "none",
               complete: false
@@ -145,14 +144,6 @@
     logoCount++;
     if (logoCount === 5) {
       document.getElementById("logoLink").href = "/EasterEgg";
-      //   document.getElementById("logo").src =
-      //     "https://media.tenor.com/images/5875a102ce91c83e4f857c31e790b180/tenor.gif";
-
-      //   document.getElementById("kirby").play();
-      // }
-      // if (logoCount === 6) {
-      //   document.getElementById("logo").src = "favicon.png";
-      //   document.getElementById("kirby").pause();
     }
     console.log(logoCount);
   };
@@ -274,15 +265,6 @@
     }
   }
 </style>
-
-<nav>
-  <a href="/home">Home</a>
-  <a href="/timer">Start a Timer</a>
-  <a href="/task-Lists">Task Lists</a>
-  <a href="/team">Team</a>
-  <a href="/friends">Friends</a>
-  <a href="/about-Us">About us</a>
-</nav>
 
 <main>
 
