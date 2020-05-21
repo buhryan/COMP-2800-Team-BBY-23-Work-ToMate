@@ -8,95 +8,118 @@
 </nav>
 
 <script>
+  //source: https://www.barbarianmeetscoding.com/blog/2020/01/04/discovering-svelte-creating-a-pomodoro-timer
+  //learn svelte: create a pomodoro timer
+  var workTimer;
+  var breakTimer;
+  let doneSet = {
+    timeInput: false
+  };
+  var repeatTime;
+  var workPeriod;
   const minutesToSeconds = (minutes) => minutes * 60;
   const secondsToMinutes = (seconds) => Math.floor(seconds / 60);
   const padWithZeroes = (number) => number.toString().padStart(2, '0');
-  const State = {idle: 'idle', inProgress: 'in progress', resting: 'resting'};
+  const State = {
+      idle: 'idle',
+      inProgress: 'in progress',
+      resting: 'resting'
+    };
+    let currentState = State.idle;
+    let interval;
+    let completed = 0;
+    var SHORT_BREAK_S;
+    let workMin;
 
-  const workMin = minutesToSeconds(.05);
-  const LONG_BREAK_S = minutesToSeconds(20);
-  const SHORT_BREAK_S = minutesToSeconds(.1);
+  function setTimer() {
+    workTimer = document.getElementById("workInput").value;
+    breakTimer = document.getElementById("breakInput").value;
+    repeatTime = document.getElementById("repeat").value;
+    workMin = minutesToSeconds(workTimer);
+    SHORT_BREAK_S = minutesToSeconds(breakTimer);
+    console.log(workMin);
 
-  let currentState = State.idle;
-  let workPeriod = workMin;
-  let completed = 0;
-  let interval;
+    workPeriod = workMin;
+    console.log(workPeriod);
 
-  function repeatTime(){
-    return document.getElementById("repeat").value;
+  
+    doneSet.timeInput = !doneSet.timeInput;
   }
-  function formatTime(timeInSeconds) { 
+
+  function formatTime(timeInSeconds) {
     const minutes = secondsToMinutes(timeInSeconds);
     const remainingSeconds = timeInSeconds % 60;
     return `${padWithZeroes(minutes)}:${padWithZeroes(remainingSeconds)}`;
   }
 
-  function startTimer() { 
-    if(repeatTime() == "null"){
+  function startTimer() {
+    currentState !== State.idle;
+    if (repeatTime == "null") {
       console.log("in no repeat");
-      document.getElementById("noRepeat").style.display="inline";
-    }else{
-    document.getElementById("noRepeat").style.display="none";
-    document.getElementById("afterWork").style.display="none";
-    document.getElementById("afterBreak").style.display="none";
-    currentState = State.inProgress;
-    interval = setInterval(() => {
-      if (workPeriod === 0) {
-        document.getElementById("workDone").play();
-        //let msg = document.getElementById("after").innerHTML= "Timer Done";
-        document.getElementById("afterWork").style.display="inline";
-        // window.alert("done");
-      }
-      workPeriod -= 1;
-    },1000);
-  }
+      document.getElementById("noRepeat").style.display = "inline";
+    } else {
+      document.getElementById("noRepeat").style.display = "none";
+      document.getElementById("afterWork").style.display = "none";
+      document.getElementById("afterBreak").style.display = "none";
+      currentState = State.inProgress;
+      interval = setInterval(() => {
+        if (workPeriod === 0) {
+          document.getElementById("workDone").play();
+          //let msg = document.getElementById("after").innerHTML= "Timer Done";
+          document.getElementById("afterWork").style.display = "inline";
+          // window.alert("done");
+        }
+        workPeriod -= 1;
+      }, 1000);
+    }
   }
 
-  function workPause(){
+  function workPause() {
     document.getElementById("workDone").pause();
-    document.getElementById("afterWork").style.display="none";
+    document.getElementById("afterWork").style.display = "none";
     completeTimer();
   }
-  function breakPause(){
+
+  function breakPause() {
     console.log("hi");
     document.getElementById("breakDone").pause();
-    document.getElementById("afterBreak").style.display="none";
+    document.getElementById("afterBreak").style.display = "none";
     console.log(completed);
     idle();
   }
 
-  function completeTimer(){
+  function completeTimer() {
     clearInterval(interval);
     completed++;
-    if (completed == repeatTime()) {
-      document.getElementById("cycle").style.display="inline";
-      document.getElementById("allDone").style.display="none";
+    if (completed == repeatTime) {
+      document.getElementById("cycle").style.display = "inline";
+      document.getElementById("allDone").style.display = "none";
       completed = 0;
     } else {
       rest(SHORT_BREAK_S);
     }
   }
 
-  function rest(time){
+  function rest(time) {
     currentState = State.resting;
     workPeriod = time;
     interval = setInterval(() => {
       if (workPeriod === 0) {
         document.getElementById("breakDone").play();
-        document.getElementById("afterBreak").style.display="inline";
+        document.getElementById("afterBreak").style.display = "inline";
       }
       workPeriod -= 1;
-    },1000);
+    }, 1000);
   }
 
   function cancelTimer() {
-    if(document.getElementById("afterBreak").style.display=="inline"){
-      document.getElementById("afterBreak").style.display="none";
+    if (document.getElementById("afterBreak").style.display == "inline") {
+      document.getElementById("afterBreak").style.display = "none";
     }
-    if(document.getElementById("afterWork").style.display="inline"){
-      document.getElementById("afterWork").style.display="none";
+    if (document.getElementById("afterWork").style.display = "inline") {
+      document.getElementById("afterWork").style.display = "none";
     }
-    
+
     document.getElementById("breakDone").pause();
     document.getElementById("workDone").pause();
     currentState = State.idle;
@@ -104,7 +127,7 @@
     workPeriod = workMin;
   }
 
-  function idle(){
+  function idle() {
     currentState = State.idle;
     clearInterval(interval);
     workPeriod = workMin;
@@ -113,68 +136,94 @@
 </script>
 
 <style>
-
-  #afterWork{
+  button {
+    border: none;
+  }
+  #afterWork {
     display: none;
-    margin:20px;
+    margin: 20px;
   }
-  #afterBreak{
-    display:none;
-    margin:20px;
+
+  #afterBreak {
+    display: none;
+    margin: 20px;
   }
-  #startTime{
-    background-color:#ee8152;
-    color:#f7EaC5;
-    border-radius:7px;
-    margin:20px;
+
+  #startTime {
+    background-color: #ee8152;
+    color: #f7EaC5;
+    border-radius: 7px;
+    margin: 20px;
   }
-  #cancelTime{
+
+  #cancelTime {
     background-color: #Af7089;
-    color:#f7EaC5;
-    border-radius:7px;
-    margin:20px;
+    color: #f7EaC5;
+    border-radius: 7px;
+    margin: 20px;
   }
-  #pauseWork{
+
+  #pauseWork {
     background-color: #Ec6d6d;
-    color:#f7EaC5;
-    border-radius:7px;
-    margin:20px;
+    color: #f7EaC5;
+    border-radius: 7px;
+    margin: 20px;
   }
-  #pauseBreak{
+
+  #pauseBreak {
     background-color: #Ec6d6d;
-    color:#f7EaC5;
-    border-radius:7px;
-    margin:20px;
+    color: #f7EaC5;
+    border-radius: 7px;
+    margin: 20px;
   }
-  h1{
+
+  h1 {
     color: #900c3f;
-    margin:20px;
+    margin: 20px;
   }
-  #cycle{
-    display:none;
-    margin:20px;
+
+  #cycle {
+    display: none;
+    margin: 20px;
   }
-  #setBtn{
-    background-color:#eeB089;
-    border-radius:7px;
+
+  #setBtn {
+    background-color: #eeB089;
+    border-radius: 7px;
+    margin: 10px;
+    width: 20%;
   }
-  #noRepeat{
-    display:none;
+
+  #noRepeat {
+    display: none;
   }
-  main{
-    background-color:#f7EaC5;
-    text-align:center;
+
+  main {
+    background-color: #f7EaC5;
+    text-align: center;
     padding: 50px;
-    height:100%;
+    height: 100%;
+  }
+  
+  input{
+    width:20%;
+  }
+  p{
+    font-family: arial;
   }
 </style>
-<main >
-  <h1>
-    {formatTime(workPeriod)}
-  </h1>
-  
+<main>
+
+
+  <p> Work Time:
+    <input id="workInput" type="number" pattern="[0-9]{2}"> Minutes</p>
+  <p>
+    Break Time:
+    <input id="breakInput" type="number" pattern="[0-9{2}"> Minutes
+  </p>
+  <!-- <button on:click={setTimer}>Submit</button> -->
   <select id="repeat">
-    <option value="null">Times to repeat the timer</option>
+    <option value="null">Timer repeatition</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -186,12 +235,15 @@
     <option value="9">9</option>
     <option value="10">10</option>
   </select>
-  <button id = "setBtn" on:click={repeatTime}>Set</button>
+<br>
+  <button id="setBtn" on:click={setTimer}>Set</button>
+  {#if doneSet.timeInput}
   <footer>
     <div id = "allDone">
-      <button id="startTime" on:click={startTimer} disabled={currentState !== State.idle}>Start</button>
+      <button id="startTime" on:click={startTimer} >Start</button>
       <button id="cancelTime" on:click={cancelTimer} >Cancel</button>
     </div>
+    <h1 >{formatTime(workPeriod)}</h1>
     <div id = "afterWork">
       <h2>Work Period Done.</h2>
     <button id="pauseWork" on:click={workPause}>Pause Sound and Take a Break</button>
@@ -206,9 +258,10 @@
     <div id="noRepeat">
       <h2>Please select repetition time.</h2>
     </div>
+    <!--src: https://notificationsounds.com/notification-sounds-->
     <audio id="workDone" src={'lovingly.mp3'}></audio>
     <audio id="breakDone" src="https://files4.mytinyphone.com/file.php?fileringID=3875238&type=ringt&rtype=play"></audio>
-    <!--button on:click={completePomodoro}>complete</button-->
-
+   
   </footer>
+  {/if}
 </main>

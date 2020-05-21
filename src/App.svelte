@@ -48,6 +48,7 @@
 <Route path="/landing">
   <Landing />
 </Route>
+
 <Route path="/timer">
   <Timer />
 </Route>
