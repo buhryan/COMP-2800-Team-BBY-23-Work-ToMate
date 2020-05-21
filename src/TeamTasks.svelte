@@ -35,7 +35,6 @@
   }
   console;
 
-
   const completeTask = task => {
     db.collection("groups")
       .doc(localStorage.getItem("grpID"))
@@ -159,19 +158,12 @@
       margin-left: 4%;
       margin-top: 2%;
     }
-    h1 {
+    h1{
       color: black;
       text-transform: uppercase;
-      font-size: 4em;
-      font-weight: 25;
+      width:100%;
+      font-size: 6vw;
       text-align: center;
-    }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 15%;
-      font-size: 25px;
     }
     span {
       vertical-align: middle;
@@ -179,21 +171,21 @@
       text-align: left;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
     }
     .task-input {
       position: relative;
-      width: 30%;
-      height: 25%;
-      font-size: 25px;
+      width: 50%;
+      height: 20%;
+      font-size: 3vw;
       margin-bottom: 5%;
     }
     #aElement{
-      margin-left:35%;
+      margin-left:23%;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -214,9 +206,9 @@
       margin-right: 10%;
       margin-top: 2%;
       margin-bottom: 5%;
-      height: 40px;
-      width: 50px;
-      font-size: 14px;
+      height: 8%;
+      width: 10%;
+      font-size: 3.5vw;
     }
     .complete {
       float: left;
@@ -225,39 +217,33 @@
       margin-left: 4%;
       margin-top: 2%;
     }
-    h1 {
+    h1{
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
-      font-weight: 25;
+      width:100%;
+      font-size: 7vw;
       text-align: center;
-    }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 15%;
     }
     span {
       vertical-align: middle;
-      font-size: 40px;
+      font-size: 6vw;
       text-align: left;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
     .task-input {
       position: relative;
-      width: 30%;
+      width: 50%;
       height: 25%;
-      font-size: 17px;
+      font-size: 3vw;
       margin-bottom: 5%;
     }
     #aElement{
-      margin-left:30%;
+      margin-left:23%;
     }
   }
   @media (max-width: 400px) {
@@ -269,7 +255,7 @@
       padding: 0px;
     }
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
@@ -278,8 +264,8 @@
       margin-right: 5%;
       margin-top: 2.5%;
       margin-bottom: 5%;
-      height: 25px;
-      width: 35px;
+      height: 8%;
+      width: 10%;
       font-size: 10px;
     }
     .complete {
@@ -289,39 +275,33 @@
       margin-left: 4%;
       margin-top: 2%;
     }
-    h1 {
+    h1{
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
-      font-weight: 25;
+      width:100%;
+      font-size: 6vw;
       text-align: center;
     }
-    #addList {
-      position: relative;
-      width: 25%;
-      height: 15%;
-      left: 15%;
-      margin: 10%;
-    }
     #back {
-      width: 90px;
-      height: 40px;
-      font-weight: 600;
+      width: 20%;
+      height: 10%;
+      font-size:5vw;
+      font-weight:600;
     }
     span {
       vertical-align: middle;
-      font-size: 30px;
+      font-size: 5vw;
       text-align: left;
     }
     .task-input {
       position: relative;
-      width: 30%;
+      width: 50%;
       height: 25%;
-      font-size: 14px;
+      font-size: 3vw;
       margin-bottom: 5%;
     }
     #aElement{
-      margin-left:35%;
+      margin-left:23%;
     }
   }
 </style>

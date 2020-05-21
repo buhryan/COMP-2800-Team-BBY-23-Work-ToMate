@@ -101,6 +101,7 @@
     }
   };
 </script>
+
 <style>
   nav {
     background-color: rgb(247, 177, 27);
@@ -109,21 +110,18 @@
     padding-bottom: 1%;
     margin: 0;
   }
-  .task-name-edit {
-      font-size: 4em;
-      font-weight: 100;
-      text-align: center;
-    }
   @media (min-width: 1025px) {
     #navItem {
       font-size: 2vw;
       margin-right: 2%;
       width: 10%;
     }
-    h1 {
+    h1,
+    .task-name-edit {
       color: black;
-      font-size: 4.5em;
-      font-weight: 500;
+      width: 100%;
+      font-size: 6vw;
+      font-weight: 25;
       text-align: center;
     }
     h2 {
@@ -140,8 +138,8 @@
       background-color: orange;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
@@ -153,10 +151,12 @@
       margin-right: 1%;
       width: 10%;
     }
-    h1 {
+    h1,
+    .task-name-edit {
       color: black;
-      font-size: 3.5em;
-      font-weight: 500;
+      width: 100%;
+      font-size: 7vw;
+      font-weight: 25;
       text-align: center;
     }
     h2 {
@@ -173,8 +173,8 @@
       background-color: orange;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
@@ -185,10 +185,12 @@
       margin-right: 1%;
       width: 10%;
     }
-    h1 {
+    h1,
+    .task-name-edit {
       color: black;
-      font-size: 2.5em;
-      font-weight: 500;
+      width: 100%;
+      font-size: 6vw;
+      font-weight: 25;
       text-align: center;
     }
     h2 {
@@ -205,13 +207,13 @@
       background-color: orange;
     }
     #back {
-      width: 90px;
-      height: 40px;
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
     }
   }
 </style>
-
 
 <nav>
   <a href="/home" id="navItem">Home</a>

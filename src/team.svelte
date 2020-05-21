@@ -103,8 +103,8 @@
       margin-bottom: 5%;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
@@ -136,7 +136,7 @@
     h4 {
       text-align: center;
       color: white;
-      font-size: 3.5vw;
+      font-size: 5vw;
     }
     #joinButton {
       width: 25%;
@@ -177,7 +177,7 @@
     }
     span {
       vertical-align: middle;
-      font-size: 35px;
+      font-size: 8vw;
       text-align: left;
     }
     #groupIden {
@@ -193,7 +193,7 @@
     h4 {
       text-align: center;
       color: white;
-      font-size: 3vw;
+      font-size: 5vw;
     }
     #createGroup {
       width: 50%;
@@ -212,7 +212,7 @@
   }
   @media (max-width: 400px) {
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
@@ -223,13 +223,13 @@
       margin-bottom: 5%;
     }
     #joinButton {
-      width: 27%;
+      width: 25%;
       height: 10%;
-      font-size: 12px;
+      font-size: 3.25vw;
     }
     h1 {
       color: black;
-      font-size: 2em;
+      font-size: 10vw;
       font-weight: 400;
       text-align: center;
       margin-bottom: 5%;
@@ -237,12 +237,12 @@
     h3 {
       text-align: center;
       color: white;
-      font-size: 21px;
+      font-size: 4vw;
     }
     h4 {
       text-align: center;
       color: white;
-      font-size: 16px;
+      font-size: 5vw;
     }
     #createGroup {
       width: 50%;
@@ -256,15 +256,17 @@
     #groupIden {
       margin-left: 5%;
       width: 60%;
+      font-size:4vw;
     }
     #back {
-      width: 90px;
-      height: 40px;
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
     }
     span {
       vertical-align: middle;
-      font-size: 30px;
+      font-size: 5vw;
       text-align: left;
     }
   }
@@ -300,7 +302,7 @@
       <h4>{userid}</h4>
     </div>
     <br />
-    <a href="/team" id="createAElement">
+    <a href="/team-create" id="createAElement">
       <button id="createGroup">Create Group</button>
     </a>
     <br />

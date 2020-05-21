@@ -17,6 +17,7 @@
   import TeamMembers from "./TeamMembers.svelte";
   import TeamTasks from "./TeamTasks.svelte";
   import TeamTaskDetails from "./TeamTaskDetails.svelte";
+  import TeamCreate from "./TeamCreate.svelte";
   import EasterEgg from "./EasterEgg.svelte";
 </script>
 
@@ -69,6 +70,7 @@
 <Route path="/team-tasks-details">
   <TeamTaskDetails />
 </Route>
+<Route path="/team-create"><TeamCreate/></Route>
 <Route path="/EasterEgg">
   <EasterEgg />
 </Route>

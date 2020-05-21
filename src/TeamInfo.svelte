@@ -100,8 +100,8 @@
       text-align: center;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
@@ -151,8 +151,8 @@
       margin-bottom: 5%;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
@@ -192,39 +192,45 @@
   }
   @media (max-width: 400px) {
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
     h1 {
       color: black;
-      font-size: 2em;
-      font-weight: 400;
+      font-size: 6vw;
       text-align: center;
       margin-bottom: 5%;
     }
     #groupIden {
       color: white;
-      font-size: 1.35em;
+      font-size: 5vw;
       font-weight: 400;
       text-align: center;
     }
     #invite {
       margin-left: 5%;
       width: 70%;
+      font-size:4vw;
+    }
+    #invButton {
+      width: 20%;
+      height: 10%;
+      font-size: 3.5vw;
     }
     #back {
-      width: 90px;
-      height: 40px;
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
     }
     #buttons {
       width: 60%;
-      font-size: 25px;
+      font-size: 5vw;
       margin-bottom: 5%;
     }
     #leave {
-      font-size: 15px;
+      font-size: 4vw;
       margin-bottom: 5%;
       margin-top: 5%;
       width: 45%;

@@ -49,7 +49,7 @@
   }
   h2 {
     color: darkred;
-    text-align:center;
+    text-align: center;
   }
   @media (min-width: 1025px) {
     #navItem {
@@ -65,14 +65,14 @@
       text-align: center;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
     }
     h2 {
-      font-size: 4.5vw;
+      font-size: 7vw;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -89,18 +89,18 @@
       text-align: center;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
     h2 {
-      font-size: 4vw;
+      font-size: 7vw;
     }
   }
   @media (max-width: 400px) {
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
@@ -112,12 +112,13 @@
       text-align: center;
     }
     #back {
-      width: 90px;
-      height: 40px;
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
     }
     h2 {
-      font-size: 20px;
+      font-size: 7vw;
     }
   }
 </style>

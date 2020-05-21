@@ -7,7 +7,7 @@
           <nav class="navbar navbar-expand-sm">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active" id="navitem">
-                <a href="/home">Home</a>
+                <a href="/landing">Landing Page</a>
               </li>
               <li class="nav-item" id="navitem">
                 <a href="/about-Us">About us</a>
@@ -35,7 +35,7 @@
     <div class="row tm-albums-container grid">
       <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
         <figure class="effect-sadie">
-          <img src="img/timer.png" alt="Image" class="img-fluid" />
+          <img src="img/timer.png" alt="Bryan Xing" class="img-fluid" />
           <figcaption>
             <h2>Bryan Xing</h2>
             <p>is a CST student at BCIT.</p>
@@ -44,7 +44,7 @@
       </div>
       <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
         <figure class="effect-sadie">
-          <img src="img/lists.png" alt="Image" class="img-fluid" />
+          <img src="img/lists.png" alt="Calvin Loungsay" class="img-fluid" />
           <figcaption>
             <h2>Calvin Loungsay</h2>
             <p>is a CST student at BCIT.</p>
@@ -53,7 +53,7 @@
       </div>
       <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
         <figure class="effect-sadie">
-          <img src="img/teams.png" alt="Image" class="img-fluid" />
+          <img src="img/teams.png" alt="Boming Gong" class="img-fluid" />
           <figcaption>
             <h2>Boming Gong</h2>
             <p>is a CST student at BCIT.</p>
@@ -62,7 +62,7 @@
       </div>
       <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
         <figure class="effect-sadie">
-          <img src="img/friends.png" alt="Image" class="img-fluid" />
+          <img src="img/friends.png" alt="Jessica Chu" class="img-fluid" />
           <figcaption>
             <h2>Jessica Chu</h2>
             <p>is a CST student at BCIT.</p>

@@ -82,7 +82,7 @@
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 4em;
+      font-size: 10vw;
       font-weight: 25;
       text-align: center;
       margin-bottom: 2.5%;
@@ -136,7 +136,7 @@
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 11vw;
+      font-size: 10vw;
       font-weight: 25;
       text-align: center;
     }

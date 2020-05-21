@@ -222,16 +222,9 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 8vw;
-      font-weight: 25;
+      width:100%;
+      font-size: 6vw;
       text-align: center;
-    }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 15%;
-      font-size: 25px;
     }
     span {
       vertical-align: middle;
@@ -239,21 +232,21 @@
       text-align: left;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
     }
     .task-input {
       position: relative;
-      width: 30%;
-      height: 25%;
-      font-size: 5vw;
+      width: 40%;
+      height: 20%;
+      font-size: 3vw;
       margin-bottom: 5%;
     }
     #aElement{
-      margin-left:35%;
+      margin-left:30%;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -289,32 +282,26 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
+      width:100%;
       font-size: 7vw;
-      font-weight: 25;
       text-align: center;
-    }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 15%;
     }
     span {
       vertical-align: middle;
-      font-size: 7vw;
+      font-size: 8vw;
       text-align: left;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
     .task-input {
       position: relative;
-      width: 30%;
+      width: 40%;
       height: 25%;
-      font-size: 4vw;
+      font-size: 3vw;
       margin-bottom: 5%;
     }
     #aElement{
@@ -354,16 +341,9 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 8vw;
-      font-weight: 25;
+      width:100%;
+      font-size: 6vw;
       text-align: center;
-    }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      font-size: 4vw;
-      margin-bottom: 5%;
     }
     #back {
       width: 20%;
@@ -373,7 +353,7 @@
     }
     span {
       vertical-align: middle;
-      font-size: 7vw;
+      font-size: 5vw;
       text-align: left;
     }
     .task-input {
