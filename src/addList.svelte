@@ -1,8 +1,16 @@
+<!-- 
+  Found on Github
+  By drehimself
+  This code was  adapted from code found here: 
+  source: https://github.com/drehimself/svelte-todo-examplef
+-->
 <script>
   import { fly } from "svelte/transition";
   import { db } from "./firebase.js";
 
   const ENTER_KEY = 13;
+  const MAX_CLICKS = 5;
+
   let listName = {
     name: "Default List",
     editing: false
@@ -142,7 +150,7 @@
 
   const logoClick = () => {
     logoCount++;
-    if (logoCount === 5) {
+    if (logoCount === MAX_CLICKS) {
       document.getElementById("logoLink").href = "/EasterEgg";
     }
     console.log(logoCount);
