@@ -233,6 +233,7 @@
   <a href="/friends" id="navItem">Friends</a>
   <a href="/about-Us" id="navItem">About us</a>
 </nav>
+
 <main>
 
   <p>
