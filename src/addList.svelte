@@ -1,10 +1,16 @@
+<!-- 
+  Found on Github
+  By drehimself
+  This code was  adapted from code found here: 
+  source: https://github.com/drehimself/svelte-todo-examplef
+-->
 <script>
   import { fly } from "svelte/transition";
   import { db } from "./firebase.js";
 
   const ENTER_KEY = 13;
   const MAX_CLICKS = 5;
-  
+
   let listName = {
     name: "Default List",
     editing: false
@@ -268,7 +274,6 @@
     }
   }
 </style>
-
 <nav>
   <a href="/home">Home</a>
   <a href="/timer">Start a Timer</a>

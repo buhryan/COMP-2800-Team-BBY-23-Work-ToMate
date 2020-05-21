@@ -2,7 +2,7 @@
   import { db } from "./firebase.js";
   import { Confirm } from "svelte-confirm";
   import { fly } from "svelte/transition";
-  import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications'
+  import { NotificationDisplay, notifier } from "@beyonk/svelte-notifications";
 
   let userid;
   let users = [];
@@ -38,7 +38,7 @@
   const addFriend = userName => {
     if (friends.some(friend => friend.id === userName.id)) {
       console.log("Already friends!");
-      notifier.info('Already friends!', 2000);
+      notifier.info("Already friends!", 2000);
       clearText();
     } else {
       db.collection("users")
@@ -51,7 +51,7 @@
         .then(() => {
           console.log("Successfully added");
           console.log(userName.data());
-          notifier.success('Friend added!', 2000);
+          notifier.success("Friend added!", 2000);
           clearText();
         })
         .catch(() => {
@@ -82,9 +82,11 @@
 </script>
 
 <style>
-main {
-  text-align: center;
-}
+  main {
+    text-align: center;
+    border: solid black 2px;
+    background-color: #ffa032;
+  }
   #searchbar {
     border-radius: 8px;
   }
@@ -107,59 +109,153 @@ main {
   }
   h3 {
     margin: 0;
+    color: black;
     display: inline-block;
   }
   .user,
   .friend {
     padding: 20px;
   }
+  nav {
+    background-color: rgb(247, 177, 27);
+    border: 2px black solid;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin: 0;
+  }
+  #findUserText {
+    color: black;
+    font-size: 4vw;
+  }
+  @media (min-width: 1025px) {
+    #navItem {
+      font-size: 2vw;
+      margin-right: 2%;
+      width: 10%;
+    }
+    #addFriendName {
+      font-size: 5vw;
+      width: 70%;
+      color: black;
+    }
+    .add {
+      font-size: 3vw;
+      width: 20%;
+    }
+    .delete {
+      width:10%;
+    }
+    h1 {
+      color: black;
+      font-size: 8vw;
+    }
+    #friendName{
+      font-size:5.5vw;
+    }
+  }
+  @media (max-width: 1024px) and (min-width: 401px) {
+    #navItem {
+      font-size: 3.5vw;
+      margin-right: 1%;
+      width: 10%;
+    }
+    #addFriendName {
+      font-size: 5vw;
+      width: 70%;
+    }
+    .add {
+      font-size: 3vw;
+      width: 20%;
+    }
+    .delete {
+      width:10%;
+    }
+    #findUserText{
+      font-size:6vw;
+    }
+    h1{
+      color:black;
+      font-size:10vw;
+    }
+    #friendName {
+      font-size:5.5vw;
+    }
+  }
+  @media (max-width: 400px) {
+    #navItem {
+      font-size: 3vw;
+      margin-right: 1%;
+      width: 10%;
+    }
+    #addFriendName {
+      font-size: 5vw;
+      width: 70%;
+    }
+    .add {
+      font-size: 3vw;
+      width: 20%;
+    }
+    .delete {
+      width:10%;
+    }
+    #findUserText{
+      font-size:8vw;
+    }
+    #friendName{
+      font-size:8vw;
+    }
+    h1{
+      color:black;
+      font-size:10vw;
+    }
+  }
 </style>
-
 <nav>
-  <a href="/home">Home</a>
-  <a href="/timer">Start a Timer</a>
-  <a href="/task-Lists">Task Lists</a>
-  <a href="/team">Team</a>
-  <a href="/friends">Friends</a>
-  <a href="/about-Us">About us</a>
+  <a href="/home" id="navItem">Home</a>
+  <a href="/timer" id="navItem">Start a Timer</a>
+  <a href="/task-Lists" id="navItem">Task Lists</a>
+  <a href="/team" id="navItem">Team</a>
+  <a href="/friends" id="navItem">Friends</a>
+  <a href="/about-Us" id="navItem">About us</a>
 </nav>
 
 <main>
-<NotificationDisplay bind:this={n} />
-  <div class="searchbar-container">
-    <label id="searchbarLabel">
-      Find a user
-      <input
-        type="text"
-        bind:value={searchTerm}
-        placeholder="Search"
-        id="searchbar" />
-    </label>
-  </div>
-
-  <div class="search-container">
-
-    {#if visible}
-      {#each filteredList as userName}
-        <div transition:fly={{ y: -20, duration: 300 }} class="user">
-          <h3>{userName.data().name}</h3>
-          <div class="button-container">
-            <button on:click={() => addFriend(userName)} class="add">+</button>
-          </div>
-        </div>
-      {/each}
-    {/if}
-
-  </div>
 
   <div class="friend-container">
 
     <h1>Friends</h1>
     <hr />
 
+    <NotificationDisplay bind:this={n} />
+    <div class="searchbar-container">
+      <label id="searchbarLabel">
+        <span id="findUserText">Find a user</span>
+        <input
+          type="text"
+          bind:value={searchTerm}
+          placeholder="Search"
+          id="searchbar" />
+      </label>
+    </div>
+
+    {#if visible}
+      <div class="search-container">
+        {#each filteredList as userName}
+          <div transition:fly={{ y: -20, duration: 300 }} class="user">
+            <div class="button-container">
+              <h3 id="addFriendName">{userName.data().name}</h3>
+              <button on:click={() => addFriend(userName)} class="add">
+                +
+              </button>
+            </div>
+          </div>
+        {/each}
+      </div>
+    {/if}
+
     {#each friends as friend}
       <div class="friend">
-        <h3>{friend.data().name}</h3>
+        <h3 id="friendName">{friend.data().name}</h3>
         <Confirm let:confirm={confirmThis}>
           <button
             on:click={() => confirmThis(removeFriend, friend.id)}

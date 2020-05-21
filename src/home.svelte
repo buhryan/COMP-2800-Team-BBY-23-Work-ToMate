@@ -109,15 +109,17 @@
         </div>
       </div>
     </div>
-
     <div class="social-media-buttons">
+     <!-- Twitter share found on their website
+       Source: https://publish.twitter.com/# -->
       <a
         href="https://twitter.com/share?ref_src=twsrc%5Etfw"
         class="twitter-share-button"
         data-show-count="false"
         data-size="large">
       </a>
-
+       <!-- Facebook share found on their developers website page
+       Source: https://developers.facebook.com/docs/plugins/share-button/#example -->
       <div
         class="fb-share-button"
         data-href="https://worktomate.web.app"
