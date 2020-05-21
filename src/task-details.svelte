@@ -14,7 +14,7 @@
   };
   let taskComplete;
 
-  //Needs to be added for user login
+  //Checks if user is signed in.
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -40,12 +40,12 @@
       // No user is signed in.
     }
   });
-
+  // Edit the task name.
   const editName = () => {
     taskName.editing = true;
     taskName = taskName;
   };
-
+  // When finished editing task name run this.
   const doneEditTaskName = () => {
     taskName.editing = false;
     db.collection("users")
@@ -65,18 +65,18 @@
       });
     taskName = taskName;
   };
-
+  // When hitting enter run doneEditTaskName.
   const doneEditKeydownTaskName = e => {
     if (e.which === ENTER_KEY) {
       doneEditTaskName();
     }
   };
-
+  // Edits the desc
   const editDesc = () => {
     taskDesc.editing = true;
     taskDesc = taskDesc;
   };
-
+  // Run when finished editing task description
   const doneEditTaskDesc = () => {
     taskDesc.editing = false;
     db.collection("users")
@@ -96,7 +96,7 @@
       });
     taskDesc = taskDesc;
   };
-
+  // When hitting enter run doneEditTaskDesc.
   const doneEditKeydownTaskDesc = e => {
     if (e.which === ENTER_KEY) {
       doneEditTaskDesc(taskDesc);

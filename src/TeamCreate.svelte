@@ -1,3 +1,9 @@
+<!-- 
+  Found on Github
+  By drehimself
+  This code was  adapted from code found here: 
+  source: https://github.com/drehimself/svelte-todo-examplef
+-->
 <script>
   import { fly } from "svelte/transition";
   import { db } from "./firebase.js";
@@ -15,22 +21,23 @@
   let inputText = "+ New Task";
   let userid = firebase.auth().currentUser.uid;
   let memberArray = [];
-
+  // Edits the group name.
   const editGroupName = () => {
     groupName.editing = true;
     groupName = groupName;
   };
-
+  // Run this when finished editing the group name.
   const doneEditGroupName = () => {
     groupName.editing = false;
     groupName = groupName;
   };
-
+  // Run doneEditGroupName when hitting enter.
   const doneEditKeydownGroupName = e => {
     if (event.which === ENTER_KEY) {
       doneEditGroupName(groupName);
     }
   };
+  // Adds a task to groups task list.
   // can't accept empty names
   const addTask = e => {
     if (e.which === ENTER_KEY) {
@@ -45,7 +52,7 @@
       newTask = "";
     }
   };
-
+  // Adds task to database when clicked off of.
   const addTaskBlur = () => {
     if (newTask !== "") {
       tasks.push({
@@ -62,48 +69,49 @@
       replaceText();
     }
   };
-
+  // Removes placeholder text.
   const removePlaceholder = () => {
     inputText = "";
   };
-
+  // Replaces text in textbox.
   const replaceText = () => {
     inputText = "+ new task";
   };
-
+  // Edits a task name.
   const editTask = task => {
     task.editing = true;
     tasks = tasks;
   };
+  // When finished editing task name run this.
   // can't accept empty names
   const doneEdit = task => {
     task.editing = false;
     tasks = tasks;
   };
-
+  // When enter is hit run doneEdit.
   const doneEditKeydown = (task, e) => {
     if (event.which === ENTER_KEY) {
       doneEdit(task);
     }
   };
-
+  // Deletes task.
   const deleteTask = id => {
     tasks = tasks.filter(task => task.id !== id);
   };
-
+  // Checks a task.
   const checkAllTasks = e => {
     tasks.forEach(task => (task.checked = event.target.checked));
     tasks = tasks;
   };
-
+  // Clears all checked tasks.
   const clearChecked = () => {
     tasks = tasks.filter(task => !task.checked);
   };
-
+  // Upates the Filter.
   const updateFilter = filter => {
     currentFilter = filter;
   };
-
+  // Creates a new team in database.
   const createTeam = () => {
     let listId;
     memberArray.push(userid);

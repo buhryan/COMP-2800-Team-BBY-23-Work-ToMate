@@ -5,7 +5,7 @@
   let users = [];
   let count = 0;
   let userid;
-  // Needs this for User login
+  // Checks if user is signed in.
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -32,10 +32,11 @@
       // No user is signed in.
     }
   });
+  // Sets grpID in localStorage for use in other sveltes.
   function setID() {
     localStorage.setItem("grpID", this.id);
-    console.log(localStorage.getItem("grpID"));
   }
+  // Joins a group by adding name to database.
   function joinTeam() {
     let teamID = document.getElementById("groupIden").value;
     localStorage.setItem("grpID", teamID);

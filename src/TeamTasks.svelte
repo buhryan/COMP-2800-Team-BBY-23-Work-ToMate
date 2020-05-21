@@ -16,25 +16,22 @@
       user = firebase.auth().currentUser;
       if (user != null) {
         userid = user.uid;
-        // Goes to collection users / unique user id doc / Task-Lists collection / doc of whatever the previous button id
-        // was / collection Tasks / then taks all the Tasks in there.
         db.collection("groups")
           .doc(localStorage.getItem("grpID"))
           .collection("Tasks")
           .onSnapshot(snapshot => {
             tasks = snapshot.docs;
           });
-        console.log(tasks);
       }
     } else {
       // No user is signed in.
     }
   });
+  // Stores task name from a team in localStorage for us in other sveltes.
   function storeID() {
     localStorage.setItem("teamTaskName", this.id);
   }
-  console;
-
+  // Sets task to complete in database.
   const completeTask = task => {
     db.collection("groups")
       .doc(localStorage.getItem("grpID"))
@@ -50,7 +47,7 @@
         console.error("Error updating task: ", error);
       });
   };
-
+  // Deletes a task from the teams group of tasks.
   const deleteTask = task => {
     db.collection("groups")
       .doc(localStorage.getItem("grpID"))
@@ -64,7 +61,7 @@
         console.error("Error deleting task: ", error);
       });
   };
-
+  // Adds a task to the groups list.
   const addTask = e => {
     if (e.which === ENTER_KEY) {
       db.collection("groups")
@@ -84,7 +81,7 @@
         });
     }
   };
-
+  // Adds task when user clicks off the textbox.
   const addTaskBlur = () => {
     if (newTask !== "") {
       db.collection("groups")
@@ -107,11 +104,11 @@
       replaceText();
     }
   };
-
+  // Removes placeholder text.
   const removePlaceholder = () => {
     inputText = "";
   };
-
+  // Replaces text.
   const replaceText = () => {
     inputText = "+ new task";
   };
@@ -158,10 +155,10 @@
       margin-left: 4%;
       margin-top: 2%;
     }
-    h1{
+    h1 {
       color: black;
       text-transform: uppercase;
-      width:100%;
+      width: 100%;
       font-size: 6vw;
       text-align: center;
     }
@@ -184,8 +181,8 @@
       font-size: 3vw;
       margin-bottom: 5%;
     }
-    #aElement{
-      margin-left:23%;
+    #aElement {
+      margin-left: 23%;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -217,10 +214,10 @@
       margin-left: 4%;
       margin-top: 2%;
     }
-    h1{
+    h1 {
       color: black;
       text-transform: uppercase;
-      width:100%;
+      width: 100%;
       font-size: 7vw;
       text-align: center;
     }
@@ -242,8 +239,8 @@
       font-size: 3vw;
       margin-bottom: 5%;
     }
-    #aElement{
-      margin-left:23%;
+    #aElement {
+      margin-left: 23%;
     }
   }
   @media (max-width: 400px) {
@@ -275,18 +272,18 @@
       margin-left: 4%;
       margin-top: 2%;
     }
-    h1{
+    h1 {
       color: black;
       text-transform: uppercase;
-      width:100%;
+      width: 100%;
       font-size: 6vw;
       text-align: center;
     }
     #back {
       width: 20%;
       height: 10%;
-      font-size:5vw;
-      font-weight:600;
+      font-size: 5vw;
+      font-weight: 600;
     }
     span {
       vertical-align: middle;
@@ -300,8 +297,8 @@
       font-size: 3vw;
       margin-bottom: 5%;
     }
-    #aElement{
-      margin-left:23%;
+    #aElement {
+      margin-left: 23%;
     }
   }
 </style>

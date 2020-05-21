@@ -4,7 +4,7 @@
   let memberNames = [];
   let userid;
   let count = 0;
-  // Needs this for User login
+  // Checks if user is signed in.
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -30,9 +30,6 @@
       // No user is signed in.
     }
   });
-  function storeID() {
-    localStorage.setItem("taskName", this.id);
-  }
 </script>
 
 <style>

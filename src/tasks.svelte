@@ -12,7 +12,7 @@
   let inputText = "+ New Task";
   let newTask = "";
   let tempid = 0;
-  // Needs this for User login
+  // Checks if user is signed in
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -51,16 +51,17 @@
       // No user is signed in.
     }
   });
+  //Stores task id in localStorage for use in other sveltes.
   function storeID() {
     localStorage.setItem("taskId", this.id);
     console.log(localStorage.getItem("taskId"));
   }
-
+  // Edits a list name.
   const editName = () => {
     listName.editing = true;
     listName = listName;
   };
-
+  // When finished editing a list name run this.
   const doneEditListName = () => {
     listName.editing = false;
     db.collection("users")
@@ -78,13 +79,13 @@
       });
     listName = listName;
   };
-
+  // When hitting enter run doneEditListName.
   const doneEditKeydownListName = e => {
     if (e.which === ENTER_KEY) {
       doneEditListName();
     }
   };
-
+  // Sets task completation to true after hitting checkbox.
   const completeTask = task => {
     db.collection("users")
       .doc(userid)
@@ -102,7 +103,7 @@
         console.error("Error updating task: ", error);
       });
   };
-
+  // Deletes a task from the task list.
   const deleteTask = task => {
     db.collection("users")
       .doc(userid)
@@ -118,7 +119,7 @@
         console.error("Error deleting task: ", error);
       });
   };
-
+  // Add a task to the task list.
   const addTask = e => {
     if (e.which === ENTER_KEY) {
       db.collection("users")
@@ -165,11 +166,11 @@
       replaceText();
     }
   };
-
+  // Removes placeholder text.
   const removePlaceholder = () => {
     inputText = "";
   };
-
+  // Replaces text of new text with this.
   const replaceText = () => {
     inputText = "+ new task";
   };

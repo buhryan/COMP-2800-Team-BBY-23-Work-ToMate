@@ -8,7 +8,7 @@
     localStorage.setItem("listId", this.id);
   }
   let userid;
-  //Needs this to work with User Login
+  // Checks if user is signed in
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -22,13 +22,12 @@
           .onSnapshot(snapshot => {
             taskList = snapshot.docs;
           });
-        console.log(taskList);
       }
     } else {
       // No user is signed in.
     }
   });
-
+  // Removes a task list in the database
   const removeList = list => {
     db.collection("users")
       .doc(userid)
