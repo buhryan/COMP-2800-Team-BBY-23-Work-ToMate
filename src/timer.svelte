@@ -12,15 +12,15 @@
   const secondsToMinutes = (seconds) => Math.floor(seconds / 60);
   const padWithZeroes = (number) => number.toString().padStart(2, '0');
   const State = {
-      idle: 'idle',
-      inProgress: 'in progress',
-      resting: 'resting'
-    };
-    let currentState = State.idle;
-    let interval;
-    let completed = 0;
-    var SHORT_BREAK_S;
-    let workMin;
+    idle: 'idle',
+    inProgress: 'in progress',
+    resting: 'resting'
+  };
+  let currentState = State.idle;
+  let interval;
+  let completed = 0;
+  var SHORT_BREAK_S;
+  let workMin;
 
   function setTimer() {
     workTimer = document.getElementById("workInput").value;
@@ -33,7 +33,7 @@
     workPeriod = workMin;
     console.log(workPeriod);
 
-  
+
     doneSet.timeInput = !doneSet.timeInput;
   }
 
@@ -64,11 +64,13 @@
       }, 1000);
     }
   }
+
   function workPause() {
     document.getElementById("workDone").pause();
     document.getElementById("afterWork").style.display = "none";
     completeTimer();
   }
+
   function breakPause() {
     console.log("hi");
     document.getElementById("breakDone").pause();
@@ -88,6 +90,7 @@
       rest(SHORT_BREAK_S);
     }
   }
+
   function rest(time) {
     currentState = State.resting;
     workPeriod = time;
@@ -99,6 +102,7 @@
       workPeriod -= 1;
     }, 1000);
   }
+
   function cancelTimer() {
     if (document.getElementById("afterBreak").style.display == "inline") {
       document.getElementById("afterBreak").style.display = "none";
@@ -113,6 +117,7 @@
     clearInterval(interval);
     workPeriod = workMin;
   }
+
   function idle() {
     currentState = State.idle;
     clearInterval(interval);
@@ -122,9 +127,22 @@
 </script>
 
 <style>
+  nav {
+    background-color: rgb(247, 177, 27);
+    font-size: 3vw;
+    margin-right: 1%;
+    width: 100%;
+  }
+
+  .navList {
+    padding-left: 5%;
+    font-size: 12pt;
+  }
+
   button {
     border: none;
   }
+
   #afterWork {
     display: none;
     margin: 20px;
@@ -167,6 +185,7 @@
     color: #900c3f;
     margin: 20px;
   }
+
   #cycle {
     display: none;
     margin: 20px;
@@ -189,14 +208,23 @@
     padding: 50px;
     height: 100%;
   }
-  
-  input{
-    width:20%;
+
+  input {
+    width: 20%;
   }
-  p{
+
+  p {
     font-family: arial;
   }
 </style>
+<nav>
+  <a class="navList" href="/home" id="navItem">Home</a>
+  <a class="navList" href="/timer" id="navItem">Start a Timer</a>
+  <a class="navList" href="/task-Lists" id="navItem">Task Lists</a>
+  <a class="navList" href="/team" id="navItem">Team</a>
+  <a class="navList" href="/friends" id="navItem">Friends</a>
+  <a class="navList" href="/about-Us" id="navItem">About us</a>
+</nav>
 <main>
 
 
@@ -220,7 +248,7 @@
     <option value="9">9</option>
     <option value="10">10</option>
   </select>
-<br>
+  <br>
   <button id="setBtn" on:click={setTimer}>Set</button>
   {#if doneSet.timeInput}
   <footer>
