@@ -14,8 +14,6 @@
   };
   let taskComplete;
 
-  console.log(localStorage.getItem("listId"));
-  console.log(localStorage.getItem("taskId"));
   //Needs to be added for user login
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -23,9 +21,6 @@
       user = firebase.auth().currentUser;
       if (user != null) {
         userid = user.uid;
-        //Goes to collection users/ userid doc / collection Task-List / gets doc of whatever button id was clicked on task-Lists page
-        // then tasks collection / then doc of whatever the button id was in tasks.svelte / Then grabs all doc details and puts them in
-        // variables.
         db.collection("groups")
           .doc(localStorage.getItem("grpID"))
           .collection("Tasks")

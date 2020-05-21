@@ -29,7 +29,6 @@
           .onSnapshot(snapshot => {
             tasks = snapshot.docs;
           });
-        console.log(tasks);
 
         db.collection("users")
           .doc(userid)
@@ -56,7 +55,6 @@
     localStorage.setItem("taskId", this.id);
     console.log(localStorage.getItem("taskId"));
   }
-  console;
 
   const editName = () => {
     listName.editing = true;
@@ -222,7 +220,7 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      width:100%;
+      width: 100%;
       font-size: 6vw;
       text-align: center;
     }
@@ -245,8 +243,8 @@
       font-size: 3vw;
       margin-bottom: 5%;
     }
-    #aElement{
-      margin-left:30%;
+    #aElement {
+      margin-left: 30%;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -282,7 +280,7 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      width:100%;
+      width: 100%;
       font-size: 7vw;
       text-align: center;
     }
@@ -304,8 +302,8 @@
       font-size: 3vw;
       margin-bottom: 5%;
     }
-    #aElement{
-      margin-left:30%;
+    #aElement {
+      margin-left: 30%;
     }
   }
   @media (max-width: 400px) {
@@ -341,15 +339,15 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      width:100%;
+      width: 100%;
       font-size: 6vw;
       text-align: center;
     }
     #back {
       width: 20%;
       height: 10%;
-      font-size:5vw;
-      font-weight:600;
+      font-size: 5vw;
+      font-weight: 600;
     }
     span {
       vertical-align: middle;
@@ -363,8 +361,8 @@
       font-size: 3vw;
       margin-bottom: 5%;
     }
-    #aElement{
-      margin-left:35%;
+    #aElement {
+      margin-left: 35%;
     }
   }
 </style>
@@ -383,9 +381,7 @@
   </a>
 
   {#if !listName.editing}
-    <h1 id="name" on:dblclick={() => editName(listName)}>
-      {listName.name}
-    </h1>
+    <h1 id="name" on:dblclick={() => editName(listName)}>{listName.name}</h1>
   {:else}
     <input
       class="list-name-edit"

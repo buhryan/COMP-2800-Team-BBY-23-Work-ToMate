@@ -106,8 +106,8 @@
       font-size: 45px;
       text-align: center;
     }
-    #aElement{
-      margin-left:35%;
+    #aElement {
+      margin-left: 35%;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -147,8 +147,8 @@
       font-size: 5vw;
       margin-bottom: 5%;
     }
-    #aElement{
-      margin-left:35%;
+    #aElement {
+      margin-left: 35%;
     }
     span {
       vertical-align: middle;
@@ -199,8 +199,8 @@
       font-size: 4vw;
       margin-bottom: 5%;
     }
-    #aElement{
-      margin-left:35%;
+    #aElement {
+      margin-left: 35%;
     }
     span {
       vertical-align: middle;
@@ -210,8 +210,8 @@
     #back {
       width: 20%;
       height: 10%;
-      font-size:5vw;
-      font-weight:600;
+      font-size: 5vw;
+      font-weight: 600;
     }
   }
 </style>
@@ -249,7 +249,7 @@
   {/each}
   <div>
     <a href="/add-List" id="aElement">
-      <input type="button" value="Add List" id="addList">
+      <button id="addList">Add List</button>
     </a>
   </div>
 </div>

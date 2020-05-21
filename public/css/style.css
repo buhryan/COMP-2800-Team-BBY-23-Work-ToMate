@@ -278,9 +278,9 @@ figure.effect-sadie:hover p {
 
 .tm-tag-line-title {
     font-size: 2rem;
-    color:blanchedalmond;
+    color:black;
     position: relative;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0;
     padding-left: 20px;
     padding-right: 20px;
@@ -420,8 +420,8 @@ figure.effect-sadie:hover p {
     height: 100px;
 }
 #navitem{
-    font-size: 6vw;
-    margin: 10px;
+    font-size: 5vw;
+    margin: 1vw;
 }
 .nav-tabs .nav-item {
     margin-bottom: 20px;
@@ -610,7 +610,7 @@ iframe { max-width: 100%; }
     border: 3px solid transparent;
     border-top-color: #f9c922;
 
-    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    -webkit-animation: spin 1.5s linear infintm-tag-line-titleite; /* Chrome, Opera 15+, Safari 5+ */
       animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
@@ -883,4 +883,5 @@ iframe { max-width: 100%; }
     .tm-fa-mb-big { margin-bottom: 1.5rem; }
     .tm-site-name { font-size: 2.4rem; }
     .tm-site-description { font-size: 1.2rem; }
+    .tm-tag-line-title{ font-size: 6vw;}
 }
