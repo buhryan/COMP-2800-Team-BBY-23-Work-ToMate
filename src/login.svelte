@@ -67,16 +67,6 @@
     padding-top: 10px;
     font-size: 20pt;
   }
-
-  #fName {
-    width: 50%;
-    height: 40px;
-    display: flex;
-    margin: 0px auto;
-    margin-top: 50px;
-    font-size: 18pt;
-  }
-
   #email {
     width: 50%;
     height: 40px;
@@ -94,15 +84,6 @@
     margin: 0px auto;
     margin-top: 20px;
     font-size: 18pt;
-  }
-
-  #pass2 {
-    width: 50%;
-    height: 40px;
-    display: flex;
-    margin: 0px auto;
-    margin-top: 20px;
-    font-size: 15pt;
   }
 
   #loggedIn {

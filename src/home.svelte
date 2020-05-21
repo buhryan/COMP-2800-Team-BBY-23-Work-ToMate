@@ -1,8 +1,8 @@
-<script:head>
+<head>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <div id="fb-root"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0"></script>
-</script:head>
+</head>
 
 <style>
 .social-media-buttons {
@@ -20,9 +20,6 @@
         <div class="col-xl-12">
           <nav class="navbar navbar-expand-sm">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active" id="navitem">
-                <a href="/home">Home</a>
-              </li>
               <li class="nav-item" id="navitem">
                 <a href="/about-Us">About us</a>
               </li>
@@ -111,7 +108,7 @@
         data-show-count="false"
         data-size="large">
       </a>
-       <!-- Facebook share found on their developers website page
+      <!-- Facebook share found on their developers website page
        Source: https://developers.facebook.com/docs/plugins/share-button/#example -->
       <div
         class="fb-share-button"

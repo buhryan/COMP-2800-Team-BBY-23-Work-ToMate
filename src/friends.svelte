@@ -104,6 +104,7 @@
   .delete,
   .add {
     height: 100%;
+    padding:0px;
     border-radius: 5px;
     display: inline-block;
   }
@@ -145,6 +146,9 @@
     .delete {
       width:10%;
     }
+    #deleteButton{
+      font-size: 3vw;
+    }
     h1 {
       color: black;
       font-size: 8vw;
@@ -168,7 +172,8 @@
       width: 20%;
     }
     .delete {
-      width:10%;
+      width:12%;
+      height:8%;
     }
     #findUserText{
       font-size:6vw;
@@ -179,6 +184,9 @@
     }
     #friendName {
       font-size:5.5vw;
+    }
+    #deleteButton{
+      font-size:4vw;
     }
   }
   @media (max-width: 400px) {
@@ -196,7 +204,7 @@
       width: 20%;
     }
     .delete {
-      width:10%;
+      width:12%;
     }
     #findUserText{
       font-size:8vw;
@@ -259,7 +267,7 @@
         <Confirm let:confirm={confirmThis}>
           <button
             on:click={() => confirmThis(removeFriend, friend.id)}
-            class="delete">
+            class="delete" id="deleteButton">
             -
           </button>
         </Confirm>
