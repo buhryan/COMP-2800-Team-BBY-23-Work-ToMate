@@ -4,10 +4,12 @@
   } from "./firebase.js";
   let state = true;
 
+  //gets the user input of email and password and logs user in
   function login() {
     let userEmail = document.getElementById("email").value;
     let userPass = document.getElementById("pass").value;
 
+    //when email and password doesnt match the database record
     firebase
       .auth()
       .signInWithEmailAndPassword(userEmail, userPass)
@@ -18,19 +20,14 @@
         state = false;
       });
 
+      //logs user in
     firebase.auth().onAuthStateChanged(function (user) {
       if (state) {
         console.log(user.uid);
         if (user) {
           document.getElementById("loggedIn").style.display = "block";
-          //location = "/home";
-          // User is signed in.
 
-          // ...
-        } else {
-          // User is signed out.
-          // ...
-        }
+        } 
       }
     });
   }

@@ -8,9 +8,13 @@
   };
   var repeatTime;
   var workPeriod;
+
+  //converts time
   const minutesToSeconds = minutes => minutes * 60;
   const secondsToMinutes = seconds => Math.floor(seconds / 60);
+  //formats time
   const padWithZeroes = number => number.toString().padStart(2, "0");
+  //state of the timer
   const State = {
     idle: "idle",
     inProgress: "in progress",
@@ -22,60 +26,65 @@
   var SHORT_BREAK_S;
   let workMin;
 
+  //get user inputs of work, break period and time repeatition
   function setTimer() {
     workTimer = document.getElementById("workInput").value;
     breakTimer = document.getElementById("breakInput").value;
     repeatTime = document.getElementById("repeat").value;
     workMin = minutesToSeconds(workTimer);
     SHORT_BREAK_S = minutesToSeconds(breakTimer);
-    console.log(workMin);
-
     workPeriod = workMin;
-    console.log(workPeriod);
-
+    //let user to start timer
     doneSet.timeInput = !doneSet.timeInput;
   }
 
+  //formates remaining time showing on the screen
   function formatTime(timeInSeconds) {
     const minutes = secondsToMinutes(timeInSeconds);
     const remainingSeconds = timeInSeconds % 60;
     return `${padWithZeroes(minutes)}:${padWithZeroes(remainingSeconds)}`;
   }
 
+  //starts the timer
   function startTimer() {
     currentState !== State.idle;
-    if (repeatTime == "null") {
-      console.log("in no repeat");
+    //when the user did not input all the fields
+    if (repeatTime == "null" || workTimer == "null" || breakTimer == "null") {
       document.getElementById("noRepeat").style.display = "inline";
     } else {
+      //when the timer starts
       document.getElementById("noRepeat").style.display = "none";
       document.getElementById("afterWork").style.display = "none";
       document.getElementById("afterBreak").style.display = "none";
       currentState = State.inProgress;
       interval = setInterval(() => {
+        //when the timer goes off
         if (workPeriod === 0) {
           document.getElementById("workDone").play();
-          //let msg = document.getElementById("after").innerHTML= "Timer Done";
           document.getElementById("afterWork").style.display = "inline";
-          // window.alert("done");
         }
         workPeriod -= 1;
       }, 1000);
     }
   }
+
+  //pause the notification sound of work periods
   function workPause() {
     document.getElementById("workDone").pause();
     document.getElementById("afterWork").style.display = "none";
+    //counts how many times the work timer goes off and goes into the break timer
     completeTimer();
   }
+
+  //pause the notification sound of break periods
   function breakPause() {
-    console.log("hi");
     document.getElementById("breakDone").pause();
     document.getElementById("afterBreak").style.display = "none";
-    console.log(completed);
+    //goes into the work timer
     idle();
   }
-
+  
+  //counts how many times the work timer goes off
   function completeTimer() {
     clearInterval(interval);
     completed++;
@@ -87,6 +96,8 @@
       rest(SHORT_BREAK_S);
     }
   }
+
+  //break timer
   function rest(time) {
     currentState = State.resting;
     workPeriod = time;
@@ -98,6 +109,8 @@
       workPeriod -= 1;
     }, 1000);
   }
+
+  //when user clicks "cancel", timer goes back to the work period and stops
   function cancelTimer() {
     if (document.getElementById("afterBreak").style.display == "inline") {
       document.getElementById("afterBreak").style.display = "none";
@@ -112,6 +125,8 @@
     clearInterval(interval);
     workPeriod = workMin;
   }
+
+  //keep track which period is the timer on
   function idle() {
     currentState = State.idle;
     clearInterval(interval);
@@ -124,6 +139,7 @@
   button {
     border: none;
   }
+
   #afterWork {
     display: none;
     margin: 20px;
@@ -166,6 +182,7 @@
     color: #900c3f;
     margin: 20px;
   }
+
   #cycle {
     display: none;
     margin: 20px;
@@ -192,9 +209,11 @@
   input {
     width: 20%;
   }
+
   p {
     font-family: arial;
   }
+
   nav {
     background-color: rgb(247, 177, 27);
     border: 2px black solid;
@@ -202,6 +221,7 @@
     padding-bottom: 1%;
     margin: 0;
   }
+
   @media (min-width: 1025px) {
     #navItem {
       font-size: 2vw;
@@ -209,6 +229,7 @@
       width: 10%;
     }
   }
+
   @media (max-width: 1024px) and (min-width: 401px) {
     #navItem {
       font-size: 3.5vw;
@@ -216,6 +237,7 @@
       width: 10%;
     }
   }
+
   @media (max-width: 400px) {
     #navItem {
       font-size: 3vw;
@@ -285,7 +307,7 @@
         <h2>Cycle Done!</h2>
       </div>
       <div id="noRepeat">
-        <h2>Please select repetition time.</h2>
+        <h2>Please make sure work time, break time, and time repeatition are filled.</h2>
       </div>
       <!--src: https://notificationsounds.com/notification-sounds-->
       <audio id="workDone" src={'lovingly.mp3'} />
