@@ -10,14 +10,15 @@ http://www.tooplate.com/view/2101-insertion
 body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	font-size: 17px;
-    font-weight: 300;
+    font-weight: 500;
     color: #666666;
     overflow-x: hidden;
 }
 
 .logo{
-    color: orange;
-
+    color: white;
+    border:2px solid black;
+    background-color:rgba(128, 128, 128, 0.87);
 }
 
 a { transition: all 0.3s ease; }
@@ -55,7 +56,7 @@ a:hover, a:focus, a.active {
 
 .tm-site-description {
     font-size: 1.6rem;
-    color:e1bf30;
+    color:white;
 }
 
 .navbar-expand-sm .navbar-nav .nav-link { padding: 10px 20px; }
@@ -277,9 +278,9 @@ figure.effect-sadie:hover p {
 
 .tm-tag-line-title {
     font-size: 2rem;
-    color:blanchedalmond;
+    color:black;
     position: relative;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0;
     padding-left: 20px;
     padding-right: 20px;
@@ -419,13 +420,12 @@ figure.effect-sadie:hover p {
     height: 100px;
 }
 #navitem{
-    font-size: 3rem;
-    margin: 10px;
+    font-size: 6.5vw;
+    margin: 1vw;
 }
 .nav-tabs .nav-item {
     margin-bottom: 20px;
     margin-left: 10px;
-    font-size: large;
     width: 100%;
 }
 
@@ -610,7 +610,7 @@ iframe { max-width: 100%; }
     border: 3px solid transparent;
     border-top-color: #f9c922;
 
-    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    -webkit-animation: spin 1.5s linear infintm-tag-line-titleite; /* Chrome, Opera 15+, Safari 5+ */
       animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
@@ -883,4 +883,5 @@ iframe { max-width: 100%; }
     .tm-fa-mb-big { margin-bottom: 1.5rem; }
     .tm-site-name { font-size: 2.4rem; }
     .tm-site-description { font-size: 1.2rem; }
+    .tm-tag-line-title{ font-size: 6vw;}
 }

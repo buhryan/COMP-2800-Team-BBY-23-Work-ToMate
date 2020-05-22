@@ -2,9 +2,10 @@
   import { db } from "./firebase.js";
   let groups = [];
   let docIDS = [];
+  let users = [];
   let count = 0;
   let userid;
-  // Needs this for User login
+  // Checks if user is signed in.
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -31,18 +32,38 @@
       // No user is signed in.
     }
   });
+  // Sets grpID in localStorage for use in other sveltes.
   function setID() {
     localStorage.setItem("grpID", this.id);
-    console.log(localStorage.getItem("grpID"));
   }
+  // Joins a group by adding name to database.
   function joinTeam() {
-    let teamID = document.getElementById("groupID").value;
-    let dbRef = db.collection("groups").doc(teamID);
-    dbRef.update({
-      members: firebase.firestore.FieldValue.arrayUnion(
-        "levyOFtloEdo8Gc3tPhBQuKb1ZU2"
-      )
-    });
+    let teamID = document.getElementById("groupIden").value;
+    localStorage.setItem("grpID", teamID);
+    setTimeout(function() {
+      if (users.length == 0) {
+        users.push(userid);
+        db.collection("groups")
+          .doc(teamID)
+          .update({
+            members: users
+          });
+      } else {
+        for (let count = 0; count < users.length; count++) {
+          if (users[count] === userid && count == users.length - 1) {
+            alert("Already in this group!");
+            break;
+          } else if (users[count] != userid && count == users.length - 1) {
+            users.push(userid);
+            db.collection("groups")
+              .doc(teamID)
+              .update({
+                members: users
+              });
+          }
+        }
+      }
+    }, 400);
   }
 </script>
 
@@ -69,10 +90,11 @@
     }
     .listItem {
       width: 80%;
-      margin-right: 10%;
-      margin-left: 10%;
       margin-bottom: 5%;
-      padding: 0px;
+    }
+    #aElement{
+      margin-right:10%;
+      margin-left:10%;
     }
     h1 {
       color: black;
@@ -82,8 +104,8 @@
       margin-bottom: 5%;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
@@ -99,11 +121,13 @@
       width: 55%;
     }
     #createGroup {
-      margin-right: 10%;
-      margin-left: 25%;
       width: 50%;
       font-size: 4vw;
       margin-bottom: 5%;
+    }
+    #createAElement{
+      margin-right:10%;
+      margin-left:25%;
     }
     h3 {
       text-align: center;
@@ -113,7 +137,7 @@
     h4 {
       text-align: center;
       color: white;
-      font-size: 3.5vw;
+      font-size: 5vw;
     }
     #joinButton {
       width: 25%;
@@ -134,9 +158,11 @@
     }
     .listItem {
       width: 80%;
-      margin-right: 10%;
-      margin-left: 10%;
       margin-bottom: 5%;
+    }
+    #aElement{
+      margin-left:10%;
+      margin-right:10%;
     }
     h1 {
       color: black;
@@ -152,7 +178,7 @@
     }
     span {
       vertical-align: middle;
-      font-size: 35px;
+      font-size: 8vw;
       text-align: left;
     }
     #groupIden {
@@ -168,14 +194,16 @@
     h4 {
       text-align: center;
       color: white;
-      font-size: 3vw;
+      font-size: 5vw;
     }
     #createGroup {
-      margin-right: 10%;
-      margin-left: 25%;
       width: 50%;
       font-size: 3.5vw;
       margin-bottom: 5%;
+    }
+    #createAElement{
+      margin-right:10%;
+      margin-left:25%;
     }
     #joinButton {
       width: 25%;
@@ -185,7 +213,7 @@
   }
   @media (max-width: 400px) {
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
@@ -196,13 +224,13 @@
       margin-bottom: 5%;
     }
     #joinButton {
-      width: 27%;
+      width: 25%;
       height: 10%;
-      font-size: 12px;
+      font-size: 3.25vw;
     }
     h1 {
       color: black;
-      font-size: 2em;
+      font-size: 10vw;
       font-weight: 400;
       text-align: center;
       margin-bottom: 5%;
@@ -210,32 +238,36 @@
     h3 {
       text-align: center;
       color: white;
-      font-size: 23px;
+      font-size: 4vw;
     }
     h4 {
       text-align: center;
       color: white;
-      font-size: 18px;
+      font-size: 5vw;
     }
     #createGroup {
-      margin-right: 15%;
-      margin-left: 25%;
       width: 50%;
       font-size: 15px;
       margin-bottom: 5%;
     }
+    #createAElement{
+      margin-right:15%;
+      margin-left:25%;
+    }
     #groupIden {
       margin-left: 5%;
       width: 60%;
+      font-size:4vw;
     }
     #back {
-      width: 90px;
-      height: 40px;
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
     }
     span {
       vertical-align: middle;
-      font-size: 30px;
+      font-size: 5vw;
       text-align: left;
     }
   }
@@ -256,7 +288,7 @@
   <h1>Groups</h1>
   {#each groups as grp, count}
     <div id="">
-      <a href="/team-info">
+      <a href="/team-info" id="aElement">
         <!-- id of button is the task name-->
         <button on:click={setID} id={docIDS[count]} class="listItem">
           <span>{grp.grpName}</span>
@@ -271,7 +303,7 @@
       <h4>{userid}</h4>
     </div>
     <br />
-    <a href="/team">
+    <a href="/team-create" id="createAElement">
       <button id="createGroup">Create Group</button>
     </a>
     <br />

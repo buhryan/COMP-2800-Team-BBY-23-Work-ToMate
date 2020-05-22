@@ -1,8 +1,16 @@
+<!-- 
+  Found on Github
+  By drehimself
+  This code was  adapted from code found here: 
+  source: https://github.com/drehimself/svelte-todo-examplef
+-->
 <script>
   import { fly } from "svelte/transition";
   import { db } from "./firebase.js";
 
   const ENTER_KEY = 13;
+  const MAX_CLICKS = 5;
+
   let listName = {
     name: "Default List",
     editing: false
@@ -12,25 +20,29 @@
   let tempId = 1;
   let logoCount = 0;
   let tasks = [];
-  let inputText = "+ new task";
+  let inputText = "+ New Task";
   let userid = firebase.auth().currentUser.uid;
 
+  // Allows for editing for the list name.
   const editListName = () => {
     listName.editing = true;
     listName = listName;
   };
 
+  // Finishes editing the list name and changes it.
   const doneEditListName = () => {
     listName.editing = false;
     listName = listName;
   };
 
+  // doneEditListName is run when the enter key is pressed also.
   const doneEditKeydownListName = e => {
     if (event.which === ENTER_KEY) {
       doneEditListName(listName);
     }
   };
-  // can't accept empty names
+  
+  // Adds a task to an array when the enter key is pressed.
   const addTask = e => {
     if (e.which === ENTER_KEY) {
       tasks.push({
@@ -45,7 +57,9 @@
     }
   };
 
+  // Adds a task to an array when you click off the input.
   const addTaskBlur = () => {
+    // If the input is empty, nothing is added, input goes back to default.
     if (newTask !== "") {
       tasks.push({
         id: tempId,
@@ -62,47 +76,57 @@
     }
   };
 
+  // Removes the placeholder text on the input.
   const removePlaceholder = () => {
     inputText = "";
   };
 
+  // Replaces the text with the default placeholder text.
   const replaceText = () => {
     inputText = "+ new task";
   };
 
+  // Allows for editing of task names.
   const editTask = task => {
     task.editing = true;
     tasks = tasks;
   };
-  // can't accept empty names
+  
+  // Finishes editing task names and saves the changed values.
   const doneEdit = task => {
     task.editing = false;
     tasks = tasks;
   };
 
+  // Runs doneEdit when the enter key is pressed.
   const doneEditKeydown = (task, e) => {
     if (event.which === ENTER_KEY) {
       doneEdit(task);
     }
   };
 
+  // Deletes the task from the array and the list.
   const deleteTask = id => {
     tasks = tasks.filter(task => task.id !== id);
   };
 
+  // Checks all the tasks on the list, unchecks all if they're all checked.
   const checkAllTasks = e => {
     tasks.forEach(task => (task.checked = event.target.checked));
     tasks = tasks;
   };
 
+  // Deletes the checked tasks on the list from the array.
   const clearChecked = () => {
     tasks = tasks.filter(task => !task.checked);
   };
 
+  // Changes the filter to display the selected tasks.
   const updateFilter = filter => {
     currentFilter = filter;
   };
 
+  // Saves the list and all the tasks to the database.
   const saveList = () => {
     let listId;
     db.collection("users")
@@ -126,7 +150,6 @@
             .doc(listId)
             .collection("Tasks")
             .add({
-              _id: task.id,
               task: task.title,
               desc: "none",
               complete: false
@@ -141,18 +164,11 @@
       });
   };
 
+  // Triggers the easter egg when there have been 5 clicks on the logo.
   const logoClick = () => {
     logoCount++;
-    if (logoCount === 5) {
+    if (logoCount === MAX_CLICKS) {
       document.getElementById("logoLink").href = "/EasterEgg";
-      //   document.getElementById("logo").src =
-      //     "https://media.tenor.com/images/5875a102ce91c83e4f857c31e790b180/tenor.gif";
-
-      //   document.getElementById("kirby").play();
-      // }
-      // if (logoCount === 6) {
-      //   document.getElementById("logo").src = "favicon.png";
-      //   document.getElementById("kirby").pause();
     }
     console.log(logoCount);
   };
@@ -274,15 +290,6 @@
     }
   }
 </style>
-
-<nav>
-  <a href="/home">Home</a>
-  <a href="/timer">Start a Timer</a>
-  <a href="/task-Lists">Task Lists</a>
-  <a href="/team">Team</a>
-  <a href="/friends">Friends</a>
-  <a href="/about-Us">About us</a>
-</nav>
 
 <main>
 

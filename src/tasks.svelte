@@ -12,7 +12,7 @@
   let inputText = "+ New Task";
   let newTask = "";
   let tempid = 0;
-  // Needs this for User login
+  // Checks if user is signed in
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -20,7 +20,7 @@
       if (user != null) {
         userid = user.uid;
         // Goes to collection users / unique user id doc / Task-Lists collection / doc of whatever the previous button id
-        // was / collection Tasks / then taks all the Tasks in there.
+        // was / collection Tasks / then takes all the Tasks in there.
         db.collection("users")
           .doc(userid)
           .collection("Task-Lists")
@@ -29,7 +29,6 @@
           .onSnapshot(snapshot => {
             tasks = snapshot.docs;
           });
-        console.log(tasks);
 
         db.collection("users")
           .doc(userid)
@@ -52,17 +51,19 @@
       // No user is signed in.
     }
   });
+  //Stores task id in localStorage for use in other sveltes.
   function storeID() {
     localStorage.setItem("taskId", this.id);
     console.log(localStorage.getItem("taskId"));
   }
-  console;
 
+  // Allows task names to be edited.
   const editName = () => {
     listName.editing = true;
     listName = listName;
   };
 
+  // Updates the database with the new task name.
   const doneEditListName = () => {
     listName.editing = false;
     db.collection("users")
@@ -81,12 +82,14 @@
     listName = listName;
   };
 
+  // Pressing enter key will trigger the doneeditlistname function
   const doneEditKeydownListName = e => {
     if (e.which === ENTER_KEY) {
       doneEditListName();
     }
   };
 
+  // Sets a task to copmlete.
   const completeTask = task => {
     db.collection("users")
       .doc(userid)
@@ -105,6 +108,7 @@
       });
   };
 
+  // Deletes a task from the database.
   const deleteTask = task => {
     db.collection("users")
       .doc(userid)
@@ -121,6 +125,7 @@
       });
   };
 
+  // Adds a task to the database upon pressing enter.
   const addTask = e => {
     if (e.which === ENTER_KEY) {
       db.collection("users")
@@ -143,6 +148,7 @@
     }
   };
 
+  // Adds a task to the database upon click off the input.
   const addTaskBlur = () => {
     if (newTask !== "") {
       db.collection("users")
@@ -168,10 +174,12 @@
     }
   };
 
+  // Clears the placeholder text on the input.
   const removePlaceholder = () => {
     inputText = "";
   };
 
+  // Replaces the text with the default placeholder.
   const replaceText = () => {
     inputText = "+ new task";
   };
@@ -222,16 +230,9 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 4em;
-      font-weight: 25;
+      width: 100%;
+      font-size: 6vw;
       text-align: center;
-    }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 15%;
-      font-size: 25px;
     }
     span {
       vertical-align: middle;
@@ -239,19 +240,21 @@
       text-align: left;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
     }
     .task-input {
       position: relative;
-      width: 30%;
-      height: 25%;
-      margin-left: 35%;
-      font-size: 25px;
+      width: 40%;
+      height: 20%;
+      font-size: 3vw;
       margin-bottom: 5%;
+    }
+    #aElement {
+      margin-left: 30%;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -272,8 +275,8 @@
       margin-right: 10%;
       margin-top: 2%;
       margin-bottom: 5%;
-      height: 40px;
-      width: 50px;
+      height: 8%;
+      width: 10%;
       font-size: 14px;
     }
     .complete {
@@ -287,34 +290,30 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
-      font-weight: 25;
+      width: 100%;
+      font-size: 7vw;
       text-align: center;
-    }
-    #addList {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 15%;
     }
     span {
       vertical-align: middle;
-      font-size: 40px;
+      font-size: 8vw;
       text-align: left;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
     .task-input {
       position: relative;
-      width: 30%;
+      width: 40%;
       height: 25%;
-      margin-left: 30%;
-      font-size: 17px;
+      font-size: 3vw;
       margin-bottom: 5%;
+    }
+    #aElement {
+      margin-left: 30%;
     }
   }
   @media (max-width: 400px) {
@@ -326,7 +325,7 @@
       padding: 0px;
     }
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
@@ -335,8 +334,8 @@
       margin-right: 5%;
       margin-top: 2.5%;
       margin-bottom: 5%;
-      height: 25px;
-      width: 35px;
+      height: 8%;
+      width: 10%;
       font-size: 10px;
     }
     .complete {
@@ -350,34 +349,30 @@
     .list-name-edit {
       color: black;
       text-transform: uppercase;
-      font-size: 3em;
-      font-weight: 25;
+      width: 100%;
+      font-size: 6vw;
       text-align: center;
     }
-    #addList {
-      position: relative;
-      width: 25%;
-      height: 15%;
-      left: 15%;
-      margin: 10%;
-    }
     #back {
-      width: 90px;
-      height: 40px;
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
     }
     span {
       vertical-align: middle;
-      font-size: 30px;
+      font-size: 5vw;
       text-align: left;
     }
     .task-input {
       position: relative;
       width: 30%;
       height: 25%;
-      margin-left: 35%;
-      font-size: 14px;
+      font-size: 3vw;
       margin-bottom: 5%;
+    }
+    #aElement {
+      margin-left: 35%;
     }
   }
 </style>
@@ -396,9 +391,7 @@
   </a>
 
   {#if !listName.editing}
-    <h1 id="name" on:dblclick={() => editName(listName)}>
-      {listName.name}
-    </h1>
+    <h1 id="name" on:dblclick={() => editName(listName)}>{listName.name}</h1>
   {:else}
     <input
       class="list-name-edit"
@@ -416,7 +409,7 @@
       class="complete" />
     <div class="task-container">
       <a href="/task-Details">
-        <!-- id of button is the task name-->
+        <!-- id of button is the task name. -->
         <button on:click={storeID} id={job.id} class="listItem">
           <span>{job.data().task}</span>
           <br />
@@ -430,7 +423,7 @@
     </div>
     <br />
   {/each}
-  <a href="/tasks">
+  <a href="/tasks" id="aElement">
     <input
       class="task-input"
       placeholder={inputText}

@@ -1,7 +1,14 @@
 <script>
   import { db } from "./firebase.js";
+  import { Confirm } from "svelte-confirm";
+
+  const ENTER_KEY = 13;
   let tasks = [];
   let userid;
+  let name;
+  let inputText = "+ New Task";
+  let newTask = "";
+  let tempid = 0;
   // Needs this for User login
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -9,23 +16,102 @@
       user = firebase.auth().currentUser;
       if (user != null) {
         userid = user.uid;
-        // Goes to collection users / unique user id doc / Task-Lists collection / doc of whatever the previous button id
-        // was / collection Tasks / then taks all the Tasks in there.
         db.collection("groups")
           .doc(localStorage.getItem("grpID"))
           .collection("Tasks")
           .onSnapshot(snapshot => {
             tasks = snapshot.docs;
           });
-        console.log(tasks);
       }
     } else {
       // No user is signed in.
     }
   });
+  // Stores task name from a team in localStorage for us in other sveltes.
   function storeID() {
     localStorage.setItem("teamTaskName", this.id);
   }
+  // Sets task to complete in database.
+  const completeTask = task => {
+    db.collection("groups")
+      .doc(localStorage.getItem("grpID"))
+      .collection("Tasks")
+      .doc(task)
+      .update({
+        complete: true
+      })
+      .then(() => {
+        console.log("Task successfully updated.");
+      })
+      .catch(() => {
+        console.error("Error updating task: ", error);
+      });
+  };
+  // Deletes a task from the teams group of tasks.
+  const deleteTask = task => {
+    db.collection("groups")
+      .doc(localStorage.getItem("grpID"))
+      .collection("Tasks")
+      .doc(task)
+      .delete()
+      .then(() => {
+        console.log("Task successfully deleted.");
+      })
+      .catch(() => {
+        console.error("Error deleting task: ", error);
+      });
+  };
+  // Adds a task to the groups list.
+  const addTask = e => {
+    if (e.which === ENTER_KEY) {
+      db.collection("groups")
+        .doc(localStorage.getItem("grpID"))
+        .collection("Tasks")
+        .add({
+          complete: false,
+          desc: "none",
+          task: newTask
+        })
+        .then(() => {
+          console.log("New task added!");
+          newTask = "";
+        })
+        .catch(() => {
+          console.error("Error adding task: ", error);
+        });
+    }
+  };
+  // Adds task when user clicks off the textbox.
+  const addTaskBlur = () => {
+    if (newTask !== "") {
+      db.collection("groups")
+        .doc(localStorage.getItem("grpID"))
+        .collection("Tasks")
+        .add({
+          complete: false,
+          desc: "none",
+          task: newTask
+        })
+        .then(() => {
+          console.log("New task added!");
+          newTask = "";
+          inputText = "+ new task";
+        })
+        .catch(() => {
+          console.error("Error adding task: ", error);
+        });
+    } else {
+      replaceText();
+    }
+  };
+  // Removes placeholder text.
+  const removePlaceholder = () => {
+    inputText = "";
+  };
+  // Replaces text.
+  const replaceText = () => {
+    inputText = "+ new task";
+  };
 </script>
 
 <style>
@@ -41,43 +127,40 @@
     margin: 0;
   }
   @media (min-width: 1025px) {
+    .listItem {
+      width: 65%;
+      margin-left: 3%;
+      margin-bottom: 5%;
+      background-color: #ffc078;
+      padding: 0px;
+    }
     #navItem {
       font-size: 2vw;
       margin-right: 2%;
       width: 10%;
     }
-    .listItem {
-      width: 80%;
-      background-color: #ffc078;
+    .delete {
+      float: right;
       margin-right: 10%;
-      margin-left: 10%;
+      margin-top: 2%;
       margin-bottom: 5%;
-      padding: 0px;
+      height: 60px;
+      width: 75px;
+      font-size: 20px;
+    }
+    .complete {
+      float: left;
+      width: 50px;
+      height: 50px;
+      margin-left: 4%;
+      margin-top: 2%;
     }
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 4em;
-      font-weight: 300;
+      width: 100%;
+      font-size: 6vw;
       text-align: center;
-    }
-    #addTask {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 0;
-      font-weight: 600;
-      font-size: 45px;
-      margin: 10%;
-    }
-    #deleteTask {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      right: 0;
-      font-weight: 600;
-      font-size: 45px;
-      margin: 8%;
     }
     span {
       vertical-align: middle;
@@ -85,111 +168,137 @@
       text-align: left;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
     }
+    .task-input {
+      position: relative;
+      width: 50%;
+      height: 20%;
+      font-size: 3vw;
+      margin-bottom: 5%;
+    }
+    #aElement {
+      margin-left: 23%;
+    }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
+    .listItem {
+      width: 65%;
+      margin-left: 3%;
+      margin-bottom: 5%;
+      background-color: #ffc078;
+      padding: 0px;
+    }
     #navItem {
       font-size: 3.5vw;
       margin-right: 1%;
       width: 10%;
     }
-    .listItem {
-      width: 80%;
-      background-color: #ffc078;
+    .delete {
+      float: right;
       margin-right: 10%;
-      margin-left: 10%;
+      margin-top: 2%;
       margin-bottom: 5%;
+      height: 8%;
+      width: 10%;
+      font-size: 3.5vw;
+    }
+    .complete {
+      float: left;
+      width: 25px;
+      height: 25px;
+      margin-left: 4%;
+      margin-top: 2%;
     }
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 2.5em;
-      font-weight: 300;
+      width: 100%;
+      font-size: 7vw;
       text-align: center;
-    }
-    #addTask {
-      position: relative;
-      width: 30%;
-      height: 25%;
-      left: 0;
-      margin: 10%;
-      font-weight: 600;
-      font-size: 20px;
-    }
-    #deleteTask {
-      position: relative;
-      width: 30%;
-      height: 15%;
-      right: 0;
-      margin: 8%;
-      font-weight: 600;
-      font-size: 20px;
     }
     span {
       vertical-align: middle;
-      font-size: 35px;
+      font-size: 6vw;
       text-align: left;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
+    }
+    .task-input {
+      position: relative;
+      width: 50%;
+      height: 25%;
+      font-size: 3vw;
+      margin-bottom: 5%;
+    }
+    #aElement {
+      margin-left: 23%;
     }
   }
   @media (max-width: 400px) {
+    .listItem {
+      width: 65%;
+      margin-left: 3%;
+      margin-bottom: 5%;
+      background-color: #ffc078;
+      padding: 0px;
+    }
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
-    .listItem {
-      font-size: 15px;
-      width: 80%;
-      background-color: #ffc078;
-      margin-right: 10%;
-      margin-left: 8%;
+    .delete {
+      float: right;
+      margin-right: 5%;
+      margin-top: 2.5%;
       margin-bottom: 5%;
+      height: 8%;
+      width: 10%;
+      font-size: 10px;
+    }
+    .complete {
+      float: left;
+      width: 20px;
+      height: 20px;
+      margin-left: 4%;
+      margin-top: 2%;
     }
     h1 {
       color: black;
       text-transform: uppercase;
-      font-size: 2em;
-      font-weight: 400;
+      width: 100%;
+      font-size: 6vw;
       text-align: center;
     }
-    #addTask {
-      position: relative;
-      width: 100px;
-      height: 50px;
-      left: 0px;
-      margin: 7%;
+    #back {
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
-      font-size: 15px;
-    }
-    #deleteTask {
-      position: relative;
-      width: 100px;
-      height: 50px;
-      right: 0px;
-      margin: 7%;
-      font-weight: 600;
-      font-size: 15px;
     }
     span {
       vertical-align: middle;
-      font-size: 30px;
+      font-size: 5vw;
       text-align: left;
     }
-    #back {
-      width: 90px;
-      height: 40px;
-      font-weight: 600;
+    .task-input {
+      position: relative;
+      width: 50%;
+      height: 25%;
+      font-size: 3vw;
+      margin-bottom: 5%;
+    }
+    #aElement {
+      margin-left: 23%;
     }
   }
 </style>
@@ -206,23 +315,37 @@
   <a href="/team-info">
     <button id="back">Back</button>
   </a>
-  <h1>Tasks</h1>
+
+  <h1 id="name">Tasks</h1>
   {#each tasks as job}
-    <div>
+    <input
+      type="checkbox"
+      on:change={() => completeTask(job.id)}
+      bind:checked={job.complete}
+      class="complete" />
+    <div class="task-container">
       <a href="/team-tasks-details">
+        <!-- id of button is the task name-->
         <button on:click={storeID} id={job.id} class="listItem">
           <span>{job.data().task}</span>
           <br />
         </button>
       </a>
+      <Confirm let:confirm={confirmThis}>
+        <button on:click={() => confirmThis(deleteTask, job.id)} class="delete">
+          &times
+        </button>
+      </Confirm>
     </div>
+    <br />
   {/each}
-  <div>
-    <a href="/team-tasks">
-      <button id="addTask">Add Task</button>
-    </a>
-    <a href="/team-tasks">
-      <button id="deleteTask">Delete Task</button>
-    </a>
-  </div>
+  <a href="/team-tasks" id="aElement">
+    <input
+      class="task-input"
+      placeholder={inputText}
+      on:focus={removePlaceholder}
+      on:blur={addTaskBlur}
+      bind:value={newTask}
+      on:keydown={addTask} />
+  </a>
 </div>

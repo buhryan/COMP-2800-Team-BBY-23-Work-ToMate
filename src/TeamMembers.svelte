@@ -1,31 +1,35 @@
 <script>
   import { db } from "./firebase.js";
+  let memberIDs = [];
   let memberNames = [];
   let userid;
   let count = 0;
-  // Needs this for User login
+  // Checks if user is signed in.
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
       user = firebase.auth().currentUser;
       if (user != null) {
         userid = user.uid;
-        // Goes to collection users / unique user id doc / Task-Lists collection / doc of whatever the previous button id
-        // was / collection Tasks / then taks all the Tasks in there.
         db.collection("groups")
           .doc(localStorage.getItem("grpID"))
           .onSnapshot(function(snapshot) {
-            memberNames = snapshot.data().members;
-            memberNames = memberNames;
+            memberIDs = snapshot.data().members;
+            memberIDs = memberIDs;
+            for (let count = 0; count < memberIDs.length; count++) {
+              db.collection("users")
+                .doc(memberIDs[count])
+                .onSnapshot(function(snapshot) {
+                  memberNames.push(snapshot.data().name);
+                  memberNames = memberNames;
+                });
+            }
           });
       }
     } else {
       // No user is signed in.
     }
   });
-  function storeID() {
-    localStorage.setItem("taskName", this.id);
-  }
 </script>
 
 <style>
@@ -40,9 +44,9 @@
     padding-bottom: 1%;
     margin: 0;
   }
-  h2{
-    color:darkred;
-    margin-left:5%;
+  h2 {
+    color: darkred;
+    text-align: center;
   }
   @media (min-width: 1025px) {
     #navItem {
@@ -58,15 +62,14 @@
       text-align: center;
     }
     #back {
-      width: 230px;
-      height: 85px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 45px;
       text-align: center;
     }
-    h2{
-      font-size:4.5vw;
-      margin-left:15%;
+    h2 {
+      font-size: 7vw;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -83,19 +86,18 @@
       text-align: center;
     }
     #back {
-      width: 100px;
-      height: 50px;
+      width: 20%;
+      height: 10%;
       font-weight: 600;
       font-size: 20px;
     }
-    h2{
-      font-size:4vw;
-      margin-left:20%;
+    h2 {
+      font-size: 7vw;
     }
   }
   @media (max-width: 400px) {
     #navItem {
-      font-size: 3.5vw;
+      font-size: 3vw;
       margin-right: 1%;
       width: 10%;
     }
@@ -107,12 +109,13 @@
       text-align: center;
     }
     #back {
-      width: 90px;
-      height: 40px;
+      width: 20%;
+      height: 10%;
+      font-size: 5vw;
       font-weight: 600;
     }
-    h2{
-      font-size:20px;
+    h2 {
+      font-size: 7vw;
     }
   }
 </style>
