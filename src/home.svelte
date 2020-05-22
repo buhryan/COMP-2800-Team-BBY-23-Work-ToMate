@@ -1,8 +1,7 @@
-<head>
+<svelte:head>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  <div id="fb-root"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0"></script>
-</head>
+</svelte:head>
 
 <style>
 .social-media-buttons {
@@ -124,6 +123,8 @@
           class="fb-xfbml-parse-ignore">
         </a>
       </div>
+
+       <div id="fb-root"></div>
     </div>
 
 
