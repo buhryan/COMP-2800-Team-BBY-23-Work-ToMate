@@ -8,6 +8,7 @@ BCIT 2020 Comp 2800 Group 23 project
 * Jessica Chu
 * Boming Gong
 
+## Categories
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Content](#content)
