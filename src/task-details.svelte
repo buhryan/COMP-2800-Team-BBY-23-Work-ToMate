@@ -15,7 +15,7 @@
   };
   let taskComplete;
 
-  //Needs to be added for user login
+  //Checks if user is signed in.
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.

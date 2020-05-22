@@ -3,7 +3,7 @@
   let name;
   let userid;
   let users = [];
-  // Needs this for User login
+  // Checks if user is signed in.
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -24,6 +24,7 @@
   function storeID() {
     localStorage.setItem("taskName", this.id);
   }
+  // Leaves the group and removes from groups database field.
   function leave() {
     let arrayIndex = users.indexOf(userid);
     console.log(arrayIndex);
@@ -35,6 +36,7 @@
         members: users
       });
   }
+  // Adds the user id in text to the groups database field.
   function joinTeam() {
     let newUser = document.getElementById("invite").value;
     setTimeout(function() {

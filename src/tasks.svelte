@@ -12,7 +12,7 @@
   let inputText = "+ New Task";
   let newTask = "";
   let tempid = 0;
-  // Needs this for User login
+  // Checks if user is signed in
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -51,6 +51,7 @@
       // No user is signed in.
     }
   });
+  //Stores task id in localStorage for use in other sveltes.
   function storeID() {
     localStorage.setItem("taskId", this.id);
     console.log(localStorage.getItem("taskId"));
