@@ -270,7 +270,7 @@
   </p>
   <!-- <button on:click={setTimer}>Submit</button> -->
   <select id="repeat">
-    <option value="null">Timer repeatition</option>
+    <option value="null">Timer repetition</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -307,7 +307,7 @@
         <h2>Cycle Done!</h2>
       </div>
       <div id="noRepeat">
-        <h2>Please make sure work time, break time, and time repeatition are filled.</h2>
+        <h2>Please make sure work time, break time, and time repetition are filled.</h2>
       </div>
       <!--src: https://notificationsounds.com/notification-sounds-->
       <audio id="workDone" src={'lovingly.mp3'} />
