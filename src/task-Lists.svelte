@@ -29,6 +29,7 @@
     }
   });
 
+  // Removes a list from the database.
   const removeList = list => {
     db.collection("users")
       .doc(userid)
@@ -238,6 +239,8 @@
           <br />
         </button>
       </a>
+      
+      <!-- Requires a confirmation to run the removeList function -->
       <Confirm let:confirm={confirmThis}>
         <button
           on:click={() => confirmThis(removeList, list.id)}

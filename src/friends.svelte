@@ -10,6 +10,7 @@
   let searchTerm = "";
   let n;
 
+  // Ensures a user is signed in.
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -31,11 +32,14 @@
     }
   });
 
+  // Clears the text in the search bar.
   const clearText = () => {
     searchTerm = "";
   };
 
+  // Adds a friend to the database for the user.
   const addFriend = userName => {
+    // If the user is already friends, a notification alerts them.
     if (friends.some(friend => friend.id === userName.id)) {
       console.log("Already friends!");
       notifier.info("Already friends!", 2000);
@@ -51,6 +55,7 @@
         .then(() => {
           console.log("Successfully added");
           console.log(userName.data());
+          // Notification of successful adding of friend.
           notifier.success("Friend added!", 2000);
           clearText();
         })
@@ -60,6 +65,7 @@
     }
   };
 
+  // Removes the friend from the database for the user.
   const removeFriend = friendId => {
     db.collection("users")
       .doc(userid)
@@ -104,7 +110,7 @@
   .delete,
   .add {
     height: 100%;
-    padding:0px;
+    padding: 0px;
     border-radius: 5px;
     display: inline-block;
   }
@@ -144,17 +150,17 @@
       width: 20%;
     }
     .delete {
-      width:10%;
+      width: 10%;
     }
-    #deleteButton{
+    #deleteButton {
       font-size: 3vw;
     }
     h1 {
       color: black;
       font-size: 8vw;
     }
-    #friendName{
-      font-size:5.5vw;
+    #friendName {
+      font-size: 5.5vw;
     }
   }
   @media (max-width: 1024px) and (min-width: 401px) {
@@ -172,21 +178,21 @@
       width: 20%;
     }
     .delete {
-      width:12%;
-      height:8%;
+      width: 12%;
+      height: 8%;
     }
-    #findUserText{
-      font-size:6vw;
+    #findUserText {
+      font-size: 6vw;
     }
-    h1{
-      color:black;
-      font-size:10vw;
+    h1 {
+      color: black;
+      font-size: 10vw;
     }
     #friendName {
-      font-size:5.5vw;
+      font-size: 5.5vw;
     }
-    #deleteButton{
-      font-size:4vw;
+    #deleteButton {
+      font-size: 4vw;
     }
   }
   @media (max-width: 400px) {
@@ -204,20 +210,21 @@
       width: 20%;
     }
     .delete {
-      width:12%;
+      width: 12%;
     }
-    #findUserText{
-      font-size:8vw;
+    #findUserText {
+      font-size: 8vw;
     }
-    #friendName{
-      font-size:8vw;
+    #friendName {
+      font-size: 8vw;
     }
-    h1{
-      color:black;
-      font-size:10vw;
+    h1 {
+      color: black;
+      font-size: 10vw;
     }
   }
 </style>
+
 <nav>
   <a href="/home" id="navItem">Home</a>
   <a href="/timer" id="navItem">Start a Timer</a>
@@ -235,6 +242,7 @@
     <hr />
 
     <NotificationDisplay bind:this={n} />
+
     <div class="searchbar-container">
       <label id="searchbarLabel">
         <span id="findUserText">Find a user</span>
@@ -246,6 +254,7 @@
       </label>
     </div>
 
+    <!-- Displays all matching search results, updating dynamically. -->
     {#if visible}
       <div class="search-container">
         {#each filteredList as userName}
@@ -261,13 +270,15 @@
       </div>
     {/if}
 
+    <!-- Displays each friend on the page. -->
     {#each friends as friend}
       <div class="friend">
         <h3 id="friendName">{friend.data().name}</h3>
         <Confirm let:confirm={confirmThis}>
           <button
             on:click={() => confirmThis(removeFriend, friend.id)}
-            class="delete" id="deleteButton">
+            class="delete"
+            id="deleteButton">
             -
           </button>
         </Confirm>
