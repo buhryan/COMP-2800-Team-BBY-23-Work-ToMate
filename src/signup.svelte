@@ -4,8 +4,9 @@
   } from "./firebase.js";
   //signup
   let state = true;
-
+  //gets the user input and signs user up
   function signup() {
+    //check if the passowords match
     if (
       document.getElementById("pass").value !=
       document.getElementById("pass2").value
@@ -15,7 +16,7 @@
       var userName = document.getElementById("fName").value;
       var userEmail = document.getElementById("email").value;
       var userPass = document.getElementById("pass").value;
-
+      //when the user email already exists in the database
       firebase
         .auth()
         .createUserWithEmailAndPassword(userEmail, userPass)
@@ -26,11 +27,11 @@
           window.alert("Error : " + errorMessage);
           state = false;
         });
-
+        //signs user up
       firebase.auth().onAuthStateChanged(function (user) {
         if (state) {
           console.log(user.uid);
-
+          //stores the user info into database
           if (user) {
             db.collection("users")
               .doc(user.uid)
@@ -41,8 +42,7 @@
                 merge: true
               });
             document.getElementById("loggedIn").style.display = "block";
-            //window.location.pathname = "/home";
-            // User is signed in.
+
           } else {
             // User is signed out.
             // ...

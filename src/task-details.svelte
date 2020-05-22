@@ -2,6 +2,7 @@
   import { db } from "./firebase.js";
   import { writable } from "svelte/store";
   import { fly } from "svelte/transition";
+
   const ENTER_KEY = 13;
   let userid;
   let taskName = {
@@ -40,12 +41,14 @@
       // No user is signed in.
     }
   });
-  // Edit the task name.
+
+  // Allows for editing of the task name.
   const editName = () => {
     taskName.editing = true;
     taskName = taskName;
   };
-  // When finished editing task name run this.
+
+  // Finishes editing the task name and updates the value in the database.
   const doneEditTaskName = () => {
     taskName.editing = false;
     db.collection("users")
@@ -65,18 +68,21 @@
       });
     taskName = taskName;
   };
-  // When hitting enter run doneEditTaskName.
+
+  // Runs doneEditTaskName when the enter key is pressed.
   const doneEditKeydownTaskName = e => {
     if (e.which === ENTER_KEY) {
       doneEditTaskName();
     }
   };
-  // Edits the desc
+
+  // Allows editing of the description.
   const editDesc = () => {
     taskDesc.editing = true;
     taskDesc = taskDesc;
   };
-  // Run when finished editing task description
+
+  // Finishes editing the description and updates the database with the values.
   const doneEditTaskDesc = () => {
     taskDesc.editing = false;
     db.collection("users")
@@ -96,7 +102,8 @@
       });
     taskDesc = taskDesc;
   };
-  // When hitting enter run doneEditTaskDesc.
+
+  // Runs doneEditTaskDesc when the enter key is pressed.
   const doneEditKeydownTaskDesc = e => {
     if (e.which === ENTER_KEY) {
       doneEditTaskDesc(taskDesc);
