@@ -1,3 +1,5 @@
+<!-- These components were built with the Boostrap Library: https://getbootstrap.com/-->
+
 <div class="tm-main">
 
   <div class="tm-welcome-section">
@@ -35,7 +37,7 @@
           <img src="img/Bryan.png" alt="Bryan Xing" class="img-fluid" />
           <figcaption>
             <h2>Bryan Xing</h2>
-            <br>
+            <br />
             <p>is a CST student at BCIT.</p>
           </figcaption>
         </figure>
@@ -45,7 +47,7 @@
           <img src="img/Calvin.JPG" alt="Calvin Loungsay" class="img-fluid" />
           <figcaption>
             <h2>Calvin Loungsay</h2>
-            <br>
+            <br />
             <p>Likes to play games and wishes to make them as a job.</p>
           </figcaption>
         </figure>
@@ -55,7 +57,7 @@
           <img src="img/Boming.jpg" alt="Boming Gong" class="img-fluid" />
           <figcaption>
             <h2>Boming Gong</h2>
-            <br>
+            <br />
             <p>is a CST student at BCIT.</p>
           </figcaption>
         </figure>
@@ -65,7 +67,7 @@
           <img src="img/Jessica.jpg" alt="Jessica Chu" class="img-fluid" />
           <figcaption>
             <h2>Jessica Chu</h2>
-            <br>
+            <br />
             <p>is a CST student at BCIT.</p>
           </figcaption>
         </figure>
