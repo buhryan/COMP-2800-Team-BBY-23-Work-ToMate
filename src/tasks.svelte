@@ -20,7 +20,7 @@
       if (user != null) {
         userid = user.uid;
         // Goes to collection users / unique user id doc / Task-Lists collection / doc of whatever the previous button id
-        // was / collection Tasks / then taks all the Tasks in there.
+        // was / collection Tasks / then takes all the Tasks in there.
         db.collection("users")
           .doc(userid)
           .collection("Task-Lists")
@@ -56,11 +56,13 @@
     console.log(localStorage.getItem("taskId"));
   }
 
+  // Allows task names to be edited.
   const editName = () => {
     listName.editing = true;
     listName = listName;
   };
 
+  // Updates the database with the new task name.
   const doneEditListName = () => {
     listName.editing = false;
     db.collection("users")
@@ -79,12 +81,14 @@
     listName = listName;
   };
 
+  // Pressing enter key will trigger the doneeditlistname function
   const doneEditKeydownListName = e => {
     if (e.which === ENTER_KEY) {
       doneEditListName();
     }
   };
 
+  // Sets a task to copmlete.
   const completeTask = task => {
     db.collection("users")
       .doc(userid)
@@ -103,6 +107,7 @@
       });
   };
 
+  // Deletes a task from the database.
   const deleteTask = task => {
     db.collection("users")
       .doc(userid)
@@ -119,6 +124,7 @@
       });
   };
 
+  // Adds a task to the database upon pressing enter.
   const addTask = e => {
     if (e.which === ENTER_KEY) {
       db.collection("users")
@@ -141,6 +147,7 @@
     }
   };
 
+  // Adds a task to the database upon click off the input.
   const addTaskBlur = () => {
     if (newTask !== "") {
       db.collection("users")
@@ -166,10 +173,12 @@
     }
   };
 
+  // Clears the placeholder text on the input.
   const removePlaceholder = () => {
     inputText = "";
   };
 
+  // Replaces the text with the default placeholder.
   const replaceText = () => {
     inputText = "+ new task";
   };
@@ -399,7 +408,7 @@
       class="complete" />
     <div class="task-container">
       <a href="/task-Details">
-        <!-- id of button is the task name-->
+        <!-- id of button is the task name. -->
         <button on:click={storeID} id={job.id} class="listItem">
           <span>{job.data().task}</span>
           <br />
