@@ -1,5 +1,6 @@
 <script>
   import { db } from "./firebase.js";
+  //checks if user is signed in
   firebase.auth().onAuthStateChanged(function(user) {
     console.log(user.uid);
     if (user) {
@@ -10,6 +11,7 @@
     }
   });
 
+//logs out the user
   function logout() {
     firebase
       .auth()
